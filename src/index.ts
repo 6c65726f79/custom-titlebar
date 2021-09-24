@@ -247,8 +247,7 @@ const buildMenuItem = (
       };
       break;
     case 'submenu':
-      item.innerHTML +=
-        `<svg class="${style.locals.arrow}" version="1.1" width="20px" height="20px" viewBox="0 0 24 24"><path d="M9.29,6.71L9.29,6.71c-0.39,0.39-0.39,1.02,0,1.41L13.17,12l-3.88,3.88c-0.39,0.39-0.39,1.02,0,1.41l0,0c0.39,0.39,1.02,0.39,1.41,0l4.59-4.59c0.39-0.39,0.39-1.02,0-1.41l-4.59-4.59C10.32,6.32,9.68,6.32,9.29,6.71z" /></svg>`;
+      item.innerHTML += `<svg class="${style.locals.arrow}" version="1.1" width="20px" height="20px" viewBox="0 0 24 24"><path d="M9.29,6.71L9.29,6.71c-0.39,0.39-0.39,1.02,0,1.41L13.17,12l-3.88,3.88c-0.39,0.39-0.39,1.02,0,1.41l0,0c0.39,0.39,1.02,0.39,1.41,0l4.59-4.59c0.39-0.39,0.39-1.02,0-1.41l-4.59-4.59C10.32,6.32,9.68,6.32,9.29,6.71z" /></svg>`;
 
       item.onclick = (e) => {
         e.stopPropagation();
