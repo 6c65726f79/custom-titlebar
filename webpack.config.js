@@ -20,7 +20,7 @@ module.exports = {
         rules: [
             { test: /\.tsx?$/, loader: "ts-loader" },
             { 
-                test: /\.css$/,
+                test: /\.scss$/,
                 use: [
                     {
                         loader: "style-loader",
@@ -32,16 +32,9 @@ module.exports = {
                     {
                         loader: "css-loader",
                         options: { modules: true }
-                    }
+                    },
+                    "sass-loader"
                 ]
-            },
-            {
-                test: /\.scss$/,
-                loader: '@teamsupercell/typings-for-css-modules-loader',
-                options: {
-                    modules: true,
-                    sass: true
-                }
             },
         ]
     }

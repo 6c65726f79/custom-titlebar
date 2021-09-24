@@ -1,4 +1,4 @@
-import style from './style.css';
+import style from './style.scss';
 
 let titlebar: HTMLDivElement;
 let dragregion: HTMLDivElement;
@@ -29,11 +29,12 @@ interface TitleBarOptions {
 
 export default class Titlebar {
   constructor(titleBarOptions?: TitleBarOptions) {
+    // Inject style
     (style as any).use();
 
     // Create titlebar
     titlebar = document.createElement('div');
-    titlebar.id = style.locals['electron-titlebar'];
+    titlebar.id = style.locals.titlebar;
 
     // Create drag region
     dragregion = document.createElement('div');
@@ -86,7 +87,7 @@ export default class Titlebar {
 
     // Create container
     const container = document.createElement('div');
-    container.id = style.locals['electron-container'];
+    container.id = style.locals.container;
     document.body.append(container);
 
     // Move app inside a container
@@ -154,7 +155,7 @@ export default class Titlebar {
 
   updateBackground(color: string): void {
     const brightness = hexToRgb(color)?.reduce((a, b) => a + b, 0);
-    if (brightness) {
+    if (brightness!==undefined) {
       titlebar.classList.toggle(style.locals.dark, brightness <= 382);
     }
     titlebar.style.backgroundColor = color;

@@ -1,15 +1,14 @@
-declare namespace StyleCssNamespace {
-  export interface IStyleCss {
+declare namespace StyleScssNamespace {
+  export interface IStyleScss {
     accelerator: string;
     active: string;
     arrow: string;
     button: string;
     close: string;
+    container: string;
     controls: string;
     dark: string;
     dragregion: string;
-    'electron-container': string;
-    'electron-titlebar': string;
     inactive: string;
     maximize: string;
     maximized: string;
@@ -18,12 +17,13 @@ declare namespace StyleCssNamespace {
     separator: string;
     submenu: string;
     title: string;
+    titlebar: string;
   }
 }
 
-declare const StyleCssModule: StyleCssNamespace.IStyleCss & {
+declare const StyleScssModule: StyleScssNamespace.IStyleScss & {
   /** WARNING: Only available when `css-loader` is used without `style-loader` or `mini-css-extract-plugin` */
-  locals: StyleCssNamespace.IStyleCss;
+  locals: StyleScssNamespace.IStyleScss;
 };
 
-export = StyleCssModule;
+export = StyleScssModule;
