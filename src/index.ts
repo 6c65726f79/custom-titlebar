@@ -109,7 +109,7 @@ export default class Titlebar {
     window.addEventListener('resize', () => {
       titlebar.classList.toggle(
         style.locals.maximized,
-        titleBarOptions && titleBarOptions.isMaximized && titleBarOptions.isMaximized(),
+        (titleBarOptions?.isMaximized && titleBarOptions.isMaximized()) || false,
       );
       updateMenuSize();
     });
