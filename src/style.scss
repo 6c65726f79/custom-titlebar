@@ -41,12 +41,6 @@
     .button:not(:hover) svg > * {
       fill: rgba(0, 0, 0, 0.5);
     }
-
-    &.dark {
-      .button:not(:hover) svg > * {
-        fill: rgba(204, 204, 204, 0.5);
-      }
-    }
   }
 
   &:not(.dark) {
@@ -57,6 +51,12 @@
 
   &.dark {
     color: rgb(204, 204, 204);
+
+    &.inactive {
+      .button:not(:hover) svg > * {
+        fill: rgba(204, 204, 204, 0.5);
+      }
+    }
 
     #menubar .button {
       &:hover,
