@@ -58,25 +58,28 @@
     &.dark {
         color: rgb(204, 204, 204);
         
-        #menubar .button:hover,
-        #menubar .button.active {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        #menubar .button .submenu {
-            background-color: #252526;
-        }
+        #menubar .button {
+            &:hover, &.active {
+                background-color: rgba(255, 255, 255, 0.1);
+            }
 
-        #menubar .button .submenu .button.separator {
-            background-color: #fff;
+            .submenu {
+                background-color: #252526;
+
+                .button.separator {
+                    background-color: #fff;
+                }
+            }
         }
         
-        #controls .button:hover {
-            background-color: hsla(0,0%,100%,.1);
-        }
-        
-        #controls .button:active {
-            background-color: hsla(0,0%,100%,.2);
+        #controls .button {
+            &:hover {
+                background-color: hsla(0,0%,100%,.1);
+            }
+
+            &:active {
+                background-color: hsla(0,0%,100%,.2);
+            }
         }
         
         .button svg > * {
@@ -154,14 +157,6 @@
                     .accelerator, .title {
                         display:inline-block;
                     }
-
-                    /*.accelerator {
-                        padding-left:36px;
-                    }
-
-                    .title {
-                        margin-right:auto;
-                    }*/
 
                     .title {
                         padding-right:36px;
