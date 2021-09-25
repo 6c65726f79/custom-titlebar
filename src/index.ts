@@ -56,7 +56,7 @@ export default class Titlebar {
     controls = document.createElement('div');
     controls.id = style.locals.controls;
     minimizeWindow = document.createElement('div');
-    minimizeWindow.id = 'minimize';
+    /*minimizeWindow.id = 'minimize';*/
     minimizeWindow.classList.add(style.locals.button);
     minimizeWindow.innerHTML =
       '<svg x="0px" y="0px" viewBox="0 0 10.2 1"><rect x="0" y="50%" width="10.2" height="1" /></svg>';
@@ -79,11 +79,6 @@ export default class Titlebar {
       '<svg viewBox="0 0 10 10"><polygon points="10.2,0.7 9.5,0 5.1,4.4 0.7,0 0,0.7 4.4,5.1 0,9.5 0.7,10.2 5.1,5.8 9.5,10.2 10.2,9.5 5.8,5.1" /></svg>';
     controls.append(closeWindow);
     titlebar.append(controls);
-
-    // Insert style
-    /*const style = document.createElement('style');
-    document.head.appendChild(style);
-    style.appendChild(document.createTextNode(style.locals));*/
 
     // Create container
     const container = document.createElement('div');
@@ -168,20 +163,27 @@ export default class Titlebar {
   updateMenu(newMenu: Record<string, any>): void {
     menu = newMenu;
     buildMenu(menuCondensed);
-    updateMenuSize();
   }
 }
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {
-  if (menuSize + title.clientWidth + controls.clientWidth + 1 > titlebar.clientWidth) {
-    if (!menuCondensed) {
-      buildMenu(true);
+  if(titlebar.clientWidth > 0){
+    if(!menuCondensed){
+      menuSize = menubar.clientWidth;
     }
-  } else {
-    if (menuCondensed && !forceCondensed) {
-      buildMenu(false);
+    if (menuSize + title.clientWidth + controls.clientWidth + 1 > titlebar.clientWidth) {
+      if (!menuCondensed) {
+        buildMenu(true);
+      }
+    } else {
+      if (menuCondensed && !forceCondensed) {
+        buildMenu(false);
+      }
     }
+  }
+  else {
+    setTimeout(() => updateMenuSize(), 10);
   }
 };
 
@@ -208,7 +210,7 @@ const buildMenu = (condensed = false): void => {
     menubar.append(menuItem);
   });
   if (!condensed) {
-    menuSize = menubar.clientWidth;
+    updateMenuSize();
   }
 };
 
