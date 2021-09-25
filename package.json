@@ -1,5 +1,5 @@
 {
-  "name": "custom-titlebar",
+  "name": "@6c65726f79/custom-titlebar",
   "version": "0.0.5",
   "description": "Poorly coded titlebar for web apps",
   "main": "lib/index.js",
@@ -14,6 +14,7 @@
     "version": "npm run format && git add -A src",
     "postversion": "git push && git push --tags"
   },
+  "files": ["lib/**/*"],
   "homepage": "https://github.com/6c65726f79/custom-titlebar",
   "repository": {
     "type": "git",
