@@ -229,8 +229,12 @@
     }
 
     .button {
-        svg > * {
-            fill: rgb(0, 0, 0);
+        svg {
+            margin: 10px 0px;
+        
+            &>* {
+                fill: rgb(0, 0, 0);
+            }
         }
     }
 }
