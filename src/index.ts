@@ -187,25 +187,23 @@ const updateMenuSize = () => {
 };
 
 const parseMenuObject = (menuObject: Record<string, any>): Record<string, any> => {
-  if(typeof menuObject.items == "object"){
+  if (typeof menuObject.items == 'object') {
     return menuObject;
-  }
-  else {
-    const result = {items:[] as Array<any>};
-    for(const itemIndex in menuObject){
+  } else {
+    const result = { items: [] as Array<any> };
+    for (const itemIndex in menuObject) {
       const item = menuObject[itemIndex];
-      if(typeof item.submenu == "object"){
-        item.submenu=parseMenuObject(item.submenu);
-        item.type="submenu";
-      }
-      else if(typeof item.type == "undefined"){
-        item.type="normal";
+      if (typeof item.submenu == 'object') {
+        item.submenu = parseMenuObject(item.submenu);
+        item.type = 'submenu';
+      } else if (typeof item.type == 'undefined') {
+        item.type = 'normal';
       }
       result.items.push(item);
     }
     return result;
   }
-}
+};
 
 const buildMenu = (condensed = false): void => {
   menuCondensed = condensed;
