@@ -6,7 +6,7 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "build": "webpack --mode production",
-    "format": "prettier --write \"src/**/*.ts\"",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.scss\"",
     "lint": "eslint . --ext .ts --fix",
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
