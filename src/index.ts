@@ -150,7 +150,7 @@ export default class Titlebar {
 
   updateBackground(color: string): void {
     const brightness = hexToRgb(color)?.reduce((a, b) => a + b, 0);
-    if (brightness!==undefined) {
+    if (brightness !== undefined) {
       titlebar.classList.toggle(style.locals.dark, brightness <= 382);
     }
     titlebar.style.backgroundColor = color;
@@ -168,8 +168,8 @@ export default class Titlebar {
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {
-  if(titlebar.clientWidth > 0){
-    if(!menuCondensed){
+  if (titlebar.clientWidth > 0) {
+    if (!menuCondensed) {
       menuSize = menubar.clientWidth;
     }
     if (menuSize + title.clientWidth + controls.clientWidth + 1 > titlebar.clientWidth) {
@@ -181,8 +181,7 @@ const updateMenuSize = () => {
         buildMenu(false);
       }
     }
-  }
-  else {
+  } else {
     setTimeout(() => updateMenuSize(), 10);
   }
 };
