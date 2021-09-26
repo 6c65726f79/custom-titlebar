@@ -33,7 +33,8 @@
   }
 
   &.nodrag {
-    #dragregion, #appicon {
+    #dragregion,
+    #appicon {
       -webkit-app-region: no-drag;
     }
   }

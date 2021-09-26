@@ -1,6 +1,6 @@
 import style from './style.scss';
 
-let container: HTMLDivElement
+let container: HTMLDivElement;
 let titlebar: HTMLDivElement;
 let dragregion: HTMLDivElement;
 let appicon: HTMLDivElement;
@@ -94,17 +94,17 @@ export default class Titlebar {
     // Create container
     container = document.createElement('div');
     container.id = style.locals.container;
-    container.classList.add("custom-titlebar-container");
+    container.classList.add('custom-titlebar-container');
 
     // Move body inside a container
     while (document.body.firstChild) {
-			container.append(document.body.firstChild);
-		}
+      container.append(document.body.firstChild);
+    }
 
     // Insert container
     document.body.append(container);
     document.body.style.overflow = 'hidden';
-		document.body.style.margin = '0';
+    document.body.style.margin = '0';
 
     // Insert titlebar
     document.body.insertBefore(titlebar, container);
@@ -144,7 +144,7 @@ export default class Titlebar {
     if (options.title) {
       this.updateTitle(options.title);
     }
-    if(options.icon) {
+    if (options.icon) {
       this.updateIcon(options.icon);
     }
     if (options.onMinimize) {
@@ -160,7 +160,7 @@ export default class Titlebar {
     if (options.isMaximized) {
       titlebar.classList.toggle(style.locals.maximized, options.isMaximized());
     }
-    if (typeof options.condensed != "undefined") {
+    if (typeof options.condensed != 'undefined') {
       menuCondensed = options.condensed;
       forceCondensed = options.condensed;
     }
@@ -170,11 +170,11 @@ export default class Titlebar {
     if (options.overflow) {
       container.style.overflow = options.overflow;
     }
-    if (typeof options.drag != "undefined"){
+    if (typeof options.drag != 'undefined') {
       titlebar.classList.toggle(style.locals.nodrag, !options.drag);
     }
-    if(options.titleHorizontalAlignment){
-      this.updateHorizontalAlignment(options.titleHorizontalAlignment)
+    if (options.titleHorizontalAlignment) {
+      this.updateHorizontalAlignment(options.titleHorizontalAlignment);
     }
   }
 
@@ -196,19 +196,19 @@ export default class Titlebar {
   }
 
   updateHorizontalAlignment(position: string): void {
-    title.classList.toggle(style.locals.left, position=="left");
-    title.classList.toggle(style.locals.right, position=="right");
+    title.classList.toggle(style.locals.left, position == 'left');
+    title.classList.toggle(style.locals.right, position == 'right');
   }
 
   updateIcon(icon: string): void {
     appicon.style.backgroundImage = `url('${icon}')`;
-    appicon.style.display = "block";
+    appicon.style.display = 'block';
   }
 
   dispose(): void {
     while (container.firstChild) {
-			document.body.append(container.firstChild);
-		}
+      document.body.append(container.firstChild);
+    }
     titlebar.remove();
     container.remove();
   }
