@@ -1,6 +1,7 @@
 #container {
   position: relative;
   height: calc(100% - 30px);
+  overflow: auto;
 }
 
 #titlebar {

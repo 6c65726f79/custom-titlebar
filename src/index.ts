@@ -83,10 +83,16 @@ export default class Titlebar {
     // Create container
     const container = document.createElement('div');
     container.id = style.locals.container;
-    document.body.append(container);
 
-    // Move app inside a container
-    container.append(document.getElementById('app') || '');
+    // Move body inside a container
+    while (document.body.firstChild) {
+			container.append(document.body.firstChild);
+		}
+
+    // Insert container
+    document.body.append(container);
+    document.body.style.overflow = 'hidden';
+		document.body.style.margin = '0';
 
     // Insert titlebar
     document.body.insertBefore(titlebar, container);
