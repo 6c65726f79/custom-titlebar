@@ -93,7 +93,7 @@ const { Menu, getCurrentWindow } = require('@electron/remote');
 const Titlebar = require('@6c65726f79/custom-titlebar');
 
 const currentWindow = getCurrentWindow();
-let titleBar;
+let titlebar;
 
 currentWindow.webContents.once('dom-ready', () => {
   titlebar = new Titlebar({
