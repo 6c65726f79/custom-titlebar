@@ -1,2 +1,2 @@
 # custom-titlebar
- Poorly coded titlebar for web apps
+ Poorly coded titlebar for Electron and NW.js
