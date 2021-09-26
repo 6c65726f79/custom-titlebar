@@ -2,6 +2,7 @@ declare namespace StyleScssNamespace {
   export interface IStyleScss {
     accelerator: string;
     active: string;
+    appicon: string;
     arrow: string;
     button: string;
     close: string;
@@ -10,10 +11,13 @@ declare namespace StyleScssNamespace {
     dark: string;
     dragregion: string;
     inactive: string;
+    left: string;
     maximize: string;
     maximized: string;
     menubar: string;
+    nodrag: string;
     restore: string;
+    right: string;
     separator: string;
     submenu: string;
     title: string;

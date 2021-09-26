@@ -1,7 +1,9 @@
 import style from './style.scss';
 
+let container: HTMLDivElement
 let titlebar: HTMLDivElement;
 let dragregion: HTMLDivElement;
+let appicon: HTMLDivElement;
 let menubar: HTMLDivElement;
 let title: HTMLDivElement;
 let controls: HTMLDivElement;
@@ -19,8 +21,12 @@ let activeMenu: Array<number> = [-1];
 interface TitleBarOptions {
   backgroundColor?: string;
   title?: string;
+  icon?: string;
   condensed?: boolean;
   menu?: Record<string, any>;
+  overflow?: string;
+  drag?: boolean;
+  titleHorizontalAlignment?: string;
   onMinimize?: () => void;
   onMaximize?: () => void;
   onClose?: () => void;
@@ -40,6 +46,11 @@ export default class Titlebar {
     dragregion = document.createElement('div');
     dragregion.id = style.locals.dragregion;
     titlebar.append(dragregion);
+
+    // App icon
+    appicon = document.createElement('div');
+    appicon.id = style.locals.appicon;
+    titlebar.append(appicon);
 
     // Create menubar
     menubar = document.createElement('div');
@@ -81,8 +92,9 @@ export default class Titlebar {
     titlebar.append(controls);
 
     // Create container
-    const container = document.createElement('div');
+    container = document.createElement('div');
     container.id = style.locals.container;
+    container.classList.add("custom-titlebar-container");
 
     // Move body inside a container
     while (document.body.firstChild) {
@@ -132,6 +144,9 @@ export default class Titlebar {
     if (options.title) {
       this.updateTitle(options.title);
     }
+    if(options.icon) {
+      this.updateIcon(options.icon);
+    }
     if (options.onMinimize) {
       minimizeWindow.onclick = options.onMinimize;
     }
@@ -145,12 +160,21 @@ export default class Titlebar {
     if (options.isMaximized) {
       titlebar.classList.toggle(style.locals.maximized, options.isMaximized());
     }
-    if (options.condensed) {
+    if (typeof options.condensed != "undefined") {
       menuCondensed = options.condensed;
       forceCondensed = options.condensed;
     }
     if (options.menu) {
       this.updateMenu(options.menu);
+    }
+    if (options.overflow) {
+      container.style.overflow = options.overflow;
+    }
+    if (typeof options.drag != "undefined"){
+      titlebar.classList.toggle(style.locals.nodrag, !options.drag);
+    }
+    if(options.titleHorizontalAlignment){
+      this.updateHorizontalAlignment(options.titleHorizontalAlignment)
     }
   }
 
@@ -170,6 +194,24 @@ export default class Titlebar {
     menu = parseMenuObject(newMenu);
     buildMenu(menuCondensed);
   }
+
+  updateHorizontalAlignment(position: string): void {
+    title.classList.toggle(style.locals.left, position=="left");
+    title.classList.toggle(style.locals.right, position=="right");
+  }
+
+  updateIcon(icon: string): void {
+    appicon.style.backgroundImage = `url('${icon}')`;
+    appicon.style.display = "block";
+  }
+
+  dispose(): void {
+    while (container.firstChild) {
+			document.body.append(container.firstChild);
+		}
+    titlebar.remove();
+    container.remove();
+  }
 }
 
 // Check if the menu need to be condensed
@@ -178,7 +220,7 @@ const updateMenuSize = () => {
     if (!menuCondensed) {
       menuSize = menubar.clientWidth;
     }
-    if (menuSize + title.clientWidth + controls.clientWidth + 1 > titlebar.clientWidth) {
+    if (menuSize + appicon.clientWidth + title.clientWidth + controls.clientWidth + 1 > titlebar.clientWidth) {
       if (!menuCondensed) {
         buildMenu(true);
       }
