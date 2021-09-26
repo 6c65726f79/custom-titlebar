@@ -60,7 +60,7 @@ export default class Titlebar {
     // Create title
     title = document.createElement('div');
     title.id = style.locals.title;
-    this.updateTitle(window.document.title);
+    this.updateTitle();
     titlebar.append(title);
 
     // Create controls
@@ -186,8 +186,8 @@ export default class Titlebar {
     titlebar.style.backgroundColor = color;
   }
 
-  updateTitle(newTitle: string): void {
-    title.innerText = newTitle;
+  updateTitle(newTitle?: string): void {
+    title.innerText = newTitle || window.document.title;
   }
 
   updateMenu(newMenu: Record<string, any>): void {
