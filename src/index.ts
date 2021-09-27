@@ -149,6 +149,7 @@ export default class Titlebar {
     if (typeof options.condensed != 'undefined') {
       menuCondensed = options.condensed;
       forceCondensed = options.condensed;
+      updateMenuSize();
     }
     if (options.menu) {
       this.updateMenu(options.menu);
@@ -286,9 +287,7 @@ const buildMenu = (condensed = false): void => {
   menuItems.forEach((menuItem) => {
     menubar.append(menuItem);
   });
-  if (!condensed) {
-    updateMenuSize();
-  }
+  updateMenuSize();
 };
 
 const buildMenuItem = (
