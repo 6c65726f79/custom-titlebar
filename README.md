@@ -104,6 +104,7 @@ app.whenReady().then(() => {
   require('@electron/remote/main').enable(mainWindow.webContents);
 })
 ```
+
 ```
 // preload.js
 
@@ -127,7 +128,52 @@ currentWindow.webContents.once('dom-ready', () => {
 
 ## NW.js
 
-Coming soon
+```
+// package.json
+
+{
+  "name": "helloworld",
+  "main": "index.html",
+  "window": {
+    "frame": false,
+    "toolbar": false
+  },
+  "dependencies": {
+    "@6c65726f79/custom-titlebar": "^0.1.2"
+  }
+}
+```
+
+```
+// index.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hello World!</title>
+    <script src="./node_modules/@6c65726f79/custom-titlebar/lib/index.js"></script> 
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+    <script>
+      const gui = require('nw.gui');
+      const win = gui.Window.get();
+      let maximized = false;
+
+      win.onMaximized.addListener(() => { maximized=true; });
+      win.onRestore.addListener(() => { maximized=false; });
+
+      const titlebar = new Titlebar({
+        backgroundColor: '#37474f',
+        onMinimize: () => win.minimize(),
+        onMaximize: () => maximized ? win.restore() : win.maximize(),
+        onClose: () => win.close(),
+        isMaximized: () => maximized
+      });
+    </script>
+  </body>
+</html>
+```
 
 # Options
 
