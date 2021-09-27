@@ -164,6 +164,8 @@
         background-color: #dadada;
         padding: 8px 0;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+        max-height: calc(100vh - 30px);
+        box-sizing: border-box;
 
         .button {
           &:not(.separator) {

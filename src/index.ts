@@ -391,6 +391,18 @@ const openSubMenu = (submenu: Array<any>, index: number, parent: HTMLDivElement,
   const subMenu = buildSubMenu(submenu, depth + 1);
   menuItem.classList.add(style.locals.active);
   menuItem.appendChild(subMenu);
+
+  // Prevent submenu to get out of document
+  const freeSpace = {
+    x:document.body.clientWidth-subMenu.getBoundingClientRect().right,
+    y:document.body.clientHeight-subMenu.getBoundingClientRect().bottom
+  }
+  if(freeSpace.x<0){
+    subMenu.style.marginRight=`${-freeSpace.x}px`;
+  }
+  if(freeSpace.y<0){
+    subMenu.style.marginTop=`${freeSpace.y}px`;
+  }
 };
 
 const closeSubMenu = (parent?: HTMLDivElement, depth = 0) => {
