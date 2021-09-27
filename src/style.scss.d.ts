@@ -5,10 +5,12 @@ declare namespace StyleScssNamespace {
     appicon: string;
     arrow: string;
     button: string;
+    check: string;
     close: string;
     container: string;
     controls: string;
     dark: string;
+    disabled: string;
     dragregion: string;
     inactive: string;
     left: string;

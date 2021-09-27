@@ -144,9 +144,15 @@
       }
 
       .arrow,
+      .check,
       .accelerator,
       &.separator {
         display: none;
+      }
+
+      &.disabled {
+        opacity:.5;
+        pointer-events: none;
       }
 
       .submenu {
@@ -194,6 +200,12 @@
             position: absolute;
             display: block;
             right: 8px;
+          }
+
+          .check {
+            position: absolute;
+            display: block;
+            left: 8px;
           }
         }
 
