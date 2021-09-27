@@ -31,6 +31,11 @@ This package is highly inspired by [custom-electron-titlebar](https://www.npmjs.
 
 I needed a custom titlebar for Electron 14 to replace the unmaintened [custom-electron-titlebar](https://www.npmjs.com/package/custom-electron-titlebar), but I couldn't find any interesting ones, so I made it myself.
 
+## Not yet implemented
+
+* MenuItem role, icon, radio
+* Icons theme
+
 # Install
 
 ```
@@ -40,6 +45,18 @@ npm i @6c65726f79/custom-titlebar
 # Usage
 
 ```
+// JavaScript
+
+const Titlebar = require('@6c65726f79/custom-titlebar');
+
+new Titlebar({
+  backgroundColor: '#000'
+});
+```
+
+```
+// TypeScript
+
 import { Titlebar } from '@6c65726f79/custom-titlebar'
 
 new Titlebar({
@@ -120,9 +137,9 @@ All parameters are optional.
 | backgroundColor          | `string`   | The background color of the titlebar.                                      | #FFFFFF |
 | condensed                | `boolean`  | Force the menu bar to be condensed.                                        | false   |
 | drag                     | `boolean`  | Define whether or not you can drag the window.                             | true    |
-| icon                     | `string`   | The icon of the title bar.                                                 | null    |
+| icon                     | `string`   | The icon of the titlebar.                                                  | null    |
 | isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.| null    |
-| menu                     | `object`   | List of MenuItem to show in the title bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | null  |
+| menu                     | `object`   | List of MenuItem to show in the menu bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | null  |
 | onClose                  | `function` | The function to call when the close button is clicked.                     | null    |
 | onMaximize               | `function` | The function to call when the maximize/restore button is clicked.          | null    |
 | onMinimize               | `function` | The function to call when the minimize button is clicked.                  | null    |
@@ -144,7 +161,7 @@ titlebar.updateOptions({
 
 ## Update background
 
-This change the color of titlebar and it's checked whether the color is light or dark, so that the color of the icons adapts to the background of the title bar. The value must be a valid CSS color.
+This change the color of titlebar and it's checked whether the color is light or dark, so that the color of the icons adapts to the background of the titlebar. The value must be a valid CSS color.
 
 ```
 titlebar.updateBackground('rgb(60, 60, 60)');
@@ -152,7 +169,7 @@ titlebar.updateBackground('rgb(60, 60, 60)');
 
 ## Update title
 
-This method update the title of the title bar. If you change the content of the title tag, you should call this method to update the title.
+This method update the title of the titlebar. If you change the content of the title tag, you should call this method to update the title.
 
 ```
 document.title = 'My new title';
@@ -231,7 +248,7 @@ titlebar.updateHorizontalAlignment('right');
 
 ## Dispose
 
-This method removes the title bar completely and all recorded events.
+This method removes the titlebar completely and all recorded events.
 
 ```
 titlebar.dispose();
@@ -239,7 +256,7 @@ titlebar.dispose();
 
 # CSS Class
 
-You can use the CSS class `.custom-titlebar-container` to customize the container under the title bar.
+You can use the CSS class `.custom-titlebar-container` to customize the container under the titlebar.
 
 ----
 
