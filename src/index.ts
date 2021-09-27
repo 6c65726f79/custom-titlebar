@@ -394,10 +394,10 @@ const openSubMenu = (submenu: Array<any>, index: number, parent: HTMLDivElement,
   menuItem.classList.add(style.locals.active);
   menuItem.appendChild(subMenu);
 
-  // Prevent submenu to get out of document
+  // Prevent submenu to get out of window
   const freeSpace = {
-    x: document.body.clientWidth - subMenu.getBoundingClientRect().right,
-    y: document.body.clientHeight - subMenu.getBoundingClientRect().bottom,
+    x: window.innerWidth - subMenu.getBoundingClientRect().right,
+    y: window.innerHeight - subMenu.getBoundingClientRect().bottom,
   };
   if (freeSpace.x < 0) {
     subMenu.style.marginRight = `${-freeSpace.x}px`;
