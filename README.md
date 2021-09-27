@@ -35,6 +35,7 @@ I needed a custom titlebar for Electron 14 to replace the unmaintened [custom-el
 
 * MenuItem role, icon, radio
 * Icons theme
+* Submenu scrollbar
 
 # Install
 
