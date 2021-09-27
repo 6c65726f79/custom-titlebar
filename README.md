@@ -15,6 +15,8 @@ Poorly coded titlebar for [Electron](https://www.electronjs.org/) and [NW.js](ht
 
 # About
 
+**It's a library for Electron or NW.js, it can be used on a basic website but it's useless ¯\\_(ツ)_/¯**
+
 ## Main features
 
 * Compatible with any version of Electron 🎉
@@ -68,12 +70,6 @@ new Titlebar({
 # Examples
 
 ## Electron
-
-### Without context isolation
-
-Use context isolation. ¯\\_(ツ)_/¯
-
-### With context isolation
 
 ```
 // main.js
