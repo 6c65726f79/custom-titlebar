@@ -17,11 +17,11 @@ Poorly coded titlebar for [Electron](https://www.electronjs.org/) and [NW.js](ht
 
 ## Main features
 
-* Compatible with any version of Electron
-* Works with Electron, NW.js and probably others
-* Works without any dependency, so it won't break in the next major release of Electron
-* Very small footprint (< 20 kB)
-* Options and methods very similar to [custom-electron-titlebar](https://www.npmjs.com/package/custom-electron-titlebar)
+* Compatible with any version of Electron 🎉
+* Works with Electron, NW.js and probably others 🤷‍♂️
+* Works without any dependency, so it won't break in the next major release of Electron 👀
+* Very small footprint (< 20 kB) 👣
+* Options and methods very similar to [custom-electron-titlebar](https://www.npmjs.com/package/custom-electron-titlebar) 📖
 
 ## Inpiration
 
@@ -53,7 +53,7 @@ new Titlebar({
 
 ### Without context isolation
 
-Use context isolation.
+Use context isolation. ¯\\_(ツ)_/¯
 
 ### With context isolation
 
@@ -115,27 +115,39 @@ Coming soon
 
 All parameters are optional.
 
-| Parameter                | Type       | Description                                                         | Default |
-| ------------------------ | ---------- | ------------------------------------------------------------------- | ------- |
-| backgroundColor          | `string`   | The background color of the titlebar.                               | #FFFFFF |
-| condensed                | `boolean`  | Force the menu bar to be condensed.                                 | false   |
-| drag                     | `boolean`  | Define whether or not you can drag the window                       | true    |
-| icon                     | `string`   | The icon of the title bar.                                          | null    |
+| Parameter                | Type       | Description                                                                | Default |
+| ------------------------ | ---------- | -------------------------------------------------------------------------- | ------- |
+| backgroundColor          | `string`   | The background color of the titlebar.                                      | #FFFFFF |
+| condensed                | `boolean`  | Force the menu bar to be condensed.                                        | false   |
+| drag                     | `boolean`  | Define whether or not you can drag the window                              | true    |
+| icon                     | `string`   | The icon of the title bar.                                                 | null    |
+| isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.| null    |
 | menu                     | `object`   | List of MenuItem to show in the title bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | null  |
-| onClose                  | `function` | The function to call when the close button is clicked.              | null    |
-| onMaximize               | `function` | The function to call when the maximize/restore button is clicked.   | null    |
-| onMinimize               | `function` | The function to call when the minimize button is clicked.           | null    |
-| overflow                 | `string`   | The overflow of the container (auto, visible, hidden)               | auto    |
-| titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (left, center, right) | center  |
+| onClose                  | `function` | The function to call when the close button is clicked.                     | null    |
+| onMaximize               | `function` | The function to call when the maximize/restore button is clicked.          | null    |
+| onMinimize               | `function` | The function to call when the minimize button is clicked.                  | null    |
+| overflow                 | `string`   | The overflow of the container. (`auto`, `visible`, `hidden`)               | auto    |
+| titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (`left`, `center`, `right`)  | center  |
 
 # Methods
+
+## Update options
+
+This method updates all parameters that are specified.
+
+```
+titlebar.updateOptions({
+  condensed: 'true',
+  titleHorizontalAlignment: 'left'
+});
+```
 
 ## Update background
 
 This change the color of titlebar and it's checked whether the color is light or dark, so that the color of the icons adapts to the background of the title bar. The value must be a valid CSS color.
 
 ```
-titlebar.updateBackground('#000');
+titlebar.updateBackground('rgb(60, 60, 60)');
 ```
 
 ## Update title
@@ -147,7 +159,6 @@ document.title = 'My new title';
 titlebar.updateTitle();
 
 // Or you can do as follows and avoid writing document.title
-
 titlebar.updateTitle('New Title');
 ```
 
@@ -161,11 +172,10 @@ titlebar.updateIcon('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAA
 
 ## Update menu
 
-This method updates or creates the menu. You can use an array of MenuItem from [Electron](https://www.electronjs.org/docs/api/menu-item)/[NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/), or directly Menu.getApplicationMenu() in Electron.
+This method updates or creates the menu. You can use an array of MenuItem from [Electron](https://www.electronjs.org/docs/api/menu-item)/[NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/), or directly `Menu.getApplicationMenu()` in Electron.
 
 ```
 // With a menu template
-
 titlebar.updateMenu([
   {
     label: 'Item 1',
@@ -208,13 +218,12 @@ titlebar.updateMenu([
 ]);
 
 // Or with getApplicationMenu in Electron
-
 titlebar.updateMenu(Menu.getApplicationMenu());
 ```
 
 ## Update horizontal alignment
 
-This method update the horizontal alignment of the window title. Left, center and right are allowed.
+This method updates the horizontal alignment of the window title. `left`, `center` and `right` are allowed.
 
 ```
 titlebar.updateHorizontalAlignment('right');
