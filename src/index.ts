@@ -207,23 +207,20 @@ export default class Titlebar {
 const onBlur = () => {
   titlebar.classList.add(style.locals.inactive);
   closeSubMenu();
-}
+};
 
 const onFocus = () => {
   titlebar.classList.remove(style.locals.inactive);
-}
+};
 
 const onResize = () => {
-  titlebar.classList.toggle(
-    style.locals.maximized,
-    (isMaximized && isMaximized()) || false,
-  );
+  titlebar.classList.toggle(style.locals.maximized, (isMaximized && isMaximized()) || false);
   updateMenuSize();
-}
+};
 
 const onClick = () => {
   closeSubMenu();
-}
+};
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {
@@ -231,7 +228,10 @@ const updateMenuSize = () => {
     if (!menuCondensed) {
       menuSize = menubar.clientWidth;
     }
-    if (menuSize + appicon.clientWidth + title.clientWidth + controls.clientWidth + 1 > titlebar.clientWidth || forceCondensed) {
+    if (
+      menuSize + appicon.clientWidth + title.clientWidth + controls.clientWidth + 1 > titlebar.clientWidth ||
+      forceCondensed
+    ) {
       if (!menuCondensed) {
         buildMenu(true);
       }
