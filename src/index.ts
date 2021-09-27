@@ -17,7 +17,7 @@ let menuCondensed = false;
 let forceCondensed = false;
 let subMenuOpened = false;
 let activeMenu: Array<number> = [-1];
-let isMaximized: Function;
+let isMaximized: () => boolean;
 
 interface TitleBarOptions {
   backgroundColor?: string;
