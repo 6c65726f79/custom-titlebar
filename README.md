@@ -1,6 +1,6 @@
 # custom-titlebar
 
-Poorly coded titlebar for [Electron](https://www.electronjs.org/) and [NW.js](https://nwjs.io/)
+Poorly coded titlebar for [Electron](https://www.electronjs.org/) and [NW.js](https://nwjs.io/).
 
 ![NPM](https://img.shields.io/npm/l/@6c65726f79/custom-titlebar) ![npm](https://img.shields.io/npm/v/@6c65726f79/custom-titlebar) ![npm bundle size](https://img.shields.io/bundlephobia/min/@6c65726f79/custom-titlebar)
 
@@ -15,7 +15,7 @@ Poorly coded titlebar for [Electron](https://www.electronjs.org/) and [NW.js](ht
 
 # About
 
-**It's a library for Electron or NW.js, it can be used on a basic website but it's useless ¯\\_(ツ)_/¯**
+**It's a library for Electron and NW.js, it can be used on a basic website but it's useless ¯\\_(ツ)_/¯**
 
 ## Main features
 
