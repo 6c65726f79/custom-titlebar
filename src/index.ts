@@ -17,6 +17,7 @@ let menuCondensed = false;
 let forceCondensed = false;
 let subMenuOpened = false;
 let activeMenu: Array<number> = [-1];
+let isMaximized: Function;
 
 interface TitleBarOptions {
   backgroundColor?: string;
@@ -115,26 +116,10 @@ export default class Titlebar {
     }
 
     // Event listeners
-    window.addEventListener('blur', () => {
-      titlebar.classList.add(style.locals.inactive);
-      closeSubMenu();
-    });
-
-    window.addEventListener('focus', () => {
-      titlebar.classList.remove(style.locals.inactive);
-    });
-
-    window.addEventListener('resize', () => {
-      titlebar.classList.toggle(
-        style.locals.maximized,
-        (titleBarOptions?.isMaximized && titleBarOptions.isMaximized()) || false,
-      );
-      updateMenuSize();
-    });
-
-    window.addEventListener('click', () => {
-      closeSubMenu();
-    });
+    window.addEventListener('blur', onBlur);
+    window.addEventListener('focus', onFocus);
+    window.addEventListener('resize', onResize);
+    window.addEventListener('click', onClick);
   }
 
   updateOptions(options: TitleBarOptions): void {
@@ -158,6 +143,7 @@ export default class Titlebar {
       closeWindow.onclick = options.onClose;
     }
     if (options.isMaximized) {
+      isMaximized = options.isMaximized;
       titlebar.classList.toggle(style.locals.maximized, options.isMaximized());
     }
     if (typeof options.condensed != 'undefined') {
@@ -209,9 +195,34 @@ export default class Titlebar {
     while (container.firstChild) {
       document.body.append(container.firstChild);
     }
+    window.removeEventListener('blur', onBlur);
+    window.removeEventListener('focus', onFocus);
+    window.removeEventListener('resize', onResize);
+    window.removeEventListener('click', onClick);
     titlebar.remove();
     container.remove();
   }
+}
+
+const onBlur = () => {
+  titlebar.classList.add(style.locals.inactive);
+  closeSubMenu();
+}
+
+const onFocus = () => {
+  titlebar.classList.remove(style.locals.inactive);
+}
+
+const onResize = () => {
+  titlebar.classList.toggle(
+    style.locals.maximized,
+    (isMaximized && isMaximized()) || false,
+  );
+  updateMenuSize();
+}
+
+const onClick = () => {
+  closeSubMenu();
 }
 
 // Check if the menu need to be condensed

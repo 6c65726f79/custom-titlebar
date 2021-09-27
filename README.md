@@ -119,7 +119,7 @@ All parameters are optional.
 | ------------------------ | ---------- | -------------------------------------------------------------------------- | ------- |
 | backgroundColor          | `string`   | The background color of the titlebar.                                      | #FFFFFF |
 | condensed                | `boolean`  | Force the menu bar to be condensed.                                        | false   |
-| drag                     | `boolean`  | Define whether or not you can drag the window                              | true    |
+| drag                     | `boolean`  | Define whether or not you can drag the window.                             | true    |
 | icon                     | `string`   | The icon of the title bar.                                                 | null    |
 | isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.| null    |
 | menu                     | `object`   | List of MenuItem to show in the title bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | null  |
