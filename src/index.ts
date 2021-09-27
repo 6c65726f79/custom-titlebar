@@ -146,13 +146,12 @@ export default class Titlebar {
       isMaximized = options.isMaximized;
       titlebar.classList.toggle(style.locals.maximized, options.isMaximized());
     }
-    if (typeof options.condensed != 'undefined') {
-      menuCondensed = options.condensed;
-      forceCondensed = options.condensed;
-      updateMenuSize();
-    }
     if (options.menu) {
       this.updateMenu(options.menu);
+    }
+    if (typeof options.condensed != 'undefined') {
+      forceCondensed = options.condensed;
+      updateMenuSize();
     }
     if (options.overflow) {
       container.style.overflow = options.overflow;
@@ -232,7 +231,7 @@ const updateMenuSize = () => {
     if (!menuCondensed) {
       menuSize = menubar.clientWidth;
     }
-    if (menuSize + appicon.clientWidth + title.clientWidth + controls.clientWidth + 1 > titlebar.clientWidth) {
+    if (menuSize + appicon.clientWidth + title.clientWidth + controls.clientWidth + 1 > titlebar.clientWidth || forceCondensed) {
       if (!menuCondensed) {
         buildMenu(true);
       }
