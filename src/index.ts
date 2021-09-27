@@ -317,23 +317,25 @@ const buildMenuItem = (
     // Add accelerator
     const accelerator = document.createElement('div');
     accelerator.classList.add(style.locals.accelerator);
-    accelerator.innerText = menuItem.accelerator ? menuItem.accelerator.replace('CmdOrCtrl', 'Ctrl').replace('CommandOrControl', 'Control') : menuItem.modifiers.split('+').map(capitalizeFirstLetter).join('+')+"+"+capitalizeFirstLetter(menuItem.key)
+    accelerator.innerText = menuItem.accelerator
+      ? menuItem.accelerator.replace('CmdOrCtrl', 'Ctrl').replace('CommandOrControl', 'Control')
+      : menuItem.modifiers.split('+').map(capitalizeFirstLetter).join('+') + '+' + capitalizeFirstLetter(menuItem.key);
     item.append(accelerator);
   }
 
-  if(menuItem.toolTip || menuItem.tooltip){
+  if (menuItem.toolTip || menuItem.tooltip) {
     // Add tooltip
     item.title = menuItem.toolTip || menuItem.tooltip;
   }
-  if(menuItem.enabled===false){
+  if (menuItem.enabled === false) {
     // Disable item
     item.classList.add(style.locals.disabled);
   }
-  if(menuItem.visible===false){
+  if (menuItem.visible === false) {
     // Hide item
-    item.style.display = "none";
+    item.style.display = 'none';
   }
-  if(menuItem.checked){
+  if (menuItem.checked) {
     // Add check mark
     item.innerHTML += `<svg class="${style.locals.check}" version="1.1" width="12px" height="12px" viewBox="0 0 512 512"><path d="M504.502,75.496c-9.997-9.998-26.205-9.998-36.204,0L161.594,382.203L43.702,264.311c-9.997-9.998-26.205-9.997-36.204,0c-9.998,9.997-9.998,26.205,0,36.203l135.994,135.992c9.994,9.997,26.214,9.99,36.204,0L504.502,111.7C514.5,101.703,514.499,85.494,504.502,75.496z"/></svg>`;
   }
@@ -394,14 +396,14 @@ const openSubMenu = (submenu: Array<any>, index: number, parent: HTMLDivElement,
 
   // Prevent submenu to get out of document
   const freeSpace = {
-    x:document.body.clientWidth-subMenu.getBoundingClientRect().right,
-    y:document.body.clientHeight-subMenu.getBoundingClientRect().bottom
+    x: document.body.clientWidth - subMenu.getBoundingClientRect().right,
+    y: document.body.clientHeight - subMenu.getBoundingClientRect().bottom,
+  };
+  if (freeSpace.x < 0) {
+    subMenu.style.marginRight = `${-freeSpace.x}px`;
   }
-  if(freeSpace.x<0){
-    subMenu.style.marginRight=`${-freeSpace.x}px`;
-  }
-  if(freeSpace.y<0){
-    subMenu.style.marginTop=`${freeSpace.y}px`;
+  if (freeSpace.y < 0) {
+    subMenu.style.marginTop = `${freeSpace.y}px`;
   }
 };
 
@@ -438,5 +440,5 @@ const hexToRgb = (hex: string): Array<number> | undefined =>
     ?.map((x) => parseInt(x, 16));
 
 const capitalizeFirstLetter = (s: string) => {
-      return s.charAt(0).toUpperCase() + s.slice(1);
-    }
+  return s.charAt(0).toUpperCase() + s.slice(1);
+};
