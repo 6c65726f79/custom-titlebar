@@ -42,6 +42,7 @@ export default class Titlebar {
     // Create titlebar
     titlebar = document.createElement('div');
     titlebar.id = style.locals.titlebar;
+    titlebar.oncontextmenu = () => false;
 
     // Create drag region
     dragregion = document.createElement('div');
@@ -213,6 +214,8 @@ const onFocus = () => {
   titlebar.classList.remove(style.locals.inactive);
 };
 
+const onClick = () => closeSubMenu();
+
 const onResize = () => resized();
 
 const resized = (timeout=true) => {
@@ -223,10 +226,6 @@ const resized = (timeout=true) => {
     setTimeout(() => resized(false), 10);
   }
 }
-
-const onClick = () => {
-  closeSubMenu();
-};
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {
