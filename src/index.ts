@@ -317,10 +317,10 @@ const buildMenuItem = (
     label.innerText = menuItem.label;
     item.append(label);
   }
-  
+
   let defaultAccelerator;
 
-  if(menuItem.role && !menuItem.accelerator && menuItem.getDefaultRoleAccelerator){
+  if (menuItem.role && !menuItem.accelerator && menuItem.getDefaultRoleAccelerator) {
     // Get default accelerator
     defaultAccelerator = menuItem.getDefaultRoleAccelerator();
   }
@@ -329,9 +329,14 @@ const buildMenuItem = (
     // Add accelerator
     const accelerator = document.createElement('div');
     accelerator.classList.add(style.locals.accelerator);
-    accelerator.innerText = menuItem.accelerator || defaultAccelerator
-      ? (menuItem.accelerator || defaultAccelerator).replace('CmdOrCtrl', 'Ctrl').replace('CommandOrControl', 'Control')
-      : menuItem.modifiers.split('+').map(capitalizeFirstLetter).join('+') + '+' + capitalizeFirstLetter(menuItem.key);
+    accelerator.innerText =
+      menuItem.accelerator || defaultAccelerator
+        ? (menuItem.accelerator || defaultAccelerator)
+            .replace('CmdOrCtrl', 'Ctrl')
+            .replace('CommandOrControl', 'Control')
+        : menuItem.modifiers.split('+').map(capitalizeFirstLetter).join('+') +
+          '+' +
+          capitalizeFirstLetter(menuItem.key);
     item.append(accelerator);
   }
 
