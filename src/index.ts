@@ -451,11 +451,11 @@ const buildSubMenu = (submenu: Record<string, any>, depth: number): HTMLDivEleme
 };
 
 const parseColor = (input: string): Array<number> => {
-  let div = document.createElement('div'), m;
+  const div = document.createElement('div');
   div.style.display = "none";
   div.style.color = input;
   document.body.append(div);
-  m = getComputedStyle(div).color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
+  const m = getComputedStyle(div).color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
   div.remove();
   if(m) return [parseInt(m[1]),parseInt(m[2]),parseInt(m[3])];
   else return [255,255,255];
