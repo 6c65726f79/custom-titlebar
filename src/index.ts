@@ -291,7 +291,9 @@ const buildMenu = (condensed = false): void => {
   menuItems.forEach((menuItem) => {
     menubar.append(menuItem);
   });
-  updateMenuSize();
+  if (!condensed) {
+    updateMenuSize();
+  }
 };
 
 const buildMenuItem = (
