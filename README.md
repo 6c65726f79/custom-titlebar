@@ -47,9 +47,9 @@ npm i @6c65726f79/custom-titlebar
 
 # Usage
 
-```
-// JavaScript
+## JavaScript
 
+```
 const Titlebar = require('@6c65726f79/custom-titlebar');
 
 new Titlebar({
@@ -57,9 +57,9 @@ new Titlebar({
 });
 ```
 
-```
-// TypeScript
+## TypeScript
 
+```
 import { Titlebar } from '@6c65726f79/custom-titlebar'
 
 new Titlebar({
@@ -161,6 +161,7 @@ currentWindow.webContents.once('dom-ready', () => {
 
       const titlebar = new Titlebar({
         backgroundColor: '#37474f',
+        titleHorizontalAlignment: 'left',
         onMinimize: () => win.minimize(),
         onMaximize: () => maximized ? win.restore() : win.maximize(),
         onClose: () => win.close(),
