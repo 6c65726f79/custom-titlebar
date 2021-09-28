@@ -31,7 +31,7 @@ This package is highly inspired by [custom-electron-titlebar](https://www.npmjs.
 
 ## Motivations
 
-I needed a custom titlebar for Electron 14 to replace the unmaintened [custom-electron-titlebar](https://www.npmjs.com/package/custom-electron-titlebar), but I couldn't find any interesting ones, so I made it myself.
+I needed a custom titlebar for Electron 14 to replace the unmaintained [custom-electron-titlebar](https://www.npmjs.com/package/custom-electron-titlebar), but I couldn't find any interesting ones, so I made it myself.
 
 ## Not yet implemented
 
