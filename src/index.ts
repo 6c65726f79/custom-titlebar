@@ -218,14 +218,14 @@ const onClick = () => closeSubMenu();
 
 const onResize = () => resized();
 
-const resized = (timeout=true) => {
+const resized = (timeout = true) => {
   titlebar.classList.toggle(style.locals.maximized, (isMaximized && isMaximized()) || false);
   updateMenuSize();
   // Workaround for NW.js resized event race condition
-  if(timeout){
+  if (timeout) {
     setTimeout(() => resized(false), 10);
   }
-}
+};
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {
