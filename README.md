@@ -71,9 +71,9 @@ new Titlebar({
 
 ## Electron
 
-```javascript
-// main.js
+### main.js
 
+```javascript
 const { app, BrowserWindow } = require('electron');
 require('@electron/remote/main').initialize();
 const path = require('path');
@@ -101,9 +101,9 @@ app.whenReady().then(() => {
 })
 ```
 
-```javascript
-// preload.js
+### preload.js
 
+```javascript
 const { Menu, getCurrentWindow } = require('@electron/remote');
 const Titlebar = require('@6c65726f79/custom-titlebar');
 
@@ -124,9 +124,9 @@ currentWindow.webContents.once('dom-ready', () => {
 
 ## NW.js
 
-```javascript
-// package.json
+### package.json
 
+```json
 {
   "name": "helloworld",
   "main": "index.html",
@@ -140,9 +140,9 @@ currentWindow.webContents.once('dom-ready', () => {
 }
 ```
 
-```html
-// index.html
+### index.html
 
+```html
 <!DOCTYPE html>
 <html>
   <head>
