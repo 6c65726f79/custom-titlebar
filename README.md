@@ -21,7 +21,7 @@ Poorly coded titlebar for [Electron](https://www.electronjs.org/) and [NW.js](ht
 
 * Compatible with any version of Electron 🎉
 * Works with Electron, NW.js and probably others 🤷‍♂️
-* Works without any dependency, so it won't break in the next major release of Electron 👀
+* Works without any dependencies, so it won't break in the next major release of Electron 👀
 * Very small footprint (< 20 kB) 👣
 * Options and methods very similar to [custom-electron-titlebar](https://www.npmjs.com/package/custom-electron-titlebar) 📖
 

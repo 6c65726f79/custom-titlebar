@@ -317,13 +317,20 @@ const buildMenuItem = (
     label.innerText = menuItem.label;
     item.append(label);
   }
+  
+  let defaultAccelerator;
 
-  if (menuItem.accelerator || (menuItem.key && menuItem.modifiers)) {
+  if(menuItem.role && !menuItem.accelerator && menuItem.getDefaultRoleAccelerator){
+    // Get default accelerator
+    defaultAccelerator = menuItem.getDefaultRoleAccelerator();
+  }
+
+  if (menuItem.accelerator || defaultAccelerator || (menuItem.key && menuItem.modifiers)) {
     // Add accelerator
     const accelerator = document.createElement('div');
     accelerator.classList.add(style.locals.accelerator);
-    accelerator.innerText = menuItem.accelerator
-      ? menuItem.accelerator.replace('CmdOrCtrl', 'Ctrl').replace('CommandOrControl', 'Control')
+    accelerator.innerText = menuItem.accelerator || defaultAccelerator
+      ? (menuItem.accelerator || defaultAccelerator).replace('CmdOrCtrl', 'Ctrl').replace('CommandOrControl', 'Control')
       : menuItem.modifiers.split('+').map(capitalizeFirstLetter).join('+') + '+' + capitalizeFirstLetter(menuItem.key);
     item.append(accelerator);
   }
