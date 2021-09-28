@@ -166,11 +166,10 @@ export default class Titlebar {
   }
 
   updateBackground(color: string): void {
-    const brightness = hexToRgb(color)?.reduce((a, b) => a + b, 0);
-    if (brightness !== undefined) {
-      titlebar.classList.toggle(style.locals.dark, brightness <= 382);
-    }
-    titlebar.style.backgroundColor = color;
+    const rgb = parseColor(color);
+    const brightness = getBrightness(rgb);
+    titlebar.classList.toggle(style.locals.dark, brightness <= 125);
+    titlebar.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
   }
 
   updateTitle(newTitle?: string): void {
@@ -451,12 +450,20 @@ const buildSubMenu = (submenu: Record<string, any>, depth: number): HTMLDivEleme
   return subMenu;
 };
 
-const hexToRgb = (hex: string): Array<number> | undefined =>
-  hex
-    .replace(/^#?([a-f\d])([a-f\d])([a-f\d])$/i, (m, r, g, b) => '#' + r + r + g + g + b + b)
-    .substring(1)
-    .match(/.{2}/g)
-    ?.map((x) => parseInt(x, 16));
+const parseColor = (input: string): Array<number> => {
+  let div = document.createElement('div'), m;
+  div.style.display = "none";
+  div.style.color = input;
+  document.body.append(div);
+  m = getComputedStyle(div).color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
+  div.remove();
+  if(m) return [parseInt(m[1]),parseInt(m[2]),parseInt(m[3])];
+  else return [255,255,255];
+}
+
+const getBrightness = (rgb: Array<number>): number => {
+  return ((rgb[0]*299)+(rgb[1]*587)+(rgb[2]*114))/1000;
+}
 
 const capitalizeFirstLetter = (s: string) => {
   return s.charAt(0).toUpperCase() + s.slice(1);
