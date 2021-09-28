@@ -452,18 +452,18 @@ const buildSubMenu = (submenu: Record<string, any>, depth: number): HTMLDivEleme
 
 const parseColor = (input: string): Array<number> => {
   const div = document.createElement('div');
-  div.style.display = "none";
+  div.style.display = 'none';
   div.style.color = input;
   document.body.append(div);
   const m = getComputedStyle(div).color.match(/^rgb\s*\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)$/i);
   div.remove();
-  if(m) return [parseInt(m[1]),parseInt(m[2]),parseInt(m[3])];
-  else return [255,255,255];
-}
+  if (m) return [parseInt(m[1]), parseInt(m[2]), parseInt(m[3])];
+  else return [255, 255, 255];
+};
 
 const getBrightness = (rgb: Array<number>): number => {
-  return ((rgb[0]*299)+(rgb[1]*587)+(rgb[2]*114))/1000;
-}
+  return (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
+};
 
 const capitalizeFirstLetter = (s: string) => {
   return s.charAt(0).toUpperCase() + s.slice(1);
