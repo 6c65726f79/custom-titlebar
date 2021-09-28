@@ -140,7 +140,7 @@ currentWindow.webContents.once('dom-ready', () => {
 }
 ```
 
-```javascript
+```html
 // index.html
 
 <!DOCTYPE html>
