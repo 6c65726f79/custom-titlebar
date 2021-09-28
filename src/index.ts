@@ -213,10 +213,16 @@ const onFocus = () => {
   titlebar.classList.remove(style.locals.inactive);
 };
 
-const onResize = () => {
+const onResize = () => resized();
+
+const resized = (timeout=true) => {
   titlebar.classList.toggle(style.locals.maximized, (isMaximized && isMaximized()) || false);
   updateMenuSize();
-};
+  // Workaround for NW.js resized event race condition
+  if(timeout){
+    setTimeout(() => resized(false), 10);
+  }
+}
 
 const onClick = () => {
   closeSubMenu();
