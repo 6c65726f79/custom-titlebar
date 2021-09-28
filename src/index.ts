@@ -443,6 +443,7 @@ const closeSubMenu = (parent?: HTMLDivElement, depth = 0) => {
 const buildSubMenu = (submenu: Record<string, any>, depth: number): HTMLDivElement => {
   const subMenu = document.createElement('div');
   subMenu.classList.add(style.locals.submenu);
+  subMenu.title = ""; // Hide tooltip from parent item
   for (let i = 0; i < submenu.items.length; i++) {
     const menuItem = buildMenuItem(submenu.items[i], i, subMenu, depth);
     subMenu.append(menuItem);
