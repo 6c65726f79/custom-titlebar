@@ -124,7 +124,7 @@ currentWindow.webContents.once('dom-ready', () => {
 
 ## NW.js
 
-```javascript
+```json
 // package.json
 
 {
