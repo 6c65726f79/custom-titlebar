@@ -1,4 +1,4 @@
-import style from './style.scss';
+import style from '../style/style.scss';
 import MenuItem from './MenuItem';
 
 let mainMenu: Menu;

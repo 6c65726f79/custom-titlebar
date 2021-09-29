@@ -1,6 +1,6 @@
-import style from './style.scss';
+import style from '../style/style.scss';
+import svg from '../style/svg.json';
 import Menu from './Menu';
-import svg from './svg.json';
 
 export default class MenuItem {
   element: HTMLDivElement;
