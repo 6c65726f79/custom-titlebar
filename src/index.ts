@@ -1,4 +1,5 @@
 import style from './style.scss';
+import Menu from './Menu';
 
 let container: HTMLDivElement;
 let titlebar: HTMLDivElement;
@@ -11,12 +12,11 @@ let minimizeWindow: HTMLDivElement;
 let maximizeWindow: HTMLDivElement;
 let restoreWindow: HTMLDivElement;
 let closeWindow: HTMLDivElement;
-let menu: Record<string, any>;
+let menu: Menu;
+let menuTemplate: Record<string, any>;
 let menuSize = 0;
 let menuCondensed = false;
 let forceCondensed = false;
-let subMenuOpened = false;
-let activeMenu: Array<number> = [-1];
 let isMaximized: () => boolean;
 
 interface TitleBarOptions {
@@ -176,8 +176,8 @@ export default class Titlebar {
     title.innerText = newTitle || window.document.title;
   }
 
-  updateMenu(newMenu: Record<string, any>): void {
-    menu = parseMenuObject(newMenu);
+  updateMenu(template: Record<string, any>): void {
+    menuTemplate = parseMenuTemplate(template);
     buildMenu(menuCondensed);
   }
 
@@ -206,14 +206,14 @@ export default class Titlebar {
 
 const onBlur = () => {
   titlebar.classList.add(style.locals.inactive);
-  closeSubMenu();
+  menu.closeSubMenu();
 };
 
 const onFocus = () => {
   titlebar.classList.remove(style.locals.inactive);
 };
 
-const onClick = () => closeSubMenu();
+const onClick = () => menu.closeSubMenu();
 
 const onResize = () => resized();
 
@@ -249,15 +249,15 @@ const updateMenuSize = () => {
   }
 };
 
-const parseMenuObject = (menuObject: Record<string, any>): Record<string, any> => {
-  if (typeof menuObject.items == 'object') {
-    return menuObject;
+const parseMenuTemplate = (template: Record<string, any>): Record<string, any> => {
+  if (typeof template.items == 'object') {
+    return template;
   } else {
     const result = { items: [] as Array<any> };
-    for (const itemIndex in menuObject) {
-      const item = menuObject[itemIndex];
+    for (const itemIndex in template) {
+      const item = template[itemIndex];
       if (typeof item.submenu == 'object') {
-        item.submenu = parseMenuObject(item.submenu);
+        item.submenu = parseMenuTemplate(item.submenu);
         item.type = 'submenu';
       } else if (typeof item.type == 'undefined') {
         item.type = 'normal';
@@ -270,185 +270,29 @@ const parseMenuObject = (menuObject: Record<string, any>): Record<string, any> =
 
 const buildMenu = (condensed = false): void => {
   menuCondensed = condensed;
-  const menuItems: Array<HTMLDivElement> = [];
-  if (!condensed) {
-    for (let i = 0; i < menu.items.length; i++) {
-      menuItems.push(buildMenuItem(menu.items[i], i, menubar));
-    }
-  } else {
-    const item = {
-      role: 'mainMenu',
-      type: 'submenu',
-      submenu: {
-        items: menu.items,
+  let items = menuTemplate.items;
+  if (condensed) {
+    items = [
+      {
+        role: 'mainMenu',
+        type: 'submenu',
+        submenu: {
+          items: menuTemplate.items,
+        },
       },
-    };
-    menuItems.push(buildMenuItem(item, 0, menubar));
+    ];
   }
+  menu = new Menu(items);
 
+  // Insert menu items
   menubar.innerHTML = '';
-  menuItems.forEach((menuItem) => {
-    menubar.append(menuItem);
+  menu.menuItems.forEach((menuItem) => {
+    menubar.append(menuItem.element);
   });
+
   if (!condensed) {
     updateMenuSize();
   }
-};
-
-const buildMenuItem = (
-  menuItem: Record<string, any>,
-  index: number,
-  parent: HTMLDivElement,
-  depth = 0,
-): HTMLDivElement => {
-  // Create item
-  const item = document.createElement('div');
-  item.classList.add(style.locals.button);
-
-  if (menuItem.role == 'mainMenu') {
-    // Add main menu svg
-    item.innerHTML =
-      '<svg width="10" height="10" viewBox="0 0 384 384"><rect x="0" y="277.333" width="384" height="42.667"/><rect x="0" y="170.667" width="384" height="42.667"/><rect x="0" y="64" width="384" height="42.667"/></svg>';
-  }
-
-  if (menuItem.label) {
-    // Add label
-    const label = document.createElement('div');
-    label.classList.add(style.locals.title);
-    label.innerText = menuItem.label;
-    item.append(label);
-  }
-
-  let defaultAccelerator;
-
-  if (menuItem.role && !menuItem.accelerator && menuItem.getDefaultRoleAccelerator) {
-    // Get default accelerator
-    defaultAccelerator = menuItem.getDefaultRoleAccelerator();
-  }
-
-  if (menuItem.accelerator || defaultAccelerator || (menuItem.key && menuItem.modifiers)) {
-    // Add accelerator
-    const accelerator = document.createElement('div');
-    accelerator.classList.add(style.locals.accelerator);
-    accelerator.innerText =
-      menuItem.accelerator || defaultAccelerator
-        ? (menuItem.accelerator || defaultAccelerator)
-            .replace('CmdOrCtrl', 'Ctrl')
-            .replace('CommandOrControl', 'Control')
-        : menuItem.modifiers.split('+').map(capitalizeFirstLetter).join('+') +
-          '+' +
-          capitalizeFirstLetter(menuItem.key);
-    item.append(accelerator);
-  }
-
-  if (menuItem.toolTip || menuItem.tooltip) {
-    // Add tooltip
-    item.title = menuItem.toolTip || menuItem.tooltip;
-  }
-  if (menuItem.enabled === false) {
-    // Disable item
-    item.classList.add(style.locals.disabled);
-  }
-  if (menuItem.visible === false) {
-    // Hide item
-    item.style.display = 'none';
-  }
-  if (menuItem.checked) {
-    // Add check mark
-    item.innerHTML += `<svg class="${style.locals.check}" version="1.1" width="12px" height="12px" viewBox="0 0 512 512"><path d="M504.502,75.496c-9.997-9.998-26.205-9.998-36.204,0L161.594,382.203L43.702,264.311c-9.997-9.998-26.205-9.997-36.204,0c-9.998,9.997-9.998,26.205,0,36.203l135.994,135.992c9.994,9.997,26.214,9.99,36.204,0L504.502,111.7C514.5,101.703,514.499,85.494,504.502,75.496z"/></svg>`;
-  }
-
-  switch (menuItem.type) {
-    case 'normal':
-    case 'checkbox':
-      item.onclick = (e) => {
-        e.stopPropagation();
-        closeSubMenu();
-        menuItem.click();
-      };
-      item.onmouseenter = () => {
-        closeSubMenu(parent, depth);
-      };
-      break;
-    case 'submenu':
-      // Add right arrow
-      item.innerHTML += `<svg class="${style.locals.arrow}" version="1.1" width="20px" height="20px" viewBox="0 0 24 24"><path d="M9.29,6.71L9.29,6.71c-0.39,0.39-0.39,1.02,0,1.41L13.17,12l-3.88,3.88c-0.39,0.39-0.39,1.02,0,1.41l0,0c0.39,0.39,1.02,0.39,1.41,0l4.59-4.59c0.39-0.39,0.39-1.02,0-1.41l-4.59-4.59C10.32,6.32,9.68,6.32,9.29,6.71z" /></svg>`;
-
-      item.onclick = (e) => {
-        e.stopPropagation();
-        if (depth == 0) {
-          if (subMenuOpened && activeMenu[depth] == index) {
-            closeSubMenu(parent, depth);
-          } else {
-            openSubMenu(menuItem.submenu, index, parent, depth);
-          }
-        }
-      };
-      item.onmouseenter = () => {
-        if (subMenuOpened) {
-          openSubMenu(menuItem.submenu, index, parent, depth);
-        }
-      };
-      item.onmouseleave = () => {
-        if (subMenuOpened && depth > 0) {
-          closeSubMenu(parent, depth);
-        }
-      };
-      break;
-    case 'separator':
-      item.classList.add(style.locals.separator);
-      break;
-  }
-  return item;
-};
-
-const openSubMenu = (submenu: Array<any>, index: number, parent: HTMLDivElement, depth: number): void => {
-  if (depth == 0 && activeMenu[depth] == index) return;
-  closeSubMenu(parent, depth);
-  activeMenu[depth] = index;
-  subMenuOpened = true;
-  const menuItem = parent.children[index];
-  const subMenu = buildSubMenu(submenu, depth + 1);
-  menuItem.classList.add(style.locals.active);
-  menuItem.appendChild(subMenu);
-
-  // Prevent submenu to get out of window
-  const freeSpace = {
-    x: window.innerWidth - subMenu.getBoundingClientRect().right,
-    y: window.innerHeight - subMenu.getBoundingClientRect().bottom,
-  };
-  if (freeSpace.x < 0) {
-    subMenu.style.marginRight = `${-freeSpace.x}px`;
-  }
-  if (freeSpace.y < 0) {
-    subMenu.style.marginTop = `${freeSpace.y}px`;
-  }
-};
-
-const closeSubMenu = (parent?: HTMLDivElement, depth = 0) => {
-  if (activeMenu[depth] >= 0) {
-    const menuItem = parent ? parent.children[activeMenu[depth]] : menubar.children[activeMenu[depth]];
-    if (menuItem) {
-      menuItem.classList.remove(style.locals.active);
-      menuItem.querySelector(`.${style.locals.submenu}`)?.remove();
-      if (depth === 0) {
-        subMenuOpened = false;
-      }
-      activeMenu = activeMenu.slice(0, depth);
-      activeMenu[depth] = -1;
-    }
-  }
-};
-
-const buildSubMenu = (submenu: Record<string, any>, depth: number): HTMLDivElement => {
-  const subMenu = document.createElement('div');
-  subMenu.classList.add(style.locals.submenu);
-  subMenu.title = ""; // Hide tooltip from parent item
-  for (let i = 0; i < submenu.items.length; i++) {
-    const menuItem = buildMenuItem(submenu.items[i], i, subMenu, depth);
-    subMenu.append(menuItem);
-  }
-  return subMenu;
 };
 
 const parseColor = (input: string): Array<number> => {
@@ -464,8 +308,4 @@ const parseColor = (input: string): Array<number> => {
 
 const getBrightness = (rgb: Array<number>): number => {
   return (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
-};
-
-const capitalizeFirstLetter = (s: string) => {
-  return s.charAt(0).toUpperCase() + s.slice(1);
 };
