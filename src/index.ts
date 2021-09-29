@@ -72,22 +72,22 @@ export default class Titlebar {
     minimizeWindow = document.createElement('div');
     /*minimizeWindow.id = 'minimize';*/
     minimizeWindow.classList.add(style.locals.button);
-    minimizeWindow.innerHTML = svg.windows.minimize;
+    minimizeWindow.innerHTML = svg.minimize.windows;
     controls.append(minimizeWindow);
     maximizeWindow = document.createElement('div');
     maximizeWindow.id = style.locals.maximize;
     maximizeWindow.classList.add(style.locals.button);
-    maximizeWindow.innerHTML = svg.windows.maximize;
+    maximizeWindow.innerHTML = svg.maximize.windows;
     controls.append(maximizeWindow);
     restoreWindow = document.createElement('div');
     restoreWindow.id = style.locals.restore;
     restoreWindow.classList.add(style.locals.button);
-    restoreWindow.innerHTML = svg.windows.restore;
+    restoreWindow.innerHTML = svg.restore.windows;
     controls.append(restoreWindow);
     closeWindow = document.createElement('div');
     closeWindow.id = style.locals.close;
     closeWindow.classList.add(style.locals.button);
-    closeWindow.innerHTML = svg.windows.close;
+    closeWindow.innerHTML = svg.close.windows;
     controls.append(closeWindow);
     titlebar.append(controls);
 
