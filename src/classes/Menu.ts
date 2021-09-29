@@ -53,8 +53,8 @@ export default class Menu {
   closeSubMenu(main = false) {
     if (main) {
       mainMenu.closeSubMenu();
-    } else if (this.activeMenu >= 0 || main) {
-      const menuItem = main ? mainMenu.menuItems[mainMenu.activeMenu] : this.menuItems[this.activeMenu];
+    } else if (this.activeMenu >= 0) {
+      const menuItem = this.menuItems[this.activeMenu];
       if (menuItem) {
         menuItem.element.classList.remove(style.locals.active);
         menuItem.element.querySelector(`.${style.locals.submenu}`)?.remove();
