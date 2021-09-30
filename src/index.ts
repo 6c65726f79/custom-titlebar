@@ -15,10 +15,10 @@ let restoreWindow: HTMLDivElement;
 let closeWindow: HTMLDivElement;
 let menu: Menu;
 let menuTemplate: Record<string, any>;
+let options: TitleBarOptions = {};
 let menuSize = 0;
 let menuCondensed = false;
 let forceCondensed = false;
-let isMaximized: () => boolean;
 
 interface TitleBarOptions {
   backgroundColor?: string;
@@ -121,46 +121,9 @@ export default class Titlebar {
     window.addEventListener('click', onClick);
   }
 
-  updateOptions(options: TitleBarOptions): void {
-    if (options.backgroundColor) {
-      this.updateBackground(options.backgroundColor);
-    }
-    if (options.title) {
-      this.updateTitle(options.title);
-    }
-    if (options.icon) {
-      this.updateIcon(options.icon);
-    }
-    if (options.onMinimize) {
-      minimizeWindow.onclick = options.onMinimize;
-    }
-    if (options.onMaximize) {
-      maximizeWindow.onclick = options.onMaximize;
-      restoreWindow.onclick = options.onMaximize;
-    }
-    if (options.onClose) {
-      closeWindow.onclick = options.onClose;
-    }
-    if (options.isMaximized) {
-      isMaximized = options.isMaximized;
-      titlebar.classList.toggle(style.locals.maximized, options.isMaximized());
-    }
-    if (options.menu) {
-      this.updateMenu(options.menu);
-    }
-    if (typeof options.condensed != 'undefined') {
-      forceCondensed = options.condensed;
-      updateMenuSize();
-    }
-    if (options.overflow) {
-      container.style.overflow = options.overflow;
-    }
-    if (typeof options.drag != 'undefined') {
-      titlebar.classList.toggle(style.locals.nodrag, !options.drag);
-    }
-    if (options.titleHorizontalAlignment) {
-      this.updateHorizontalAlignment(options.titleHorizontalAlignment);
-    }
+  updateOptions(titleBarOptions: TitleBarOptions): void {
+    options = Object.assign({}, options, titleBarOptions);
+    applyOptions(titleBarOptions, this);
   }
 
   updateBackground(color: string): void {
@@ -204,25 +167,66 @@ export default class Titlebar {
 
 const onBlur = () => {
   titlebar.classList.add(style.locals.inactive);
-  menu.closeSubMenu();
+  menu?.closeSubMenu();
 };
 
 const onFocus = () => {
   titlebar.classList.remove(style.locals.inactive);
 };
 
-const onClick = () => menu.closeSubMenu();
+const onClick = () => menu?.closeSubMenu();
 
 const onResize = () => resized();
 
 const resized = (timeout = true) => {
-  titlebar.classList.toggle(style.locals.maximized, (isMaximized && isMaximized()) || false);
+  titlebar.classList.toggle(style.locals.maximized, (options.isMaximized && options.isMaximized()) || false);
   updateMenuSize();
   // Workaround for NW.js resized event race condition
   if (timeout) {
     setTimeout(() => resized(false), 10);
   }
 };
+
+const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
+  if (o.backgroundColor) {
+    context.updateBackground(o.backgroundColor);
+  }
+  if (o.title) {
+    context.updateTitle(o.title);
+  }
+  if (o.icon) {
+    context.updateIcon(o.icon);
+  }
+  if (o.onMinimize) {
+    minimizeWindow.onclick = o.onMinimize;
+  }
+  if (o.onMaximize) {
+    maximizeWindow.onclick = o.onMaximize;
+    restoreWindow.onclick = o.onMaximize;
+  }
+  if (o.onClose) {
+    closeWindow.onclick = o.onClose;
+  }
+  if (o.isMaximized) {
+    titlebar.classList.toggle(style.locals.maximized, o.isMaximized());
+  }
+  if (o.menu) {
+    context.updateMenu(o.menu);
+  }
+  if (typeof o.condensed != 'undefined') {
+    forceCondensed = o.condensed;
+    updateMenuSize();
+  }
+  if (o.overflow) {
+    container.style.overflow = o.overflow;
+  }
+  if (typeof o.drag != 'undefined') {
+    titlebar.classList.toggle(style.locals.nodrag, !o.drag);
+  }
+  if (o.titleHorizontalAlignment) {
+    context.updateHorizontalAlignment(o.titleHorizontalAlignment);
+  }
+}
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {
