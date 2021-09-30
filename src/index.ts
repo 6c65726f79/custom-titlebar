@@ -1,6 +1,7 @@
 import style from './style/style.scss';
 import svg from './style/svg.json';
 import Menu from './classes/Menu';
+import { RoleHandler } from './classes/RoleHandler';
 
 let container: HTMLDivElement;
 let titlebar: HTMLDivElement;
@@ -33,6 +34,8 @@ interface TitleBarOptions {
   onMaximize?: () => void;
   onClose?: () => void;
   isMaximized?: () => boolean;
+  getFocusedWindow?: () => any;
+  getFocusedWebContents?: () => any;
 }
 
 export default class Titlebar {
@@ -226,7 +229,10 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (o.titleHorizontalAlignment) {
     context.updateHorizontalAlignment(o.titleHorizontalAlignment);
   }
-}
+  if (o.getFocusedWindow && o.getFocusedWebContents) {
+    RoleHandler.init(o.getFocusedWindow, o.getFocusedWebContents);
+  }
+};
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {

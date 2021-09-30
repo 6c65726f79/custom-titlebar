@@ -1,6 +1,7 @@
 import style from '../style/style.scss';
 import svg from '../style/svg.json';
 import Menu from './Menu';
+import { RoleHandler } from './RoleHandler';
 
 export default class MenuItem {
   element: HTMLDivElement;
@@ -69,7 +70,7 @@ export default class MenuItem {
           e.stopPropagation();
           parent.closeSubMenu(true);
           if (menuItem.click) {
-            menuItem.click();
+            menuItem.role ? RoleHandler.invoke(menuItem.click) : menuItem.click();
           }
         };
         this.element.onmouseenter = () => {

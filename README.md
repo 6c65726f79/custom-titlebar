@@ -35,7 +35,7 @@ I needed a custom titlebar for Electron 14 to replace the unmaintained [custom-e
 
 ## Not yet implemented
 
-* MenuItem role, icon, radio
+* MenuItem ~~role~~, icon, radio
 * Icons theme
 * Submenu scrollbar
 
@@ -104,7 +104,7 @@ app.whenReady().then(() => {
 ### preload.js
 
 ```javascript
-const { Menu, getCurrentWindow } = require('@electron/remote');
+const { Menu, BrowserWindow, webContents, getCurrentWindow } = require('@electron/remote');
 const Titlebar = require('@6c65726f79/custom-titlebar');
 
 const currentWindow = getCurrentWindow();
@@ -117,7 +117,9 @@ currentWindow.webContents.once('dom-ready', () => {
     onMinimize: () => currentWindow.minimize(),
     onMaximize: () => currentWindow.isMaximized() ? currentWindow.unmaximize() : currentWindow.maximize(),
     onClose: () => currentWindow.close(),
-    isMaximized: () => currentWindow.isMaximized()
+    isMaximized: () => currentWindow.isMaximized(),
+    getFocusedWindow: () => BrowserWindow.getFocusedWindow(), /* Only needed if you use MenuItem roles */
+    getFocusedWebContents: () => webContents.getFocusedWebContents() /* Only needed if you use MenuItem roles */
   });
 });
 ```
@@ -181,6 +183,8 @@ All parameters are optional.
 | backgroundColor          | `string`   | The background color of the titlebar.                                      | #FFFFFF |
 | condensed                | `boolean`  | Force the menu bar to be condensed.                                        | false   |
 | drag                     | `boolean`  | Define whether or not you can drag the window.                             | true    |
+| getFocusedWebContents    | `function` | A function that return the FocusedWebContents. **(Electron only)**             | null    |
+| getFocusedWindow         | `function` | A function that return the FocusedWindow. **(Electron only)**                  | null    |
 | icon                     | `string`   | The icon of the titlebar.                                                  | null    |
 | isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.| null    |
 | menu                     | `object`   | List of MenuItem to show in the menu bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | null  |
