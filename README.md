@@ -60,7 +60,7 @@ new Titlebar({
 ## TypeScript
 
 ```typescript
-import { Titlebar } from '@6c65726f79/custom-titlebar'
+import Titlebar from '@6c65726f79/custom-titlebar'
 
 new Titlebar({
   backgroundColor: '#000'
@@ -177,21 +177,23 @@ currentWindow.webContents.once('dom-ready', () => {
 
 All parameters are optional.
 
-| Parameter                | Type       | Description                                                                | Default |
-| ------------------------ | ---------- | -------------------------------------------------------------------------- | ------- |
-| backgroundColor          | `string`   | The background color of the titlebar.                                      | #FFFFFF |
-| condensed                | `boolean`  | Force the menu bar to be condensed.                                        | false   |
-| drag                     | `boolean`  | Define whether or not you can drag the window.                             | true    |
-| getFocusedWebContents    | `function` | A function that return the FocusedWebContents. **(Electron only)**         | null    |
-| getFocusedWindow         | `function` | A function that return the FocusedWindow. **(Electron only)**              | null    |
-| icon                     | `string`   | The icon of the titlebar.                                                  | null    |
-| isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.| null    |
-| menu                     | `object`   | List of MenuItem to show in the menu bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | null  |
-| onClose                  | `function` | The function to call when the close button is clicked.                     | null    |
-| onMaximize               | `function` | The function to call when the maximize/restore button is clicked.          | null    |
-| onMinimize               | `function` | The function to call when the minimize button is clicked.                  | null    |
-| overflow                 | `string`   | The overflow of the container. (`auto`, `visible`, `hidden`)               | auto    |
-| titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (`left`, `center`, `right`)  | center  |
+| Parameter                | Type       | Description                                                                | Default          |
+| ------------------------ | ---------- | -------------------------------------------------------------------------- | ---------------- |
+| backgroundColor          | `string`   | The background color of the titlebar.                                      | `#FFFFFF`        |
+| condensed                | `boolean`  | Force the menu bar to be condensed.                                        | `false`          |
+| drag                     | `boolean`  | Define whether or not you can drag the window.                             | `true`           |
+| getFocusedWebContents    | `function` | A function that return the FocusedWebContents. **(Electron only)**         | undefined        |
+| getFocusedWindow         | `function` | A function that return the FocusedWindow. **(Electron only)**              | undefined        |
+| icon                     | `string`   | The icon of the titlebar.                                                  | undefined        |
+| isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.| undefined        |
+| menu                     | `object`   | List of MenuItem to show in the menu bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | undefined        |
+| onClose                  | `function` | The function to call when the close button is clicked.                     | undefined        |
+| onMaximize               | `function` | The function to call when the maximize/restore button is clicked.          | undefined        |
+| onMinimize               | `function` | The function to call when the minimize button is clicked.                  | undefined        |
+| overflow                 | `string`   | The overflow of the container. (`auto`, `visible`, `hidden`)               | `auto`           |
+| title                    | `string`   | Window title.                                                              | `document.title` |
+| titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (`left`, `center`, `right`)  | `center`         |
+| unfocusEffect            | `boolean`  | Enables or disables the unfocus effect on the title bar.                   | `true`           |
 
 # Methods
 
