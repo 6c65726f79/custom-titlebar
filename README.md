@@ -89,15 +89,14 @@ function createWindow () {
       preload: path.join(__dirname, 'preload.js')
     }
   })
+
+  require('@electron/remote/main').enable(win.webContents);
   
   win.loadFile('index.html');
-
-  return win;
 }
 
 app.whenReady().then(() => {
-  const mainWindow = createWindow();
-  require('@electron/remote/main').enable(mainWindow.webContents);
+  createWindow();
 })
 ```
 
@@ -183,8 +182,8 @@ All parameters are optional.
 | backgroundColor          | `string`   | The background color of the titlebar.                                      | #FFFFFF |
 | condensed                | `boolean`  | Force the menu bar to be condensed.                                        | false   |
 | drag                     | `boolean`  | Define whether or not you can drag the window.                             | true    |
-| getFocusedWebContents    | `function` | A function that return the FocusedWebContents. **(Electron only)**             | null    |
-| getFocusedWindow         | `function` | A function that return the FocusedWindow. **(Electron only)**                  | null    |
+| getFocusedWebContents    | `function` | A function that return the FocusedWebContents. **(Electron only)**         | null    |
+| getFocusedWindow         | `function` | A function that return the FocusedWindow. **(Electron only)**              | null    |
 | icon                     | `string`   | The icon of the titlebar.                                                  | null    |
 | isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.| null    |
 | menu                     | `object`   | List of MenuItem to show in the menu bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | null  |
