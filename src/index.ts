@@ -107,7 +107,6 @@ export default class Titlebar {
   }
 
   updateOptions(titleBarOptions: TitleBarOptions): void {
-    /*options = Object.assign({}, options, titleBarOptions);*/
     Options.update(titleBarOptions);
     applyOptions(titleBarOptions, this);
   }
