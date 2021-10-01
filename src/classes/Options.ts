@@ -1,4 +1,3 @@
-
 export interface TitleBarOptions {
   backgroundColor?: string;
   title?: string;
@@ -19,14 +18,14 @@ export interface TitleBarOptions {
 
 export const Options = {
   values: {
-    backgroundColor: "#fff",
+    backgroundColor: '#fff',
     title: undefined,
     icon: undefined,
     condensed: false,
     menu: undefined,
-    overflow: "auto",
+    overflow: 'auto',
     drag: true,
-    titleHorizontalAlignment: "center",
+    titleHorizontalAlignment: 'center',
     unfocusEffect: true,
     onMinimize: undefined,
     onMaximize: undefined,
@@ -36,7 +35,7 @@ export const Options = {
     getFocusedWebContents: undefined,
   } as TitleBarOptions,
 
-  update(_options: TitleBarOptions){
+  update(_options: TitleBarOptions) {
     this.values = Object.assign({}, this.values, _options);
-  }
-}
+  },
+};

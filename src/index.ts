@@ -152,7 +152,7 @@ export default class Titlebar {
 }
 
 const onBlur = () => {
-  if(Options.values.unfocusEffect){
+  if (Options.values.unfocusEffect) {
     titlebar.classList.add(style.locals.inactive);
   }
   menu?.closeSubMenu();
@@ -167,7 +167,10 @@ const onClick = () => menu?.closeSubMenu();
 const onResize = () => resized();
 
 const resized = (timeout = true) => {
-  titlebar.classList.toggle(style.locals.maximized, (Options.values.isMaximized && Options.values.isMaximized()) || false);
+  titlebar.classList.toggle(
+    style.locals.maximized,
+    (Options.values.isMaximized && Options.values.isMaximized()) || false,
+  );
   updateMenuSize();
   // Workaround for NW.js resized event race condition
   if (timeout) {

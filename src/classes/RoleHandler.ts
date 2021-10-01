@@ -8,7 +8,7 @@ export const RoleHandler = {
   },
 
   invoke(method: (...args: any) => void) {
-    if(typeof getFocusedWindow != "undefined" && typeof getFocusedWebContents != "undefined"){
+    if (typeof getFocusedWindow != 'undefined' && typeof getFocusedWebContents != 'undefined') {
       const focusedWindow = getFocusedWindow();
       const focusedWebContents = getFocusedWebContents();
       method(undefined, focusedWindow, focusedWebContents);
