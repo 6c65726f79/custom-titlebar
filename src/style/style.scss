@@ -46,6 +46,10 @@
       opacity: 0.5;
     }
 
+    #dragregion {
+      background: rgba(255,255,255,.17);
+    }
+
     .button:not(:hover) svg > * {
       fill: rgba(0, 0, 0, 0.5);
     }
