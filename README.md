@@ -60,7 +60,7 @@ new Titlebar({
 ## TypeScript
 
 ```typescript
-import Titlebar from '@6c65726f79/custom-titlebar'
+import Titlebar from '@6c65726f79/custom-titlebar';
 
 new Titlebar({
   backgroundColor: '#000'
@@ -136,7 +136,7 @@ currentWindow.webContents.once('dom-ready', () => {
     "toolbar": false
   },
   "dependencies": {
-    "@6c65726f79/custom-titlebar": "^0.1.2"
+    "@6c65726f79/custom-titlebar": "^0.2.0"
   }
 }
 ```
@@ -193,7 +193,7 @@ All parameters are optional.
 | overflow                 | `string`   | The overflow of the container. (`auto`, `visible`, `hidden`)               | `auto`           |
 | title                    | `string`   | Window title.                                                              | `document.title` |
 | titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (`left`, `center`, `right`)  | `center`         |
-| unfocusEffect            | `boolean`  | Enables or disables the unfocus effect on the title bar.                   | `true`           |
+| unfocusEffect            | `boolean`  | Enables or disables the unfocus effect on the titlebar.                    | `true`           |
 
 # Methods
 
