@@ -2,6 +2,7 @@ import style from './style/style.scss';
 import svg from './style/svg.json';
 import Menu from './classes/Menu';
 import { RoleHandler } from './classes/RoleHandler';
+import { Options, TitleBarOptions } from './classes/Options';
 
 let container: HTMLDivElement;
 let titlebar: HTMLDivElement;
@@ -16,27 +17,8 @@ let restoreWindow: HTMLDivElement;
 let closeWindow: HTMLDivElement;
 let menu: Menu;
 let menuTemplate: Record<string, any>;
-let options: TitleBarOptions = {};
 let menuSize = 0;
 let menuCondensed = false;
-let forceCondensed = false;
-
-interface TitleBarOptions {
-  backgroundColor?: string;
-  title?: string;
-  icon?: string;
-  condensed?: boolean;
-  menu?: Record<string, any>;
-  overflow?: string;
-  drag?: boolean;
-  titleHorizontalAlignment?: string;
-  onMinimize?: () => void;
-  onMaximize?: () => void;
-  onClose?: () => void;
-  isMaximized?: () => boolean;
-  getFocusedWindow?: () => any;
-  getFocusedWebContents?: () => any;
-}
 
 export default class Titlebar {
   constructor(titleBarOptions?: TitleBarOptions) {
@@ -125,7 +107,8 @@ export default class Titlebar {
   }
 
   updateOptions(titleBarOptions: TitleBarOptions): void {
-    options = Object.assign({}, options, titleBarOptions);
+    /*options = Object.assign({}, options, titleBarOptions);*/
+    Options.update(titleBarOptions);
     applyOptions(titleBarOptions, this);
   }
 
@@ -169,7 +152,9 @@ export default class Titlebar {
 }
 
 const onBlur = () => {
-  titlebar.classList.add(style.locals.inactive);
+  if(Options.values.unfocusEffect){
+    titlebar.classList.add(style.locals.inactive);
+  }
   menu?.closeSubMenu();
 };
 
@@ -182,7 +167,7 @@ const onClick = () => menu?.closeSubMenu();
 const onResize = () => resized();
 
 const resized = (timeout = true) => {
-  titlebar.classList.toggle(style.locals.maximized, (options.isMaximized && options.isMaximized()) || false);
+  titlebar.classList.toggle(style.locals.maximized, (Options.values.isMaximized && Options.values.isMaximized()) || false);
   updateMenuSize();
   // Workaround for NW.js resized event race condition
   if (timeout) {
@@ -217,7 +202,6 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
     context.updateMenu(o.menu);
   }
   if (typeof o.condensed != 'undefined') {
-    forceCondensed = o.condensed;
     updateMenuSize();
   }
   if (o.overflow) {
@@ -242,13 +226,13 @@ const updateMenuSize = () => {
     }
     if (
       menuSize + appicon.clientWidth + title.clientWidth + controls.clientWidth + 1 > titlebar.clientWidth ||
-      forceCondensed
+      Options.values.condensed
     ) {
       if (!menuCondensed) {
         buildMenu(true);
       }
     } else {
-      if (menuCondensed && !forceCondensed) {
+      if (menuCondensed && !Options.values.condensed) {
         buildMenu(false);
       }
     }
