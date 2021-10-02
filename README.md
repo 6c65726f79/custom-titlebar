@@ -42,6 +42,7 @@ I needed a custom titlebar for Electron 14 to replace the unmaintained [custom-e
 * MenuItem ~~role~~, icon, radio
 * ~~Icons theme~~ Done!
 * Submenu scrollbar
+* Keyboard controls
 
 # Install
 

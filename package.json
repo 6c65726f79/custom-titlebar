@@ -30,8 +30,10 @@
     "titlebar",
     "menubar",
     "windows",
+    "macos",
     "electron",
-    "nw"
+    "nw",
+    "nwjs"
   ],
   "author": {
     "name": "Samuel Leroy",
