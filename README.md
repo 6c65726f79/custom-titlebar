@@ -200,7 +200,7 @@ All parameters are optional.
 | onMaximize               | `function` | The function to call when the maximize/restore button is clicked.          | undefined        |
 | onMinimize               | `function` | The function to call when the minimize button is clicked.                  | undefined        |
 | overflow                 | `string`   | The overflow of the container. (`auto`, `visible`, `hidden`)               | `auto`           |
-| platform                 | `string`   | Style of the control buttons. (`windows`, `macos`)                         | `windows`        |
+| platform                 | `string`   | Style of the control buttons. (`win`, `darwin`)                            | `win`            |
 | title                    | `string`   | Window title.                                                              | `document.title` |
 | titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (`left`, `center`, `right`)  | `center`         |
 | unfocusEffect            | `boolean`  | Enables or disables the unfocus effect on the titlebar.                    | `true`           |
