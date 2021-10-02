@@ -40,7 +40,7 @@ I needed a custom titlebar for Electron 14 to replace the unmaintained [custom-e
 ## Not yet implemented
 
 * MenuItem ~~role~~, icon, radio
-* Icons theme
+* ~~Icons theme~~ Done!
 * Submenu scrollbar
 
 # Install
@@ -160,7 +160,7 @@ currentWindow.webContents.once('dom-ready', () => {
     <h1>Hello World!</h1>
     <script>
       const gui = require('nw.gui');
-      const os = require('os');
+      const { platform } = require('process');
       const win = gui.Window.get();
       let maximized = false;
 
@@ -169,7 +169,7 @@ currentWindow.webContents.once('dom-ready', () => {
 
       const titlebar = new Titlebar({
         backgroundColor: '#37474f',
-        platform: os.platform(),
+        platform: platform,
         onMinimize: () => win.minimize(),
         onMaximize: () => maximized ? win.restore() : win.maximize(),
         onClose: () => win.close(),
