@@ -29,6 +29,7 @@ export default class Titlebar {
     titlebar = document.createElement('div');
     titlebar.id = style.locals.titlebar;
     titlebar.oncontextmenu = () => false;
+    titlebar.classList.add(style.locals['hide-menu']);
 
     // Create drag region
     dragregion = document.createElement('div');
@@ -55,24 +56,24 @@ export default class Titlebar {
     controls = document.createElement('div');
     controls.id = style.locals.controls;
     minimizeWindow = document.createElement('div');
-    /*minimizeWindow.id = 'minimize';*/
+    minimizeWindow.id = style.locals.minimize;
     minimizeWindow.classList.add(style.locals.button);
-    minimizeWindow.innerHTML = svg.minimize.windows;
+    minimizeWindow.title = "Minimize";
     controls.append(minimizeWindow);
     maximizeWindow = document.createElement('div');
     maximizeWindow.id = style.locals.maximize;
     maximizeWindow.classList.add(style.locals.button);
-    maximizeWindow.innerHTML = svg.maximize.windows;
+    maximizeWindow.title = "Maximize";
     controls.append(maximizeWindow);
     restoreWindow = document.createElement('div');
     restoreWindow.id = style.locals.restore;
     restoreWindow.classList.add(style.locals.button);
-    restoreWindow.innerHTML = svg.restore.windows;
+    restoreWindow.title = "Restore";
     controls.append(restoreWindow);
     closeWindow = document.createElement('div');
     closeWindow.id = style.locals.close;
     closeWindow.classList.add(style.locals.button);
-    closeWindow.innerHTML = svg.close.windows;
+    closeWindow.title = "Close";
     controls.append(closeWindow);
     titlebar.append(controls);
 
@@ -98,6 +99,9 @@ export default class Titlebar {
     if (titleBarOptions) {
       this.updateOptions(titleBarOptions);
     }
+    
+    // Apply theme
+    applyTheme(Options.values.platform || "win");
 
     // Event listeners
     window.addEventListener('blur', onBlur);
@@ -218,7 +222,32 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (o.getFocusedWindow && o.getFocusedWebContents) {
     RoleHandler.init(o.getFocusedWindow, o.getFocusedWebContents);
   }
+  if(o.platform){
+    applyTheme(o.platform);
+  }
+  if(typeof o.hideMenuOnDarwin != 'undefined') {
+    titlebar.classList.toggle(style.locals['hide-menu'], o.hideMenuOnDarwin);
+  }
 };
+
+const applyTheme = (platform: string) => {
+  let svgs;
+  switch (platform) {
+    case "darwin":
+    case "macos":
+      svgs = svg.darwin;
+      break;
+    default:
+      svgs = svg.win;
+      break;
+  }
+  titlebar.classList.toggle(style.locals.win,platform=="win");
+  titlebar.classList.toggle(style.locals.darwin,platform=="darwin");
+  minimizeWindow.innerHTML = svgs.minimize;
+  maximizeWindow.innerHTML = svgs.maximize;
+  restoreWindow.innerHTML = platform=="darwin" ? svgs.maximize : svgs.restore;
+  closeWindow.innerHTML = svgs.close;
+}
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {

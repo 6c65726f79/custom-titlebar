@@ -10,13 +10,16 @@ declare namespace StyleScssNamespace {
     container: string;
     controls: string;
     dark: string;
+    darwin: string;
     disabled: string;
     dragregion: string;
+    'hide-menu': string;
     inactive: string;
     left: string;
     maximize: string;
     maximized: string;
     menubar: string;
+    minimize: string;
     nodrag: string;
     restore: string;
     right: string;
@@ -24,6 +27,7 @@ declare namespace StyleScssNamespace {
     submenu: string;
     title: string;
     titlebar: string;
+    win: string;
   }
 }
 

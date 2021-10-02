@@ -13,6 +13,10 @@ Poorly coded titlebar for [Electron](https://www.electronjs.org/) and [NW.js](ht
 
 > Condensed menu
 
+![Preview 3](screenshots/capture-3.png)
+
+> Control button styles
+
 # About
 
 **It's a library for Electron and NW.js, it can be used on a basic website but it's useless ¯\\_(ツ)_/¯**
@@ -105,6 +109,7 @@ app.whenReady().then(() => {
 ```javascript
 const { Menu, BrowserWindow, webContents, getCurrentWindow } = require('@electron/remote');
 const Titlebar = require('@6c65726f79/custom-titlebar');
+const { platform } = require('process');
 
 const currentWindow = getCurrentWindow();
 let titlebar;
@@ -113,6 +118,7 @@ currentWindow.webContents.once('dom-ready', () => {
   titlebar = new Titlebar({
     menu: Menu.getApplicationMenu(),
     backgroundColor: '#37474f',
+    platform: platform,
     onMinimize: () => currentWindow.minimize(),
     onMaximize: () => currentWindow.isMaximized() ? currentWindow.unmaximize() : currentWindow.maximize(),
     onClose: () => currentWindow.close(),
@@ -154,6 +160,7 @@ currentWindow.webContents.once('dom-ready', () => {
     <h1>Hello World!</h1>
     <script>
       const gui = require('nw.gui');
+      const os = require('os');
       const win = gui.Window.get();
       let maximized = false;
 
@@ -162,7 +169,7 @@ currentWindow.webContents.once('dom-ready', () => {
 
       const titlebar = new Titlebar({
         backgroundColor: '#37474f',
-        titleHorizontalAlignment: 'left',
+        platform: os.platform(),
         onMinimize: () => win.minimize(),
         onMaximize: () => maximized ? win.restore() : win.maximize(),
         onClose: () => win.close(),
@@ -184,6 +191,7 @@ All parameters are optional.
 | drag                     | `boolean`  | Define whether or not you can drag the window.                             | `true`           |
 | getFocusedWebContents    | `function` | A function that return the FocusedWebContents. **(Electron only)**         | undefined        |
 | getFocusedWindow         | `function` | A function that return the FocusedWindow. **(Electron only)**              | undefined        |
+| hideMenuOnDarwin         | `boolean`  | Hide the menu bar when the `platform` is `darwin`.                         | `true`           |
 | icon                     | `string`   | The icon of the titlebar.                                                  | undefined        |
 | isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.| undefined        |
 | menu                     | `object`   | List of MenuItem to show in the menu bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | undefined        |
@@ -191,6 +199,7 @@ All parameters are optional.
 | onMaximize               | `function` | The function to call when the maximize/restore button is clicked.          | undefined        |
 | onMinimize               | `function` | The function to call when the minimize button is clicked.                  | undefined        |
 | overflow                 | `string`   | The overflow of the container. (`auto`, `visible`, `hidden`)               | `auto`           |
+| platform                 | `string`   | Style of the control buttons. (`windows`, `macos`)                         | `windows`        |
 | title                    | `string`   | Window title.                                                              | `document.title` |
 | titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (`left`, `center`, `right`)  | `center`         |
 | unfocusEffect            | `boolean`  | Enables or disables the unfocus effect on the titlebar.                    | `true`           |

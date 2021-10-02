@@ -32,6 +32,13 @@
     }
   }
 
+  &.hide-menu.darwin {
+    #menubar {
+      display: none;
+    }
+  }
+
+  /* Drag disabled */
   &.nodrag {
     #dragregion,
     #appicon {
@@ -39,6 +46,7 @@
     }
   }
 
+  /* Inactive window */
   &.inactive {
     #title,
     #menubar .button:not(:hover) .title,
@@ -49,26 +57,11 @@
     #dragregion {
       background: rgba(255, 255, 255, 0.17);
     }
-
-    .button:not(:hover) svg > * {
-      fill: rgba(0, 0, 0, 0.5);
-    }
   }
 
-  &:not(.dark) {
-    #close:hover svg > * {
-      fill: rgb(255, 255, 255);
-    }
-  }
-
+  /* Dark skin */
   &.dark {
     color: rgb(204, 204, 204);
-
-    &.inactive {
-      .button:not(:hover) svg > * {
-        fill: rgba(204, 204, 204, 0.5);
-      }
-    }
 
     #menubar .button {
       &:hover,
@@ -85,7 +78,26 @@
       }
     }
 
-    #controls .button {
+    .button svg > * {
+      fill: rgb(204, 204, 204);
+    }
+  }
+
+  /* Windows style */
+  &.win {
+    &.inactive {
+      .button:not(:hover) svg {
+        opacity:.5;
+      }
+    }
+
+    &:not(.dark) {
+      #close:hover svg > * {
+        fill: rgb(255, 255, 255);
+      }
+    }
+
+    &.dark #controls .button {
       &:hover {
         background-color: hsla(0, 0%, 100%, 0.1);
       }
@@ -95,8 +107,103 @@
       }
     }
 
-    .button svg > * {
-      fill: rgb(204, 204, 204);
+    #controls .button {
+      width: 46px;
+
+      &:hover {
+        background-color: hsla(0, 0%, 0%, 0.1);
+      }
+
+      &#close:hover {
+        background-color: rgba(232, 17, 35, 0.9);
+      }
+
+      &:active {
+        background-color: hsla(0, 0%, 0%, 0.2);
+      }
+
+      svg {
+        width: 10px;
+        height: 10px;
+      }
+    }
+  }
+
+  /* macOS style */
+  &.darwin {
+    &.inactive {
+      #controls:not(:hover) .button::before {
+        background: #000 !important;
+        opacity:.12
+      }
+
+      &.dark {
+        #controls:not(:hover) .button::before {
+          background: #fff !important;
+        }
+      }
+    }
+
+    #controls {
+      order: -1;
+      flex-direction: row-reverse;
+
+      &:not(:hover){
+        .button svg {
+          display:none;
+        }
+      }
+
+      .button {
+        width: 26px;
+
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          width: 16px;
+          height: 16px;
+          top: 7px;
+          left: 5px;
+          z-index: -1;
+          border-radius: 10px;
+        }
+
+        &:active::before {
+          filter: brightness(80%);
+        }
+
+        &#minimize::before {
+          background: #fdbc40;
+        }
+
+        &#maximize,&#restore {
+          order: -1;
+
+          &::before {
+            background: #33c748;
+          }
+        }
+
+        &#close::before {
+          background: #fc5753;
+        }
+
+        &.disabled::before {
+          background: #dfdedf;
+        }
+
+        svg {
+          width: 14px;
+          height: 14px;
+          margin: 8px 0px;
+          opacity: .5;
+
+          & > * {
+            fill: rgb(0, 0, 0);
+          }
+        }
+      }
     }
   }
 
@@ -253,30 +360,12 @@
     z-index: 3000;
     -webkit-app-region: no-drag;
     height: 100%;
-    width: 138px;
 
     .button {
       display: inline-block;
+      position: relative;
       line-height: 30px;
-      width: 46px;
       height: 100%;
-
-      &:hover {
-        background-color: hsla(0, 0%, 0%, 0.1);
-      }
-
-      &#close:hover {
-        background-color: rgba(232, 17, 35, 0.9);
-      }
-
-      &:active {
-        background-color: hsla(0, 0%, 0%, 0.2);
-      }
-
-      svg {
-        width: 10px;
-        height: 10px;
-      }
     }
   }
 
