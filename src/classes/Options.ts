@@ -29,7 +29,7 @@ export const Options = {
     drag: true,
     titleHorizontalAlignment: 'center',
     unfocusEffect: true,
-    platform: "win",
+    platform: 'win',
     hideMenuOnDarwin: true,
     onMinimize: undefined,
     onMaximize: undefined,

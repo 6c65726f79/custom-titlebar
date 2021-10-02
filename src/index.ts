@@ -58,22 +58,22 @@ export default class Titlebar {
     minimizeWindow = document.createElement('div');
     minimizeWindow.id = style.locals.minimize;
     minimizeWindow.classList.add(style.locals.button);
-    minimizeWindow.title = "Minimize";
+    minimizeWindow.title = 'Minimize';
     controls.append(minimizeWindow);
     maximizeWindow = document.createElement('div');
     maximizeWindow.id = style.locals.maximize;
     maximizeWindow.classList.add(style.locals.button);
-    maximizeWindow.title = "Maximize";
+    maximizeWindow.title = 'Maximize';
     controls.append(maximizeWindow);
     restoreWindow = document.createElement('div');
     restoreWindow.id = style.locals.restore;
     restoreWindow.classList.add(style.locals.button);
-    restoreWindow.title = "Restore";
+    restoreWindow.title = 'Restore';
     controls.append(restoreWindow);
     closeWindow = document.createElement('div');
     closeWindow.id = style.locals.close;
     closeWindow.classList.add(style.locals.button);
-    closeWindow.title = "Close";
+    closeWindow.title = 'Close';
     controls.append(closeWindow);
     titlebar.append(controls);
 
@@ -99,9 +99,9 @@ export default class Titlebar {
     if (titleBarOptions) {
       this.updateOptions(titleBarOptions);
     }
-    
+
     // Apply theme
-    applyTheme(Options.values.platform || "win");
+    applyTheme(Options.values.platform || 'win');
 
     // Event listeners
     window.addEventListener('blur', onBlur);
@@ -222,10 +222,10 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (o.getFocusedWindow && o.getFocusedWebContents) {
     RoleHandler.init(o.getFocusedWindow, o.getFocusedWebContents);
   }
-  if(o.platform){
+  if (o.platform) {
     applyTheme(o.platform);
   }
-  if(typeof o.hideMenuOnDarwin != 'undefined') {
+  if (typeof o.hideMenuOnDarwin != 'undefined') {
     titlebar.classList.toggle(style.locals['hide-menu'], o.hideMenuOnDarwin);
   }
 };
@@ -233,21 +233,21 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
 const applyTheme = (platform: string) => {
   let svgs;
   switch (platform) {
-    case "darwin":
-    case "macos":
+    case 'darwin':
+    case 'macos':
       svgs = svg.darwin;
       break;
     default:
       svgs = svg.win;
       break;
   }
-  titlebar.classList.toggle(style.locals.win,platform=="win");
-  titlebar.classList.toggle(style.locals.darwin,platform=="darwin");
+  titlebar.classList.toggle(style.locals.win, platform == 'win');
+  titlebar.classList.toggle(style.locals.darwin, platform == 'darwin');
   minimizeWindow.innerHTML = svgs.minimize;
   maximizeWindow.innerHTML = svgs.maximize;
-  restoreWindow.innerHTML = platform=="darwin" ? svgs.maximize : svgs.restore;
+  restoreWindow.innerHTML = platform == 'darwin' ? svgs.maximize : svgs.restore;
   closeWindow.innerHTML = svgs.close;
-}
+};
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {

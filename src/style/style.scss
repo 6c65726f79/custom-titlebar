@@ -87,7 +87,7 @@
   &.win {
     &.inactive {
       .button:not(:hover) svg {
-        opacity:.5;
+        opacity: 0.5;
       }
     }
 
@@ -134,7 +134,7 @@
     &.inactive {
       #controls:not(:hover) .button::before {
         background: #000 !important;
-        opacity:.12
+        opacity: 0.12;
       }
 
       &.dark {
@@ -148,9 +148,9 @@
       order: -1;
       flex-direction: row-reverse;
 
-      &:not(:hover){
+      &:not(:hover) {
         .button svg {
-          display:none;
+          display: none;
         }
       }
 
@@ -158,7 +158,7 @@
         width: 26px;
 
         &::before {
-          content: "";
+          content: '';
           display: block;
           position: absolute;
           width: 16px;
@@ -177,7 +177,8 @@
           background: #fdbc40;
         }
 
-        &#maximize,&#restore {
+        &#maximize,
+        &#restore {
           order: -1;
 
           &::before {
@@ -197,7 +198,7 @@
           width: 14px;
           height: 14px;
           margin: 8px 0px;
-          opacity: .5;
+          opacity: 0.5;
 
           & > * {
             fill: rgb(0, 0, 0);
