@@ -2,6 +2,7 @@ import style from '../style/style.scss';
 import svg from '../style/svg.json';
 import Menu from './Menu';
 import { RoleHandler } from './RoleHandler';
+import { Options } from './Options';
 
 export default class MenuItem {
   element: HTMLDivElement;
@@ -70,7 +71,14 @@ export default class MenuItem {
           e.stopPropagation();
           parent.closeSubMenu(true);
           if (menuItem.click) {
-            menuItem.role ? RoleHandler.invoke(menuItem.click) : menuItem.click();
+            if(Options.values.menuItemClickHandler && menuItem.commandId){
+              // Use user-defined handler
+              Options.values.menuItemClickHandler(menuItem.commandId);
+            }
+            else {
+              // Use default handler
+              menuItem.role ? RoleHandler.invoke(menuItem.click) : menuItem.click();
+            }
           }
         };
         this.element.onmouseenter = () => {

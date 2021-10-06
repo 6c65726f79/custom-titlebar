@@ -16,6 +16,7 @@ export interface TitleBarOptions {
   isMaximized?: () => boolean;
   getFocusedWindow?: () => any;
   getFocusedWebContents?: () => any;
+  menuItemClickHandler?: (commandId: string) => void;
 }
 
 export const Options = {
@@ -37,6 +38,7 @@ export const Options = {
     isMaximized: undefined,
     getFocusedWindow: undefined,
     getFocusedWebContents: undefined,
+    menuItemClickHandler: undefined
   } as TitleBarOptions,
 
   update(_options: TitleBarOptions) {
