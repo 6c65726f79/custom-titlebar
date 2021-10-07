@@ -71,11 +71,10 @@ export default class MenuItem {
           e.stopPropagation();
           parent.closeSubMenu(true);
           if (menuItem.click) {
-            if(Options.values.menuItemClickHandler && menuItem.commandId){
+            if (Options.values.menuItemClickHandler && menuItem.commandId) {
               // Use user-defined handler
               Options.values.menuItemClickHandler(menuItem.commandId);
-            }
-            else {
+            } else {
               // Use default handler
               menuItem.role ? RoleHandler.invoke(menuItem.click) : menuItem.click();
             }

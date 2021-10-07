@@ -38,7 +38,7 @@ export const Options = {
     isMaximized: undefined,
     getFocusedWindow: undefined,
     getFocusedWebContents: undefined,
-    menuItemClickHandler: undefined
+    menuItemClickHandler: undefined,
   } as TitleBarOptions,
 
   update(_options: TitleBarOptions) {
