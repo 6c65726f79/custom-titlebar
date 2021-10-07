@@ -185,25 +185,26 @@ currentWindow.webContents.once('dom-ready', () => {
 
 All parameters are optional.
 
-| Parameter                | Type       | Description                                                                | Default          |
-| ------------------------ | ---------- | -------------------------------------------------------------------------- | ---------------- |
-| backgroundColor          | `string`   | The background color of the titlebar.                                      | `#FFFFFF`        |
-| condensed                | `boolean`  | Force the menu bar to be condensed.                                        | `false`          |
-| drag                     | `boolean`  | Define whether or not you can drag the window.                             | `true`           |
-| getFocusedWebContents    | `function` | A function that return the FocusedWebContents. **(Electron only)**         | undefined        |
-| getFocusedWindow         | `function` | A function that return the FocusedWindow. **(Electron only)**              | undefined        |
-| hideMenuOnDarwin         | `boolean`  | Hide the menu bar when the `platform` is `darwin`.                         | `true`           |
-| icon                     | `string`   | The icon of the titlebar.                                                  | undefined        |
-| isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.| undefined        |
-| menu                     | `object`   | List of MenuItem to show in the menu bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | undefined        |
-| onClose                  | `function` | The function to call when the close button is clicked.                     | undefined        |
-| onMaximize               | `function` | The function to call when the maximize/restore button is clicked.          | undefined        |
-| onMinimize               | `function` | The function to call when the minimize button is clicked.                  | undefined        |
-| overflow                 | `string`   | The overflow of the container. (`auto`, `visible`, `hidden`)               | `auto`           |
-| platform                 | `string`   | Style of the control buttons. (`win`, `darwin`)                            | `win`            |
-| title                    | `string`   | Window title.                                                              | `document.title` |
-| titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (`left`, `center`, `right`)  | `center`         |
-| unfocusEffect            | `boolean`  | Enables or disables the unfocus effect on the titlebar.                    | `true`           |
+| Parameter                | Type       | Description                                                                  | Default          |
+| ------------------------ | ---------- | ---------------------------------------------------------------------------- | ---------------- |
+| backgroundColor          | `string`   | The background color of the titlebar.                                        | `#FFFFFF`        |
+| condensed                | `boolean`  | Force the menu bar to be condensed.                                          | `false`          |
+| drag                     | `boolean`  | Define whether or not you can drag the window.                               | `true`           |
+| getFocusedWebContents    | `function` | A function that return the FocusedWebContents. **(Electron only)**           | undefined        |
+| getFocusedWindow         | `function` | A function that return the FocusedWindow. **(Electron only)**                | undefined        |
+| hideMenuOnDarwin         | `boolean`  | Hide the menu bar when the `platform` is `darwin`.                           | `true`           |
+| icon                     | `string`   | The icon of the titlebar.                                                    | undefined        |
+| isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.  | undefined        |
+| menu                     | `object`   | List of MenuItem to show in the menu bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | undefined        | 
+| menuItemClickHandler     | `function` | A function that takes a `commandId` as parameter to handle menu item clicks. | undefined        |
+| onClose                  | `function` | The function to call when the close button is clicked.                       | undefined        |
+| onMaximize               | `function` | The function to call when the maximize/restore button is clicked.            | undefined        |
+| onMinimize               | `function` | The function to call when the minimize button is clicked.                    | undefined        |
+| overflow                 | `string`   | The overflow of the container. (`auto`, `visible`, `hidden`)                 | `auto`           |
+| platform                 | `string`   | Style of the control buttons. (`win`, `darwin`)                              | `win`            |
+| title                    | `string`   | Window title.                                                                | `document.title` |
+| titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (`left`, `center`, `right`)    | `center`         |
+| unfocusEffect            | `boolean`  | Enables or disables the unfocus effect on the titlebar.                      | `true`           |
 
 # Methods
 
