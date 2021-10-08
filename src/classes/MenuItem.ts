@@ -70,7 +70,7 @@ export default class MenuItem {
         this.element.onclick = (e) => {
           e.stopPropagation();
           parent.closeSubMenu(true);
-          
+
           if (Options.values.menuItemClickHandler && menuItem.commandId) {
             // Use user-defined handler
             Options.values.menuItemClickHandler(menuItem.commandId);
