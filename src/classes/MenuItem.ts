@@ -1,6 +1,7 @@
 import style from '../style/style.scss';
 import svg from '../style/svg.json';
 import Menu from './Menu';
+import { Accelerator } from './Accelerator';
 import { RoleHandler } from './RoleHandler';
 import { Options } from './Options';
 
@@ -27,9 +28,9 @@ export default class MenuItem {
 
     let defaultAccelerator;
 
-    if (menuItem.role && !menuItem.accelerator && menuItem.getDefaultRoleAccelerator) {
+    if (menuItem.role && !menuItem.accelerator) {
       // Get default accelerator
-      defaultAccelerator = menuItem.getDefaultRoleAccelerator();
+      defaultAccelerator = menuItem.getDefaultRoleAccelerator ? menuItem.getDefaultRoleAccelerator() : Accelerator.getDefaultRoleAccelerator(menuItem.role);
     }
 
     if (menuItem.accelerator || defaultAccelerator || (menuItem.key && menuItem.modifiers)) {
@@ -38,12 +39,8 @@ export default class MenuItem {
       accelerator.classList.add(style.locals.accelerator);
       accelerator.innerText =
         menuItem.accelerator || defaultAccelerator
-          ? (menuItem.accelerator || defaultAccelerator)
-              .replace('CmdOrCtrl', 'Ctrl')
-              .replace('CommandOrControl', 'Control')
-          : menuItem.modifiers.split('+').map(capitalizeFirstLetter).join('+') +
-            '+' +
-            capitalizeFirstLetter(menuItem.key);
+          ? Accelerator.formatElectronAccelerator(menuItem.accelerator || defaultAccelerator)
+          : Accelerator.formatNWAccelerator(menuItem.modifiers, menuItem.key);
       this.element.append(accelerator);
     }
 
@@ -114,7 +111,3 @@ export default class MenuItem {
     }
   }
 }
-
-const capitalizeFirstLetter = (s: string) => {
-  return s.charAt(0).toUpperCase() + s.slice(1);
-};

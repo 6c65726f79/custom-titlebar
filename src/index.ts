@@ -101,7 +101,7 @@ export default class Titlebar {
     }
 
     // Apply theme
-    applyTheme(Options.values.platform || 'win');
+    applyTheme();
 
     // Event listeners
     window.addEventListener('blur', onBlur);
@@ -223,24 +223,16 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
     RoleHandler.init(o.getFocusedWindow, o.getFocusedWebContents);
   }
   if (o.platform) {
-    applyTheme(o.platform);
+    applyTheme();
   }
   if (typeof o.hideMenuOnDarwin != 'undefined') {
     titlebar.classList.toggle(style.locals['hide-menu'], o.hideMenuOnDarwin);
   }
 };
 
-const applyTheme = (platform: string) => {
-  let svgs;
-  switch (platform) {
-    case 'darwin':
-    case 'macos':
-      svgs = svg.darwin;
-      break;
-    default:
-      svgs = svg.win;
-      break;
-  }
+const applyTheme = () => {
+  const platform = Options.getPlatform();
+  let svgs = svg[platform];
   titlebar.classList.toggle(style.locals.win, platform == 'win');
   titlebar.classList.toggle(style.locals.darwin, platform == 'darwin');
   minimizeWindow.innerHTML = svgs.minimize;

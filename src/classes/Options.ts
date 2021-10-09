@@ -44,4 +44,14 @@ export const Options = {
   update(_options: TitleBarOptions) {
     this.values = Object.assign({}, this.values, _options);
   },
+
+  getPlatform() {
+    switch (this.values.platform) {
+      case 'darwin':
+      case 'macos':
+        return "darwin";
+      default:
+        return "win";
+    }
+  }
 };
