@@ -26,7 +26,7 @@ Poorly coded titlebar for [Electron](https://www.electronjs.org/) and [NW.js](ht
 * Compatible with any version of Electron 🎉
 * Works with Electron, NW.js and probably others 🤷‍♂️
 * Works without any dependencies, so it won't break in the next major release of Electron 👀
-* Very small footprint (< 20 kB) 👣
+* Very small footprint (< 30 kB) 👣
 * Options and methods very similar to [custom-electron-titlebar](https://www.npmjs.com/package/custom-electron-titlebar) 📖
 
 ## Inpiration
@@ -43,6 +43,20 @@ I needed a custom titlebar for Electron 14 to replace the unmaintained [custom-e
 * ~~Icons theme~~ Done!
 * Submenu scrollbar
 * Keyboard controls
+
+# Q&A
+
+## Can I use this package without `@electron/remote`?
+
+Absolutely! Check out the [advanced examples](https://github.com/6c65726f79/custom-titlebar/wiki/Advanced-examples#use-without-electronremote) to see how it's done.
+
+## How to fix Content Security Policy errors?
+
+Simply add `style-src 'unsafe-inline'` in the `Content-Security-Policy` meta tag.
+
+## How long before this package becomes unmaintained too?
+
+This package doesn't rely on the Electron or NW.js API so it doesn't need as much maintenance as other packages. Even if I stop maintaining it and the API change dramatically, you could modify your code to match the new API. So theoretically this package can't become obsolete.
 
 # Install
 
@@ -73,6 +87,8 @@ new Titlebar({
 ```
 
 # Examples
+
+See the Wiki for more [advanced examples](https://github.com/6c65726f79/custom-titlebar/wiki/Advanced-examples).
 
 ## Electron
 
