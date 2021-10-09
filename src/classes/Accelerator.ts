@@ -5,7 +5,7 @@ export const Accelerator = {
     const platform = Options.getPlatform();
     return accelerator
       .replace('CmdOrCtrl', platform == 'darwin' ? 'Cmd' : 'Ctrl')
-      .replace('CommandOrControl', platform == 'darwin' ? 'Command' : 'Control');
+      .replace('CommandOrControl', platform == 'darwin' ? 'Cmd' : 'Ctrl');
   },
 
   formatNWAccelerator(modifiers: string, key: string): string {
