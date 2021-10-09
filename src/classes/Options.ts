@@ -49,9 +49,9 @@ export const Options = {
     switch (this.values.platform) {
       case 'darwin':
       case 'macos':
-        return "darwin";
+        return 'darwin';
       default:
-        return "win";
+        return 'win';
     }
-  }
+  },
 };

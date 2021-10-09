@@ -232,7 +232,7 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
 
 const applyTheme = () => {
   const platform = Options.getPlatform();
-  let svgs = svg[platform];
+  const svgs = svg[platform];
   titlebar.classList.toggle(style.locals.win, platform == 'win');
   titlebar.classList.toggle(style.locals.darwin, platform == 'darwin');
   minimizeWindow.innerHTML = svgs.minimize;

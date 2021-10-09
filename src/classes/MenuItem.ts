@@ -30,7 +30,9 @@ export default class MenuItem {
 
     if (menuItem.role && !menuItem.accelerator) {
       // Get default accelerator
-      defaultAccelerator = menuItem.getDefaultRoleAccelerator ? menuItem.getDefaultRoleAccelerator() : Accelerator.getDefaultRoleAccelerator(menuItem.role);
+      defaultAccelerator = menuItem.getDefaultRoleAccelerator
+        ? menuItem.getDefaultRoleAccelerator()
+        : Accelerator.getDefaultRoleAccelerator(menuItem.role);
     }
 
     if (menuItem.accelerator || defaultAccelerator || (menuItem.key && menuItem.modifiers)) {
