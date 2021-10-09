@@ -24,11 +24,11 @@ export default class Menu {
     }
   }
 
-  isSubMenuOpened() {
+  isSubMenuOpened(): boolean {
     return this.subMenu != null;
   }
 
-  openSubMenu(submenu: Record<string, any>, index: number, depth: number): void {
+  openSubMenu(submenu: Record<string, any>, index: number): void {
     if (this.activeMenu == index) return;
     this.closeSubMenu();
     this.activeMenu = index;
@@ -50,7 +50,7 @@ export default class Menu {
     }
   }
 
-  closeSubMenu(main = false) {
+  closeSubMenu(main = false): void {
     if (main) {
       mainMenu.closeSubMenu();
     } else if (this.activeMenu >= 0) {

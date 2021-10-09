@@ -8,7 +8,7 @@ import { Options } from './Options';
 export default class MenuItem {
   element: HTMLDivElement;
 
-  constructor(menuItem: Record<string, any>, index: number, parent: Menu, depth = 0) {
+  constructor(menuItem: Record<string, any>, index: number, parent: Menu) {
     // Create item
     this.element = document.createElement('div');
     this.element.classList.add(style.locals.button);
@@ -92,13 +92,13 @@ export default class MenuItem {
             if (parent.isSubMenuOpened() && parent.activeMenu == index) {
               parent.closeSubMenu();
             } else {
-              parent.openSubMenu(menuItem.submenu, index, depth);
+              parent.openSubMenu(menuItem.submenu, index);
             }
           }
         };
         this.element.onmouseenter = () => {
           if (parent.isSubMenuOpened() || parent.isSubMenu) {
-            parent.openSubMenu(menuItem.submenu, index, depth);
+            parent.openSubMenu(menuItem.submenu, index);
           }
         };
         this.element.onmouseleave = () => {

@@ -1,18 +1,18 @@
 import { Options } from './Options';
 
 export const Accelerator = {
-  formatElectronAccelerator(accelerator: string) {
+  formatElectronAccelerator(accelerator: string): string {
     const platform = Options.getPlatform();
     return accelerator
       .replace('CmdOrCtrl', platform == 'darwin' ? 'Cmd' : 'Ctrl')
       .replace('CommandOrControl', platform == 'darwin' ? 'Command' : 'Control');
   },
 
-  formatNWAccelerator(modifiers: string, key: string) {
+  formatNWAccelerator(modifiers: string, key: string): string {
     return modifiers.split('+').map(capitalizeFirstLetter).join('+') + '+' + capitalizeFirstLetter(key);
   },
 
-  getDefaultRoleAccelerator(role: string) {
+  getDefaultRoleAccelerator(role: string): string | undefined {
     const platform = Options.getPlatform();
     switch (role) {
       case 'close':
@@ -59,6 +59,6 @@ export const Accelerator = {
   },
 };
 
-const capitalizeFirstLetter = (s: string) => {
+const capitalizeFirstLetter = (s: string): string => {
   return s.charAt(0).toUpperCase() + s.slice(1);
 };

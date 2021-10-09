@@ -41,11 +41,11 @@ export const Options = {
     menuItemClickHandler: undefined,
   } as TitleBarOptions,
 
-  update(_options: TitleBarOptions) {
+  update(_options: TitleBarOptions): void {
     this.values = Object.assign({}, this.values, _options);
   },
 
-  getPlatform() {
+  getPlatform(): "win" | "darwin" {
     switch (this.values.platform) {
       case 'darwin':
       case 'macos':
