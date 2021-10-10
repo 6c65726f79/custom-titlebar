@@ -45,7 +45,7 @@ export const Options = {
     this.values = Object.assign({}, this.values, _options);
   },
 
-  getPlatform(): "win" | "darwin" {
+  getPlatform(): 'win' | 'darwin' {
     switch (this.values.platform) {
       case 'darwin':
       case 'macos':

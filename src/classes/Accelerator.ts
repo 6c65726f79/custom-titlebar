@@ -12,7 +12,7 @@ export const Accelerator = {
 
   formatNWAccelerator(modifiers: string, key: string): string {
     return modifiers.split('+').map(capitalizeFirstLetter).join('+') + '+' + capitalizeFirstLetter(key);
-  }
+  },
 };
 
 const capitalizeFirstLetter = (s: string): string => {
