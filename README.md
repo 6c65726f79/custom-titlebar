@@ -95,9 +95,11 @@ See the Wiki for more [advanced examples](https://github.com/6c65726f79/custom-t
 ### main.js
 
 ```javascript
+const { initialize, enable } = require('@electron/remote/main');
 const { app, BrowserWindow } = require('electron');
-require('@electron/remote/main').initialize();
 const path = require('path');
+
+initialize();
 
 function createWindow () {
   const win = new BrowserWindow({
@@ -111,7 +113,7 @@ function createWindow () {
     }
   })
 
-  require('@electron/remote/main').enable(win.webContents);
+  enable(win.webContents);
   
   win.loadFile('index.html');
 }
@@ -124,7 +126,7 @@ app.whenReady().then(() => {
 ### preload.js
 
 ```javascript
-const { Menu, BrowserWindow, webContents, getCurrentWindow } = require('@electron/remote');
+const { Menu, getCurrentWindow } = require('@electron/remote');
 const Titlebar = require('@6c65726f79/custom-titlebar');
 const { platform } = require('process');
 
@@ -136,12 +138,11 @@ currentWindow.webContents.once('dom-ready', () => {
     menu: Menu.getApplicationMenu(),
     backgroundColor: '#37474f',
     platform: platform,
+    browserWindow: currentWindow, /* Only needed if you use MenuItem roles */
     onMinimize: () => currentWindow.minimize(),
     onMaximize: () => currentWindow.isMaximized() ? currentWindow.unmaximize() : currentWindow.maximize(),
     onClose: () => currentWindow.close(),
-    isMaximized: () => currentWindow.isMaximized(),
-    getFocusedWindow: () => BrowserWindow.getFocusedWindow(), /* Only needed if you use MenuItem roles */
-    getFocusedWebContents: () => webContents.getFocusedWebContents() /* Only needed if you use MenuItem roles */
+    isMaximized: () => currentWindow.isMaximized()
   });
 });
 ```
@@ -204,10 +205,9 @@ All parameters are optional.
 | Parameter                | Type       | Description                                                                  | Default          |
 | ------------------------ | ---------- | ---------------------------------------------------------------------------- | ---------------- |
 | backgroundColor          | `string`   | The background color of the titlebar.                                        | `#FFFFFF`        |
+| browserWindow            | `object`   | The current `BrowserWindow`. **(Electron only)**                             | undefined        |
 | condensed                | `boolean`  | Force the menu bar to be condensed.                                          | `false`          |
 | drag                     | `boolean`  | Define whether or not you can drag the window.                               | `true`           |
-| getFocusedWebContents    | `function` | A function that return the FocusedWebContents. **(Electron only)**           | undefined        |
-| getFocusedWindow         | `function` | A function that return the FocusedWindow. **(Electron only)**                | undefined        |
 | hideMenuOnDarwin         | `boolean`  | Hide the menu bar when the `platform` is `darwin`.                           | `true`           |
 | icon                     | `string`   | The icon of the titlebar.                                                    | undefined        |
 | isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.  | undefined        |

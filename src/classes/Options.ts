@@ -10,12 +10,11 @@ export interface TitleBarOptions {
   unfocusEffect?: boolean;
   platform?: string;
   hideMenuOnDarwin?: boolean;
+  browserWindow?: any;
   onMinimize?: () => void;
   onMaximize?: () => void;
   onClose?: () => void;
   isMaximized?: () => boolean;
-  getFocusedWindow?: () => any;
-  getFocusedWebContents?: () => any;
   menuItemClickHandler?: (commandId: string) => void;
 }
 
@@ -32,12 +31,11 @@ export const Options = {
     unfocusEffect: true,
     platform: 'win',
     hideMenuOnDarwin: true,
+    browserWindow: undefined,
     onMinimize: undefined,
     onMaximize: undefined,
     onClose: undefined,
     isMaximized: undefined,
-    getFocusedWindow: undefined,
-    getFocusedWebContents: undefined,
     menuItemClickHandler: undefined,
   } as TitleBarOptions,
 

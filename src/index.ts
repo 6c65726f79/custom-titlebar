@@ -1,7 +1,6 @@
 import style from './style/style.scss';
 import svg from './style/svg.json';
 import Menu from './classes/Menu';
-import { RoleHandler } from './classes/RoleHandler';
 import { Options, TitleBarOptions } from './classes/Options';
 
 let container: HTMLDivElement;
@@ -218,9 +217,6 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   }
   if (o.titleHorizontalAlignment) {
     context.updateHorizontalAlignment(o.titleHorizontalAlignment);
-  }
-  if (o.getFocusedWindow && o.getFocusedWebContents) {
-    RoleHandler.init(o.getFocusedWindow, o.getFocusedWebContents);
   }
   if (o.platform) {
     applyTheme();
