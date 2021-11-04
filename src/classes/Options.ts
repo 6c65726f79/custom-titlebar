@@ -15,7 +15,7 @@ export interface TitleBarOptions {
   onMaximize?: () => void;
   onClose?: () => void;
   isMaximized?: () => boolean;
-  menuItemClickHandler?: (commandId: string) => void;
+  menuItemClickHandler?: (commandId: number) => void;
 }
 
 export const Options = {
