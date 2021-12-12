@@ -330,7 +330,7 @@ This method removes the titlebar completely and all recorded events.
 titlebar.dispose();
 ```
 
-# CSS Class
+# CSS Classes
 
 The following CSS classes exist and can be used to customize the titlebar.
 
