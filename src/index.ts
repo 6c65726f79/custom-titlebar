@@ -27,6 +27,7 @@ export default class Titlebar {
     // Create titlebar
     titlebar = document.createElement('div');
     titlebar.id = style.locals.titlebar;
+    titlebar.classList.add('custom-titlebar');
     titlebar.oncontextmenu = () => false;
     titlebar.classList.add(style.locals['hide-menu']);
 
@@ -38,6 +39,7 @@ export default class Titlebar {
     // App icon
     appicon = document.createElement('div');
     appicon.id = style.locals.appicon;
+    appicon.classList.add('custom-titlebar-appicon');
     titlebar.append(appicon);
 
     // Create menubar
@@ -54,6 +56,7 @@ export default class Titlebar {
     // Create controls
     controls = document.createElement('div');
     controls.id = style.locals.controls;
+    controls.classList.add('custom-titlebar-controls');
     minimizeWindow = document.createElement('div');
     minimizeWindow.id = style.locals.minimize;
     minimizeWindow.classList.add(style.locals.button);

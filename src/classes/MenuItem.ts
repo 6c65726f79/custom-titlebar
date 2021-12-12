@@ -12,6 +12,7 @@ export default class MenuItem {
     // Create item
     this.element = document.createElement('div');
     this.element.classList.add(style.locals.button);
+    this.element.classList.add(menuItem.type=="separator" ? 'custom-titlebar-separator' : parent.isSubMenu ? 'custom-titlebar-submenu-item' : 'custom-titlebar-menu-item');
 
     if (menuItem.role == 'mainMenu') {
       // Add main menu svg

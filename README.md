@@ -332,7 +332,18 @@ titlebar.dispose();
 
 # CSS Class
 
-You can use the CSS class `.custom-titlebar-container` to customize the container under the titlebar.
+The following CSS classes exist and can be used to customize the titlebar.
+
+| Class name                     | Description                                    |
+| ------------------------------ | ---------------------------------------------- |
+| `custom-titlebar`              | Style of the titlebar.                         |
+| `custom-titlebar-appicon`      | Style of the icon.                             |
+| `custom-titlebar-container`    | Style of the container under the titlebar.     |
+| `custom-titlebar-controls`     | Style of the window controls.                  |
+| `custom-titlebar-menu-item`    | Style of the main menu items.                  |
+| `custom-titlebar-separator`    | Style of the separators.                       |
+| `custom-titlebar-submenu`      | Style of the submenus.                         |
+| `custom-titlebar-submenu-item` | Style of the submenu items.                    |
 
 ----
 

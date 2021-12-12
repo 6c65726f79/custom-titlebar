@@ -14,6 +14,7 @@ export default class Menu {
     this.isSubMenu = submenu;
     this.element = document.createElement('div');
     this.element.classList.toggle(style.locals.submenu, submenu);
+    this.element.classList.toggle('custom-titlebar-submenu', submenu);
     this.element.title = ''; // Hide tooltip from parent item
     for (let i = 0; i < items.length; i++) {
       this.menuItems[i] = new MenuItem(items[i], i, this);
