@@ -11,8 +11,9 @@
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
     "preversion": "npm run lint",
-    "version": "npm run format && git add -A src",
-    "postversion": "git push && git push --tags"
+    "version": "npm run format && git add -A src && auto-changelog -p --template changelog-template.hbs && git add CHANGELOG.md",
+    "postversion": "git push && git push --tags",
+    "changelog": "github-release-from-changelog"
   },
   "files": [
     "lib/**/*"
@@ -45,9 +46,11 @@
     "@types/node": "^16.9.3",
     "@typescript-eslint/eslint-plugin": "^4.31.1",
     "@typescript-eslint/parser": "^4.31.1",
+    "auto-changelog": "^2.3.0",
     "css-loader": "^6.3.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
+    "github-release-from-changelog": "^2.1.1",
     "prettier": "^2.4.1",
     "sass": "^1.42.1",
     "sass-loader": "^12.1.0",
