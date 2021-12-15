@@ -68,8 +68,7 @@ export default class MenuItem {
     if (menuItem.checked) {
       // Add check mark
       this.element.innerHTML += svg.check.replace('{class}', style.locals.check);
-    }
-    else if (menuItem.icon) {
+    } else if (menuItem.icon) {
       // Add icon
       const icon = document.createElement('img');
       icon.src = menuItem.icon;
