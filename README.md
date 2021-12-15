@@ -39,7 +39,7 @@ I needed a custom titlebar for Electron 14 to replace the unmaintained [custom-e
 
 ## Not yet implemented
 
-* MenuItem ~~role~~, icon, radio
+* ~~MenuItem role, icon, radio~~ Done!
 * ~~Icons theme~~ Done!
 * Submenu scrollbar
 * Keyboard controls
