@@ -11,9 +11,14 @@
     "prepare": "npm run build",
     "prepublishOnly": "npm run lint",
     "preversion": "npm run lint",
-    "version": "npm run format && git add -A src && auto-changelog -p --template changelog-template.hbs && git add CHANGELOG.md",
+    "version": "npm run format && git add -A src && auto-changelog && git add CHANGELOG.md",
     "postversion": "git push && git push --tags",
     "changelog": "github-release-from-changelog"
+  },
+  "auto-changelog": {
+    "template": "changelog-template.hbs",
+    "commitLimit": false,
+    "package": true
   },
   "files": [
     "lib/**/*"
