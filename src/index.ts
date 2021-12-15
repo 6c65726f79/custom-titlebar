@@ -81,7 +81,7 @@ export default class Titlebar {
 
     // Hide controls if Window Controls Overlay is enabled
     const nav: Record<string, any> = window.navigator;
-    controls.classList.toggle(style.locals.hidden, nav.windowControlsOverlay && nav.windowControlsOverlay.visible);
+    controls.classList.toggle(style.locals.hidden, (nav.windowControlsOverlay && nav.windowControlsOverlay.visible) === true);
 
     // Create container
     container = document.createElement('div');
