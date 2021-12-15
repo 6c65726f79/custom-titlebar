@@ -15,6 +15,7 @@ declare namespace StyleScssNamespace {
     dragregion: string;
     hidden: string;
     'hide-menu': string;
+    icon: string;
     inactive: string;
     left: string;
     maximize: string;
