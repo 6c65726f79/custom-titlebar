@@ -73,6 +73,7 @@ export default class MenuItem {
     switch (menuItem.type) {
       case 'normal':
       case 'checkbox':
+      case 'radio':
         this.element.onclick = (e) => {
           e.stopPropagation();
           parent.closeSubMenu(true);
