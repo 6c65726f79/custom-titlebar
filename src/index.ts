@@ -291,6 +291,9 @@ const parseMenuTemplate = (template: Record<string, any>): Record<string, any> =
 
 const buildMenu = (condensed = false): void => {
   menuCondensed = condensed;
+
+  if (!menuTemplate) return;
+
   let items = menuTemplate.items;
   if (condensed) {
     items = [
