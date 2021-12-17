@@ -7,8 +7,15 @@ import { Options } from './Options';
 
 export default class MenuItem {
   element: HTMLDivElement;
+  item: Record<string,any>;
+  index: number;
+  parent: Menu;
 
   constructor(menuItem: Record<string, any>, index: number, parent: Menu) {
+    this.item = menuItem;
+    this.index = index;
+    this.parent = parent;
+
     // Create item
     this.element = document.createElement('div');
     this.element.classList.add(style.locals.button);
@@ -91,7 +98,10 @@ export default class MenuItem {
             // Use default handler
             menuItem.role ? RoleHandler.invoke(menuItem.click) : menuItem.click();
           }
+
+          this.checkedState();
         };
+
         this.element.onmouseenter = () => {
           parent.closeSubMenu();
         };
@@ -110,11 +120,13 @@ export default class MenuItem {
             }
           }
         };
+
         this.element.onmouseenter = () => {
           if (parent.isSubMenuOpened() || parent.isSubMenu) {
             parent.openSubMenu(menuItem.submenu, index);
           }
         };
+
         this.element.onmouseleave = () => {
           if (parent.isSubMenuOpened() && parent.isSubMenu) {
             parent.closeSubMenu();
@@ -124,6 +136,27 @@ export default class MenuItem {
       case 'separator':
         this.element.classList.add(style.locals.separator);
         break;
+    }
+  }
+
+  // Checked state management for custom menu templates
+  checkedState() {
+    // Check if the click method is not from Electron
+    if(!this.item.click || this.item.click.toString().indexOf("ipcRenderer")<0){
+      if(this.item.type=='radio'){
+        this.parent.uncheckRadioGroup(this.index);
+      }
+      if(this.item.type=='checkbox' || this.item.type=='radio'){
+        // Invert checked state, set 'checked' to true if undefined
+        this.item.checked = this.item.checked ? false : true;
+      }
+    }
+  }
+
+  // Uncheck this item if it's a radio
+  unckeckRadio() {
+    if(this.item.type=='radio'){
+      this.item.checked = false;
     }
   }
 }

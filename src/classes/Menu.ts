@@ -25,6 +25,7 @@ export default class Menu {
     }
   }
 
+  // Return true if a submenu is opened
   isSubMenuOpened(): boolean {
     return this.subMenu != null;
   }
@@ -63,5 +64,38 @@ export default class Menu {
         this.activeMenu = -1;
       }
     }
+  }
+
+  // Uncheck all radio items from the same group in this menu
+  uncheckRadioGroup(itemIndex: number) {
+    const group = this.getItemGroup(itemIndex);
+    this.getGroupItems(group).forEach(menuItem => {
+      menuItem.unckeckRadio();
+    })
+  }
+
+  // Return the group index of an item
+  private getItemGroup(itemIndex: number) {
+    let group = 0;
+    for (let i = 0; i < itemIndex; i++) {
+      if(this.menuItems[i].item.type == 'separator') {
+        group++;
+      }
+    }
+    return group;
+  }
+
+  // Return the list of items of a group
+  private getGroupItems(groupIndex: number) {
+    let count = 0;
+    const list: Array<MenuItem> = [];
+    this.menuItems.forEach(menuItem => {
+      if(menuItem.item.type == 'separator'){
+        count++;
+      } else if(count == groupIndex) {
+        list.push(menuItem);
+      }
+    })
+    return list;
   }
 }
