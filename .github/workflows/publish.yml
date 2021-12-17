@@ -11,7 +11,7 @@ jobs:
         with:
           node-version: '14'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install
+      - run: npm ci
       - run: npm run changelog
         env:
           GITHUB_TOKEN: ${{ github.token }}
