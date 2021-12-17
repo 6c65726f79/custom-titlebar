@@ -7,7 +7,7 @@ import { Options } from './Options';
 
 export default class MenuItem {
   element: HTMLDivElement;
-  item: Record<string,any>;
+  item: Record<string, any>;
   index: number;
   parent: Menu;
 
@@ -142,11 +142,11 @@ export default class MenuItem {
   // Checked state management for custom menu templates
   checkedState() {
     // Check if the click method is not from Electron
-    if(!this.item.click || this.item.click.toString().indexOf("ipcRenderer")<0){
-      if(this.item.type=='radio'){
+    if (!this.item.click || this.item.click.toString().indexOf('ipcRenderer') < 0) {
+      if (this.item.type == 'radio') {
         this.parent.uncheckRadioGroup(this.index);
       }
-      if(this.item.type=='checkbox' || this.item.type=='radio'){
+      if (this.item.type == 'checkbox' || this.item.type == 'radio') {
         // Invert checked state, set 'checked' to true if undefined
         this.item.checked = this.item.checked ? false : true;
       }
@@ -155,7 +155,7 @@ export default class MenuItem {
 
   // Uncheck this item if it's a radio
   unckeckRadio() {
-    if(this.item.type=='radio'){
+    if (this.item.type == 'radio') {
       this.item.checked = false;
     }
   }

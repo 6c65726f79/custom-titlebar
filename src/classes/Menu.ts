@@ -69,16 +69,16 @@ export default class Menu {
   // Uncheck all radio items from the same group in this menu
   uncheckRadioGroup(itemIndex: number) {
     const group = this.getItemGroup(itemIndex);
-    this.getGroupItems(group).forEach(menuItem => {
+    this.getGroupItems(group).forEach((menuItem) => {
       menuItem.unckeckRadio();
-    })
+    });
   }
 
   // Return the group index of an item
   private getItemGroup(itemIndex: number) {
     let group = 0;
     for (let i = 0; i < itemIndex; i++) {
-      if(this.menuItems[i].item.type == 'separator') {
+      if (this.menuItems[i].item.type == 'separator') {
         group++;
       }
     }
@@ -89,13 +89,13 @@ export default class Menu {
   private getGroupItems(groupIndex: number) {
     let count = 0;
     const list: Array<MenuItem> = [];
-    this.menuItems.forEach(menuItem => {
-      if(menuItem.item.type == 'separator'){
+    this.menuItems.forEach((menuItem) => {
+      if (menuItem.item.type == 'separator') {
         count++;
-      } else if(count == groupIndex) {
+      } else if (count == groupIndex) {
         list.push(menuItem);
       }
-    })
+    });
     return list;
   }
 }
