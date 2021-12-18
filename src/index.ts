@@ -137,7 +137,7 @@ export default class Titlebar {
   }
 }
 
-const debounce = (func: Function, wait: number) => {
+const debounce = (func: (...args: any[]) => void, wait: number) => {
   let timeout: any;
   return function executedFunction(...args: any[]) {
     const later = () => {
