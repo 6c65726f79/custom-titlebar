@@ -231,14 +231,14 @@
   }
 
   #menubar {
-    height: 30px;
+    height: 100%;
     display: flex;
     flex-shrink: 1;
-    height: 30px;
     flex-wrap: nowrap;
     z-index: 2500;
 
     .button {
+      display: flex;
       position: relative;
       align-items: center;
       box-sizing: border-box;
@@ -276,7 +276,8 @@
 
       .submenu {
         position: absolute;
-        top: 30px;
+        bottom: 0px;
+        transform: translateY(100%);
         left: 0;
         opacity: 1;
         z-index: 2000;
@@ -335,6 +336,7 @@
           right: 0px;
           transform: translateX(100%);
           top: -9px;
+          bottom: auto;
         }
       }
     }
@@ -374,7 +376,9 @@
     }
 
     .button {
-      display: inline-block;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       position: relative;
       line-height: 30px;
       height: 100%;

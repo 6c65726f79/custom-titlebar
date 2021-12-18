@@ -11,6 +11,7 @@ export interface TitleBarOptions {
   platform?: string;
   hideMenuOnDarwin?: boolean;
   browserWindow?: any;
+  height?: number;
   onMinimize?: () => void;
   onMaximize?: () => void;
   onClose?: () => void;
@@ -37,6 +38,7 @@ export const Options = {
     onClose: undefined,
     isMaximized: undefined,
     menuItemClickHandler: undefined,
+    height: undefined
   } as TitleBarOptions,
 
   update(_options: TitleBarOptions): void {

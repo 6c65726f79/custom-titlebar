@@ -209,6 +209,7 @@ All parameters are optional.
 | condensed                | `boolean`  | Force the menu bar to be condensed.                                          | `false`          |
 | drag                     | `boolean`  | Define whether or not you can drag the window.                               | `true`           |
 | hideMenuOnDarwin         | `boolean`  | Hide the menu bar when the `platform` is `darwin`.                           | `true`           |
+| height                   | `number`   | The height of the titlebar.                                                  | `30`             |
 | icon                     | `string`   | The icon of the titlebar.                                                    | undefined        |
 | isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.  | undefined        |
 | menu                     | `object`   | List of MenuItem to show in the menu bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | undefined        | 

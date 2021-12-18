@@ -234,6 +234,9 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (typeof o.hideMenuOnDarwin != 'undefined') {
     titlebar.classList.toggle(style.locals['hide-menu'], o.hideMenuOnDarwin);
   }
+  if (o.height) {
+    updateSize({height: o.height});
+  }
 };
 
 const applyTheme = () => {
@@ -246,6 +249,16 @@ const applyTheme = () => {
   restoreWindow.innerHTML = platform == 'darwin' ? svgs.maximize : svgs.restore;
   closeWindow.innerHTML = svgs.close;
 };
+
+const updateSize = (values: Record<string,number>) => {
+  if(values.height) {
+    titlebar.style.height = values.height+"px";
+  }
+  if(values.width) {
+    titlebar.style.width = values.width+"px";
+    updateMenuSize();
+  }
+}
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {
