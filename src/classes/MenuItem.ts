@@ -91,6 +91,10 @@ export default class MenuItem {
           e.stopPropagation();
           parent.closeSubMenu(true);
 
+          // Update checked state before calling the click method
+          this.checkedState();
+          console.log(this.item.checked);
+
           if (Options.values.menuItemClickHandler && menuItem.commandId) {
             // Use user-defined handler
             Options.values.menuItemClickHandler(menuItem.commandId);
@@ -98,8 +102,6 @@ export default class MenuItem {
             // Use default handler
             menuItem.role ? RoleHandler.invoke(menuItem.click) : menuItem.click();
           }
-
-          this.checkedState();
         };
 
         this.element.onmouseenter = () => {
