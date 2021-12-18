@@ -102,7 +102,7 @@ export default class Titlebar {
     if (titleBarOptions) {
       this.updateOptions(titleBarOptions);
     }
-    
+
     windowControlsOverlayListener();
 
     // Apply theme
@@ -177,23 +177,22 @@ const updateBackground = (color: string): void => {
   const brightness = getBrightness(rgb);
   titlebar.classList.toggle(style.locals.dark, brightness <= 125);
   titlebar.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-}
-
+};
 
 const updateMenu = (template: Record<string, any>): void => {
   menuTemplate = parseMenuTemplate(template);
   buildMenu(menuCondensed);
-}
+};
 
 const updateHorizontalAlignment = (position: string): void => {
   title.classList.toggle(style.locals.left, position == 'left');
   title.classList.toggle(style.locals.right, position == 'right');
-}
+};
 
 const updateIcon = (icon: string): void => {
   appicon.style.backgroundImage = `url('${icon}')`;
   appicon.style.display = 'block';
-}
+};
 
 const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (o.backgroundColor) {
@@ -244,7 +243,7 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
     updateHeight(o.height);
   }
   if (typeof o.backgroundUnfocusEffect != 'undefined') {
-    dragregion.style.opacity = o.backgroundUnfocusEffect ? "1" : "0";
+    dragregion.style.opacity = o.backgroundUnfocusEffect ? '1' : '0';
   }
 };
 
@@ -260,13 +259,13 @@ const applyTheme = () => {
 };
 
 const updateHeight = (height: number) => {
-  titlebar.style.height = height+"px";
-}
+  titlebar.style.height = height + 'px';
+};
 
 const updateControlsWidth = (width: number) => {
-  controls.style.width = width + "px";
+  controls.style.width = width + 'px';
   updateMenuSize();
-}
+};
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {
@@ -343,28 +342,31 @@ const buildMenu = (condensed = false): void => {
 const windowControlsOverlayListener = () => {
   const nav: Record<string, any> = window.navigator;
 
-  if('windowControlsOverlay' in nav){
+  if ('windowControlsOverlay' in nav) {
     // Hide controls if Window Controls Overlay is enabled
-    controls.classList.toggle(style.locals.hidden, nav.windowControlsOverlay.visible || Options.values.windowControlsOverlay);
+    controls.classList.toggle(
+      style.locals.hidden,
+      nav.windowControlsOverlay.visible || Options.values.windowControlsOverlay,
+    );
 
     windowControlsOverlayHandler(nav.windowControlsOverlay.visible, nav.windowControlsOverlay.getBoundingClientRect());
 
     nav.windowControlsOverlay.addEventListener(
       'geometrychange',
-      debounce((e: Record<string,any>) => {
-        windowControlsOverlayHandler(e.visible, e.boundingRect)
-      },10)
+      debounce((e: Record<string, any>) => {
+        windowControlsOverlayHandler(e.visible, e.boundingRect);
+      }, 10),
     );
   }
-}
+};
 
 const windowControlsOverlayHandler = (visible: boolean, size: DOMRect) => {
   // Update titlebar size
   updateHeight(visible ? size.height : titlebarHeight);
-  if(Options.values.windowControlsOverlay){
-    updateControlsWidth(visible ? document.body.clientWidth-size.width : 0);
+  if (Options.values.windowControlsOverlay) {
+    updateControlsWidth(visible ? document.body.clientWidth - size.width : 0);
   }
-}
+};
 
 const parseColor = (input: string): Array<number> => {
   const div = document.createElement('div');

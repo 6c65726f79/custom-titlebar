@@ -8,7 +8,7 @@ export interface TitleBarOptions {
   drag?: boolean;
   titleHorizontalAlignment?: string;
   unfocusEffect?: boolean;
-  backgroundUnfocusEffect?: boolean,
+  backgroundUnfocusEffect?: boolean;
   platform?: string;
   hideMenuOnDarwin?: boolean;
   browserWindow?: any;
@@ -42,7 +42,7 @@ export const Options = {
     isMaximized: undefined,
     menuItemClickHandler: undefined,
     height: undefined,
-    windowControlsOverlay: false
+    windowControlsOverlay: false,
   } as TitleBarOptions,
 
   update(_options: TitleBarOptions): void {
