@@ -76,7 +76,9 @@ npm i @6c65726f79/custom-titlebar
 
 # Usage
 
-## JavaScript
+## Node.js
+
+### JavaScript
 
 ```javascript
 const Titlebar = require('@6c65726f79/custom-titlebar');
@@ -86,7 +88,7 @@ new Titlebar({
 });
 ```
 
-## TypeScript
+### TypeScript
 
 ```typescript
 import Titlebar from '@6c65726f79/custom-titlebar';
@@ -94,6 +96,18 @@ import Titlebar from '@6c65726f79/custom-titlebar';
 new Titlebar({
   backgroundColor: '#000'
 });
+```
+
+## Browser
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/@6c65726f79/custom-titlebar/lib/index.js"></script>
+
+<script>
+  new Titlebar({
+    backgroundColor: '#000'
+  });
+</script>
 ```
 
 # Examples
@@ -240,30 +254,42 @@ currentWindow.webContents.once('dom-ready', () => {
             This is a web page
         </div>
         <script>
-            const menu = [
-              {
-                label: 'File',
-                submenu: [
-                  {
-                      label: 'Checkbox',
-                      type: 'checkbox'
-                  },
-                  {
-                      label: 'Checked state',
-                      click: () => {
-                          alert(menu[0].submenu.items[0].checked ? 'Checked' : 'Unchecked');
-                      }
-                  }
-                ]
-              }
-            ];
+          let titlebar;
+          const menu = [
+            {
+              label: 'File',
+              submenu: [
+                {
+                    label: 'Checkbox',
+                    type: 'checkbox'
+                },
+                {
+                    label: 'Checked state',
+                    click: () => {
+                        alert(menu[0].submenu.items[0].checked ? 'Checked' : 'Unchecked');
+                    }
+                }
+              ]
+            }
+          ];
 
-            const titlebar = new Titlebar({
-                backgroundUnfocusEffect: false,
-                windowControlsOverlay: true,
-                backgroundColor:"#2975ff",
-                menu
+          // Use the titlebar only in standalone mode
+          if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+            createTitlebar();
+          }
+
+          window.matchMedia('(display-mode: standalone)').onchange = (e) => {
+            e.matches ? createTitlebar() : titlebar.dispose();
+          }
+
+          function createTitlebar() {
+            titlebar = new Titlebar({
+              backgroundUnfocusEffect: false,
+              windowControlsOverlay: true,
+              backgroundColor:"#2975ff",
+              menu
             });
+          }
         </script>
     </body>
 </html>
