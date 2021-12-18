@@ -8,6 +8,7 @@ export interface TitleBarOptions {
   drag?: boolean;
   titleHorizontalAlignment?: string;
   unfocusEffect?: boolean;
+  backgroundUnfocusEffect?: boolean,
   platform?: string;
   hideMenuOnDarwin?: boolean;
   browserWindow?: any;
@@ -31,6 +32,7 @@ export const Options = {
     drag: true,
     titleHorizontalAlignment: 'center',
     unfocusEffect: true,
+    backgroundUnfocusEffect: true,
     platform: 'win',
     hideMenuOnDarwin: true,
     browserWindow: undefined,

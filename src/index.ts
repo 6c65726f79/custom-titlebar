@@ -242,6 +242,9 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
     titlebarHeight = o.height;
     updateHeight(o.height);
   }
+  if (typeof o.backgroundUnfocusEffect != 'undefined') {
+    dragregion.style.opacity = o.backgroundUnfocusEffect ? "1" : "0";
+  }
 };
 
 const applyTheme = () => {
