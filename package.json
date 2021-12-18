@@ -1,7 +1,7 @@
 {
   "name": "@6c65726f79/custom-titlebar",
   "version": "0.5.6",
-  "description": "Poorly coded titlebar for Electron and NW.js",
+  "description": "Poorly coded titlebar for Electron, NW.js and PWAs",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {

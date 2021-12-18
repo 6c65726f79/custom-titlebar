@@ -61,7 +61,7 @@
 
   /* Dark skin */
   &.dark {
-    color: rgb(204, 204, 204);
+    color: rgb(255, 255, 255);
 
     #menubar .button {
       &:hover,
@@ -79,7 +79,7 @@
     }
 
     .button svg > * {
-      fill: rgb(204, 204, 204);
+      fill: rgb(255, 255, 255);
     }
   }
 

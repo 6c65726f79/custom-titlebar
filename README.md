@@ -1,6 +1,6 @@
 # custom-titlebar
 
-Poorly coded titlebar for [Electron](https://www.electronjs.org/) and [NW.js](https://nwjs.io/).
+Poorly coded titlebar for [Electron](https://www.electronjs.org/), [NW.js](https://nwjs.io/) and [PWAs](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps).
 
 ![NPM](https://img.shields.io/npm/l/@6c65726f79/custom-titlebar) ![npm](https://img.shields.io/npm/v/@6c65726f79/custom-titlebar) ![npm bundle size](https://img.shields.io/bundlephobia/min/@6c65726f79/custom-titlebar)
 
@@ -9,22 +9,32 @@ Poorly coded titlebar for [Electron](https://www.electronjs.org/) and [NW.js](ht
 
 > Light/Dark skin
 
-![Preview 2](screenshots/capture-2.png)
-
-> Condensed menu
-
 ![Preview 3](screenshots/capture-3.png)
 
 > Control button styles
 
+<details>
+<summary>Show me more</summary>
+
+![Preview 2](screenshots/capture-2.png)
+
+> Condensed menu
+
+![Preview 4](screenshots/capture-4.png)
+
+> Progressive web app
+
+</details>
+
 # About
 
-**It's a library for Electron and NW.js, it can be used on a basic website but it's useless ¯\\_(ツ)_/¯**
+**It's a library for Electron, NW.js and PWAs, it can be used on a basic website but it's useless ¯\\_(ツ)_/¯**
 
 ## Main features
 
 * Compatible with any version of Electron 🎉
 * Works with Electron, NW.js and probably others 🤷‍♂️
+* Fully compatible with Progressive Web Apps and Window Controls Overlay 🔥
 * Works without any dependencies, so it won't break in the next major release of Electron 👀
 * Very small footprint (< 30 kB) 👣
 * Options and methods very similar to [custom-electron-titlebar](https://www.npmjs.com/package/custom-electron-titlebar) 📖
@@ -198,6 +208,67 @@ currentWindow.webContents.once('dom-ready', () => {
 </html>
 ```
 
+## Progressive Web App
+
+### manifest.webmanifest
+
+```json
+{
+  "background_color": "#2975ff",
+  "description": "Progressive Web Application with a custom titlebar",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay"],
+  "icons": [],
+  "name": "Progressive Web Application",
+  "short_name": "custom-titlebar",
+  "start_url": "./",
+  "theme_color": "#2975ff"
+}
+```
+
+### index.html
+
+```html
+<html>
+    <head>
+        <title>Titlebar</title>
+        <script src="https://cdn.jsdelivr.net/npm/@6c65726f79/custom-titlebar/lib/index.js"></script>
+        <link rel="manifest" href="manifest.webmanifest">
+    </head>
+    <body>
+        <div id="app" style="padding:8px;">
+            This is a web page
+        </div>
+        <script>
+            const menu = [
+              {
+                label: 'File',
+                submenu: [
+                  {
+                      label: 'Checkbox',
+                      type: 'checkbox'
+                  },
+                  {
+                      label: 'Checked state',
+                      click: () => {
+                          alert(menu[0].submenu.items[0].checked ? 'Checked' : 'Unchecked');
+                      }
+                  }
+                ]
+              }
+            ];
+
+            const titlebar = new Titlebar({
+                windowControlsOverlay: true,
+                backgroundColor:"#2975ff",
+                unfocusEffect: false,
+                menu
+            });
+        </script>
+    </body>
+</html>
+```
+
 # Options
 
 All parameters are optional.
@@ -222,6 +293,7 @@ All parameters are optional.
 | title                    | `string`   | Window title.                                                                | `document.title` |
 | titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (`left`, `center`, `right`)    | `center`         |
 | unfocusEffect            | `boolean`  | Enables or disables the unfocus effect on the titlebar.                      | `true`           |
+| windowControlsOverlay    | `boolean`  | Set this option to true if you're using [Window Controls Overlay](https://github.com/WICG/window-controls-overlay/blob/main/explainer.md). | `false`          |
 
 # Methods
 

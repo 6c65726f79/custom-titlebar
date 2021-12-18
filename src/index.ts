@@ -18,6 +18,7 @@ let menu: Menu;
 let menuTemplate: Record<string, any>;
 let menuSize = 0;
 let menuCondensed = false;
+let titlebarHeight = 30;
 
 export default class Titlebar {
   constructor(titleBarOptions?: TitleBarOptions) {
@@ -79,13 +80,6 @@ export default class Titlebar {
     controls.append(closeWindow);
     titlebar.append(controls);
 
-    // Hide controls if Window Controls Overlay is enabled
-    const nav: Record<string, any> = window.navigator;
-    controls.classList.toggle(
-      style.locals.hidden,
-      (nav.windowControlsOverlay && nav.windowControlsOverlay.visible) === true,
-    );
-
     // Create container
     container = document.createElement('div');
     container.id = style.locals.container;
@@ -108,6 +102,8 @@ export default class Titlebar {
     if (titleBarOptions) {
       this.updateOptions(titleBarOptions);
     }
+    
+    windowControlsOverlayListener();
 
     // Apply theme
     applyTheme();
@@ -163,6 +159,18 @@ export default class Titlebar {
   }
 }
 
+const debounce = (func: Function, wait: number) => {
+  let timeout: any;
+  return function executedFunction(...args: any[]) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+};
+
 const onBlur = () => {
   if (Options.values.unfocusEffect) {
     titlebar.classList.add(style.locals.inactive);
@@ -176,18 +184,14 @@ const onFocus = () => {
 
 const onClick = () => menu?.closeSubMenu();
 
-const onResize = () => resized();
+const onResize = debounce(() => resized(), 100);
 
-const resized = (timeout = true) => {
+const resized = () => {
   titlebar.classList.toggle(
     style.locals.maximized,
     (Options.values.isMaximized && Options.values.isMaximized()) || false,
   );
   updateMenuSize();
-  // Workaround for NW.js resized event race condition
-  if (timeout) {
-    setTimeout(() => resized(false), 10);
-  }
 };
 
 const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
@@ -235,7 +239,8 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
     titlebar.classList.toggle(style.locals['hide-menu'], o.hideMenuOnDarwin);
   }
   if (o.height) {
-    updateSize({height: o.height});
+    titlebarHeight = o.height;
+    updateHeight(o.height);
   }
 };
 
@@ -250,14 +255,13 @@ const applyTheme = () => {
   closeWindow.innerHTML = svgs.close;
 };
 
-const updateSize = (values: Record<string,number>) => {
-  if(values.height) {
-    titlebar.style.height = values.height+"px";
-  }
-  if(values.width) {
-    titlebar.style.width = values.width+"px";
-    updateMenuSize();
-  }
+const updateHeight = (height: number) => {
+  titlebar.style.height = height+"px";
+}
+
+const updateControlsWidth = (width: number) => {
+  controls.style.width = width + "px";
+  updateMenuSize();
 }
 
 // Check if the menu need to be condensed
@@ -331,6 +335,32 @@ const buildMenu = (condensed = false): void => {
     updateMenuSize();
   }
 };
+
+const windowControlsOverlayListener = () => {
+  const nav: Record<string, any> = window.navigator;
+
+  if('windowControlsOverlay' in nav){
+    // Hide controls if Window Controls Overlay is enabled
+    controls.classList.toggle(style.locals.hidden, nav.windowControlsOverlay.visible || Options.values.windowControlsOverlay);
+
+    windowControlsOverlayHandler(nav.windowControlsOverlay.visible, nav.windowControlsOverlay.getBoundingClientRect());
+
+    nav.windowControlsOverlay.addEventListener(
+      'geometrychange',
+      debounce((e: Record<string,any>) => {
+        windowControlsOverlayHandler(e.visible, e.boundingRect)
+      },10)
+    );
+  }
+}
+
+const windowControlsOverlayHandler = (visible: boolean, size: DOMRect) => {
+  // Update titlebar size
+  updateHeight(visible ? size.height : titlebarHeight);
+  if(Options.values.windowControlsOverlay){
+    updateControlsWidth(visible ? document.body.clientWidth-size.width : 0);
+  }
+}
 
 const parseColor = (input: string): Array<number> => {
   const div = document.createElement('div');
