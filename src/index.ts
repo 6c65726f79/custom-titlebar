@@ -189,9 +189,9 @@ const updateHorizontalAlignment = (position: string): void => {
   title.classList.toggle(style.locals.right, position == 'right');
 };
 
-const updateIcon = (icon: string): void => {
-  appicon.style.backgroundImage = `url('${icon}')`;
-  appicon.style.display = 'block';
+const updateIcon = (icon: string | null): void => {
+  appicon.style.backgroundImage = icon ? `url('${icon}')` : 'unset';
+  appicon.style.display = icon ? 'block' : 'none';
 };
 
 const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
@@ -201,7 +201,7 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (o.title) {
     context.updateTitle(o.title);
   }
-  if (o.icon) {
+  if (typeof o.icon != 'undefined') {
     updateIcon(o.icon);
   }
   if (o.onMinimize) {

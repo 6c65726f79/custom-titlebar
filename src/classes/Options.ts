@@ -1,7 +1,7 @@
 export interface TitleBarOptions {
   backgroundColor?: string;
   title?: string;
-  icon?: string;
+  icon?: string | null;
   condensed?: boolean;
   menu?: Record<string, any>;
   overflow?: string;
