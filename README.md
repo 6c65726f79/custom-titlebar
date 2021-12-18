@@ -275,7 +275,7 @@ All parameters are optional.
 
 | Parameter                | Type       | Description                                                                        | Default          |
 | ------------------------ | ---------- | ---------------------------------------------------------------------------------- | ---------------- |
-| backgroundColor          | `string`   | The background color of the titlebar.                                              | `#FFFFFF`        |
+| backgroundColor          | `string`   | The background color of the titlebar. The value must be a valid CSS color.         | `#FFFFFF`        |
 | backgroundUnfocusEffect  | `boolean`  | Enables or disables the unfocus effect on the background of the titlebar.          | `true`           |
 | browserWindow            | `object`   | The current `BrowserWindow`. **(Electron only)**                                   | undefined        |
 | condensed                | `boolean`  | Force the menu bar to be condensed.                                                | `false`          |
@@ -309,14 +309,6 @@ titlebar.updateOptions({
 });
 ```
 
-## Update background
-
-This change the color of titlebar and it's checked whether the color is light or dark, so that the color of the icons adapts to the background of the titlebar. The value must be a valid CSS color.
-
-```javascript
-titlebar.updateBackground('rgb(60, 60, 60)');
-```
-
 ## Update title
 
 This method update the title of the titlebar. If you change the content of the title tag, you should call this method to update the title.
@@ -327,73 +319,6 @@ titlebar.updateTitle();
 
 // Or you can do as follows and avoid writing document.title
 titlebar.updateTitle('New Title');
-```
-
-## Update icon
-
-With this method you can update the icon. This method receives the url of an image or an image encoded in base64.
-
-```javascript
-titlebar.updateIcon('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAM8SURBVHjaPMzNaxxlHMDx7++ZZ2dfZjcvmjUvbd6axlZtVBJFEPEklYI3qQiKCr1bEEEontuTokcvVZRWREGhOdSCiK+9aECQ1Jg0qWmMm2w22czMzvs840n/gM9Hzn/wOM0jUE2niFPDTmudW6sbTFQe4OIzb81/uvjtqT915+O76keGhx2ceohdjmjUZ6iWx9FKC4XEY3F6+4wbdp9eb90Z2rhrNpfcmxfm+Hx6a5/Z6zvfoButk16m7OmJxuZoo7+rlAUFyAtvLxD7m+/d+bt9/p4+YWF8gamhhzh0PZKu9VW3o35zhrNXjk8enQ6kwx+9X9n0bl179NhjZ5sD87G8f+k10jhnMEy/fnao7/SR2QkYGQRdUIRenrZ9sZ2GolIFGiAW170lPlz+6HK9VjknxRdXoH/gZYK1T1j9DjIXGg5Fw0F0AfUG2T8+SpdRRQ5dD449ydqJk1dbuvOSOjRps9daeSdZ+oG81SX3DCZIwQ8pkgLsClm1RBTHMHgvRoT0py+ZabVffOr+V+e0cqqn862d+9g9IIt8xAalDJYliAKCEMupEaytUet3oK9M3iqR/fK9Kk3OPqeTzv68eCF5L4NehFQ11mGC1hqRAoljdL1KlhuS3V1sp4SqaGIvRG1vTGkT9ApjBIlyTJgBBcqHklZYJQsJIizxSJOc5NBHSxmTp2RJis5Mro1VuZkqG5MBCZgio7AMJQtKtmCVBCtKCA5DHKNIyxaJG5FWNNVyZVlLni3m1b6VUNdOSLgDgcEYIdaGsoBlDHmjwN33Gao4JF5M0AmRuWbLstRnKgn9mFrt9Xh0EtdYRL2YxM/ouQl+NyDzIw72fCI/RAS8VhePOsXAwJv++u22SlAAN/T4zLlgfIYuitBLyDxD5KfksaG97UIQ4rZ9tjqKZGTyYrTXudL5fQUtCGQpyrIu69lTu14QXwu31ygFGTYa7yBhb/uASpKxEgxhj41f6K/qS7nvURQFGgARiiTBUrKoRo+O9Gx9I3A7D1eCDulfexgjeMefcMvN8TMNJ/2Z1Ee0jfwfACJCkedIGu9Q73tEDY89L72DN7zV5SozD161mpPvluKeKdIYbPmP8e8AOU+pc9F7CmgAAAAASUVORK5CYII=');
-```
-
-## Update menu
-
-This method updates or creates the menu. You can use an array of MenuItem from [Electron](https://www.electronjs.org/docs/api/menu-item)/[NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/), or directly `Menu.getApplicationMenu()` in Electron.
-
-```javascript
-// With a menu template
-titlebar.updateMenu([
-  {
-    label: 'Item 1',
-    submenu: [
-      {
-        label: 'Subitem 1',
-        click: () => console.log('Clicked on subitem 1')
-      },
-      {
-        type: 'separator'
-      },
-      {
-        label: 'Subitem 2',
-        click: () => console.log('Clicked on subitem 2')
-      },
-    ]
-  },
-  {
-    label: 'Item 2',
-    submenu: [
-      {
-        label: 'Subitem checkbox',
-        type: 'checkbox',
-        checked: true
-      },
-      {
-        type: 'separator'
-      },
-      {
-        label: 'Subitem with submenu',
-        submenu: [
-          {
-            label: 'Submenu item 1',
-            accelerator: 'Ctrl+T'
-          }
-        ]
-      }
-    ]
-  }
-]);
-
-// Or with getApplicationMenu in Electron
-titlebar.updateMenu(Menu.getApplicationMenu());
-```
-
-## Update horizontal alignment
-
-This method updates the horizontal alignment of the window title. `left`, `center` and `right` are allowed.
-
-```javascript
-titlebar.updateHorizontalAlignment('right');
 ```
 
 ## Dispose

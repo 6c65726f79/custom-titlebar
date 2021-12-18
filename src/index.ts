@@ -120,30 +120,8 @@ export default class Titlebar {
     applyOptions(titleBarOptions, this);
   }
 
-  updateBackground(color: string): void {
-    const rgb = parseColor(color);
-    const brightness = getBrightness(rgb);
-    titlebar.classList.toggle(style.locals.dark, brightness <= 125);
-    titlebar.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-  }
-
   updateTitle(newTitle?: string): void {
     title.innerText = newTitle || window.document.title;
-  }
-
-  updateMenu(template: Record<string, any>): void {
-    menuTemplate = parseMenuTemplate(template);
-    buildMenu(menuCondensed);
-  }
-
-  updateHorizontalAlignment(position: string): void {
-    title.classList.toggle(style.locals.left, position == 'left');
-    title.classList.toggle(style.locals.right, position == 'right');
-  }
-
-  updateIcon(icon: string): void {
-    appicon.style.backgroundImage = `url('${icon}')`;
-    appicon.style.display = 'block';
   }
 
   dispose(): void {
@@ -194,15 +172,38 @@ const resized = () => {
   updateMenuSize();
 };
 
+const updateBackground = (color: string): void => {
+  const rgb = parseColor(color);
+  const brightness = getBrightness(rgb);
+  titlebar.classList.toggle(style.locals.dark, brightness <= 125);
+  titlebar.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+}
+
+
+const updateMenu = (template: Record<string, any>): void => {
+  menuTemplate = parseMenuTemplate(template);
+  buildMenu(menuCondensed);
+}
+
+const updateHorizontalAlignment = (position: string): void => {
+  title.classList.toggle(style.locals.left, position == 'left');
+  title.classList.toggle(style.locals.right, position == 'right');
+}
+
+const updateIcon = (icon: string): void => {
+  appicon.style.backgroundImage = `url('${icon}')`;
+  appicon.style.display = 'block';
+}
+
 const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (o.backgroundColor) {
-    context.updateBackground(o.backgroundColor);
+    updateBackground(o.backgroundColor);
   }
   if (o.title) {
     context.updateTitle(o.title);
   }
   if (o.icon) {
-    context.updateIcon(o.icon);
+    updateIcon(o.icon);
   }
   if (o.onMinimize) {
     minimizeWindow.onclick = o.onMinimize;
@@ -218,7 +219,7 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
     titlebar.classList.toggle(style.locals.maximized, o.isMaximized());
   }
   if (o.menu) {
-    context.updateMenu(o.menu);
+    updateMenu(o.menu);
   }
   if (typeof o.condensed != 'undefined') {
     updateMenuSize();
@@ -230,7 +231,7 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
     titlebar.classList.toggle(style.locals.nodrag, !o.drag);
   }
   if (o.titleHorizontalAlignment) {
-    context.updateHorizontalAlignment(o.titleHorizontalAlignment);
+    updateHorizontalAlignment(o.titleHorizontalAlignment);
   }
   if (o.platform) {
     applyTheme();
