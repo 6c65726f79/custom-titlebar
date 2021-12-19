@@ -347,6 +347,61 @@ titlebar.updateTitle();
 titlebar.updateTitle('New Title');
 ```
 
+## Update menu
+
+This method updates or creates the menu. You can use an array of MenuItem from [Electron](https://www.electronjs.org/docs/api/menu-item)/[NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/), or directly `Menu.getApplicationMenu()` in Electron.
+
+```javascript
+// With a menu template
+const menu = [
+  {
+    label: 'Item 1',
+    submenu: [
+      {
+        label: 'Subitem 1',
+        click: () => console.log('Clicked on subitem 1')
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Subitem 2',
+        click: () => console.log('Clicked on subitem 2')
+      },
+    ]
+  },
+  {
+    label: 'Item 2',
+    submenu: [
+      {
+        label: 'Subitem checkbox',
+        type: 'checkbox',
+        checked: true
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Subitem with submenu',
+        submenu: [
+          {
+            label: 'Submenu item 1',
+            accelerator: 'Ctrl+T'
+          }
+        ]
+      }
+    ]
+  }
+];
+titlebar.updateMenu(menu);
+
+// Or with getApplicationMenu in Electron
+titlebar.updateMenu(Menu.getApplicationMenu());
+
+// Disable menu
+titlebar.updateMenu();
+```
+
 ## Dispose
 
 This method removes the titlebar completely and all recorded events.

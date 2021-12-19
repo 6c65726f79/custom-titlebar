@@ -124,6 +124,11 @@ export default class Titlebar {
     title.innerText = newTitle || window.document.title;
   }
 
+  updateMenu(template: Record<string, any>=[]): void {
+    menuTemplate = parseMenuTemplate(template);
+    buildMenu(menuCondensed);
+  }
+
   dispose(): void {
     while (container.firstChild) {
       document.body.append(container.firstChild);
@@ -179,11 +184,6 @@ const updateBackground = (color: string): void => {
   titlebar.style.backgroundColor = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
 };
 
-const updateMenu = (template: Record<string, any>): void => {
-  menuTemplate = parseMenuTemplate(template);
-  buildMenu(menuCondensed);
-};
-
 const updateHorizontalAlignment = (position: string): void => {
   title.classList.toggle(style.locals.left, position == 'left');
   title.classList.toggle(style.locals.right, position == 'right');
@@ -218,7 +218,7 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
     titlebar.classList.toggle(style.locals.maximized, o.isMaximized());
   }
   if (o.menu) {
-    updateMenu(o.menu);
+    context.updateMenu(o.menu);
   }
   if (typeof o.condensed != 'undefined') {
     updateMenuSize();
