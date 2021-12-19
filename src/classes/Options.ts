@@ -3,7 +3,7 @@ export interface TitleBarOptions {
   title?: string;
   icon?: string | null;
   condensed?: boolean;
-  menu?: Record<string, any>;
+  menu?: Record<string, any> | null;
   overflow?: string;
   drag?: boolean;
   titleHorizontalAlignment?: string;

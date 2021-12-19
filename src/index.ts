@@ -15,7 +15,7 @@ let maximizeWindow: HTMLDivElement;
 let restoreWindow: HTMLDivElement;
 let closeWindow: HTMLDivElement;
 let menu: Menu;
-let menuTemplate: Record<string, any>;
+let menuTemplate: Record<string, any> | null;
 let menuSize = 0;
 let menuCondensed = false;
 let titlebarHeight = 30;
@@ -124,8 +124,8 @@ export default class Titlebar {
     title.innerText = newTitle || window.document.title;
   }
 
-  updateMenu(template: Record<string, any> = []): void {
-    menuTemplate = parseMenuTemplate(template);
+  updateMenu(template?: Record<string, any> | null): void {
+    menuTemplate = template ? parseMenuTemplate(template) : null;
     buildMenu(menuCondensed);
   }
 
@@ -217,7 +217,7 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (o.isMaximized) {
     titlebar.classList.toggle(style.locals.maximized, o.isMaximized());
   }
-  if (o.menu) {
+  if (typeof o.menu != 'undefined') {
     context.updateMenu(o.menu);
   }
   if (typeof o.condensed != 'undefined') {
@@ -311,6 +311,7 @@ const parseMenuTemplate = (template: Record<string, any>): Record<string, any> =
 
 const buildMenu = (condensed = false): void => {
   menuCondensed = condensed;
+  menubar.innerHTML = '';
 
   if (!menuTemplate) return;
 
@@ -329,7 +330,6 @@ const buildMenu = (condensed = false): void => {
   menu = new Menu(items);
 
   // Insert menu items
-  menubar.innerHTML = '';
   menu.menuItems.forEach((menuItem) => {
     menubar.append(menuItem.element);
   });
