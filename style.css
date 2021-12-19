@@ -20,7 +20,7 @@ body {
 }
 
 .add-button {
-  margin: 10px auto;
+  margin: 20px auto;
   padding: 10px;
   background: #fff;
   border: none;
@@ -36,5 +36,15 @@ body {
 
   a {
     color:#fff;
+  }
+
+  #app {
+    background: unset;
+  }
+}
+
+@media all and (display-mode: fullscreen) {
+  #app {
+    background:#fff;
   }
 }
