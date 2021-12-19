@@ -3,11 +3,14 @@
         <title>Titlebar</title>
         <script src="https://cdn.jsdelivr.net/npm/@6c65726f79/custom-titlebar/lib/index.js"></script>
         <link rel="manifest" href="manifest.webmanifest">
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <div id="app" style="padding:8px;">
-            This is a web page<br>
-            <button class="add-button">Add to home screen</button>
+        <div id="app">
+            <div id="align">
+                This is a PWA demo using <a href="https://github.com/6c65726f79/custom-titlebar">@6c65726f79/custom-titlebar</a>.
+                <button class="add-button">Install app</button>
+            </div>
         </div>
         <script>
             const menu = [
