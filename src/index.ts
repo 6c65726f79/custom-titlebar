@@ -124,7 +124,7 @@ export default class Titlebar {
     title.innerText = newTitle || window.document.title;
   }
 
-  updateMenu(template: Record<string, any>=[]): void {
+  updateMenu(template: Record<string, any> = []): void {
     menuTemplate = parseMenuTemplate(template);
     buildMenu(menuCondensed);
   }
