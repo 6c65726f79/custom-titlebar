@@ -39,6 +39,12 @@ Poorly coded titlebar for [Electron](https://www.electronjs.org/), [NW.js](https
 * Very small footprint (< 30 kB) 👣
 * Options and methods very similar to [custom-electron-titlebar](https://www.npmjs.com/package/custom-electron-titlebar) 📖
 
+## Demo
+
+You can see a demo of this library in a PWA here: https://6c65726f79.github.io/custom-titlebar/
+
+If the install button doesn't appear, try reloading and reopening the tab several times.
+
 ## Inpiration
 
 This package is highly inspired by [custom-electron-titlebar](https://www.npmjs.com/package/custom-electron-titlebar).
@@ -272,16 +278,7 @@ currentWindow.webContents.once('dom-ready', () => {
               ]
             }
           ];
-
-          // Use the titlebar only in standalone mode
-          if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
-            createTitlebar();
-          }
-
-          window.matchMedia('(display-mode: standalone)').onchange = (e) => {
-            e.matches ? createTitlebar() : titlebar.dispose();
-          }
-
+          
           function createTitlebar() {
             titlebar = new Titlebar({
               backgroundUnfocusEffect: false,
@@ -290,6 +287,17 @@ currentWindow.webContents.once('dom-ready', () => {
               menu
             });
           }
+
+          window.addEventListener('load', () => {
+            // Use the titlebar only in standalone mode
+            if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+              createTitlebar();
+            }
+
+            window.matchMedia('(display-mode: standalone)').onchange = (e) => {
+              e.matches ? createTitlebar() : titlebar.dispose();
+            }
+          });
         </script>
     </body>
 </html>
