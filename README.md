@@ -2,7 +2,7 @@
 
 Poorly coded titlebar for [Electron](https://www.electronjs.org/), [NW.js](https://nwjs.io/) and [PWAs](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps).
 
-![NPM](https://img.shields.io/npm/l/@6c65726f79/custom-titlebar) ![npm](https://img.shields.io/npm/v/@6c65726f79/custom-titlebar) ![npm bundle size](https://img.shields.io/bundlephobia/min/@6c65726f79/custom-titlebar)
+![NPM](https://img.shields.io/npm/l/@6c65726f79/custom-titlebar) ![npm](https://img.shields.io/npm/v/@6c65726f79/custom-titlebar) ![npm bundle size](https://img.shields.io/bundlephobia/min/@6c65726f79/custom-titlebar) ![npm](https://img.shields.io/npm/dm/@6c65726f79/custom-titlebar) [![](https://data.jsdelivr.com/v1/package/npm/@6c65726f79/custom-titlebar/badge?style=rounded)](https://www.jsdelivr.com/package/npm/@6c65726f79/custom-titlebar)
 
 
 ![Preview 1](screenshots/capture-1.png)
