@@ -1,0 +1,27 @@
+{
+  "name": "Progressive Web Application Custom Titlebar",
+  "short_name": "pwa-custom-titlebar",
+  "description": "Progressive Web Application with a custom titlebar",
+  "icons": [
+    {
+        "src": "./img/fire-32.png",
+        "sizes": "32x32",
+        "type": "image/png"
+    },
+    {
+      "src": "./img/fire-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "./img/fire-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./",
+  "display": "standalone",
+  "theme_color": "#2975ff",
+  "background_color": "#2975ff",
+  "display_override": ["window-controls-overlay"]
+}

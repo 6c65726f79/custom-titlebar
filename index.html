@@ -1,0 +1,188 @@
+<html>
+    <head>
+        <title>Titlebar</title>
+        <script src="https://cdn.jsdelivr.net/npm/@6c65726f79/custom-titlebar/lib/index.js"></script>
+        <link rel="manifest" href="manifest.webmanifest">
+    </head>
+    <body>
+        <div id="app" style="padding:8px;">
+            This is a web page<br>
+            <button class="add-button">Add to home screen</button>
+        </div>
+        <script>
+            const menu = [
+                    {
+                        label: 'Options',
+                        submenu: [
+                            {
+                                label: 'Condensed',
+                                type: 'checkbox',
+                                click: () => {
+                                    titlebar.updateOptions({condensed:menu[0].submenu.items[0].checked});
+                                }
+                            },
+                            {
+                                label: 'Drag',
+                                type: 'checkbox',
+                                checked: true,
+                                click: () => {
+                                    titlebar.updateOptions({drag:menu[0].submenu.items[1].checked});
+                                }
+                            },
+                            {
+                                label: 'Icon',
+                                type: 'checkbox',
+                                checked: true,
+                                click: () => {
+                                    console.log(this);
+                                    titlebar.updateOptions({icon:menu[0].submenu.items[2].checked?"peach.png":null});
+                                }
+                            },
+                            {
+                                type:'separator'
+                            },
+                            {
+                                label: 'Left',
+                                tooltip: 'Title horizontal alignment',
+                                type: 'radio',
+                                click: () => {
+                                    titlebar.updateOptions({titleHorizontalAlignment:'left'});
+                                }
+                            },
+                            {
+                                label: 'Center',
+                                tooltip: 'Title horizontal alignment',
+                                type: 'radio',
+                                checked: true,
+                                click: () => {
+                                    titlebar.updateOptions({titleHorizontalAlignment:'center'});
+                                }
+                            },
+                            {
+                                label: 'Right',
+                                tooltip: 'Title horizontal alignment',
+                                type: 'radio',
+                                click: () => {
+                                    titlebar.updateOptions({titleHorizontalAlignment:'right'});
+                                }
+                            },
+                        ]
+                    },
+                    {
+                        label: 'Demo',
+                        submenu: [
+                            {
+                                label: 'Checkbox',
+                                type: 'checkbox'
+                            },
+                            {
+                                label: 'Checked state',
+                                click: () => {
+                                    alert(menu[1].submenu.items[0].checked ? 'Checked' : 'Unchecked');
+                                }
+                            },
+                            {
+                                type:'separator'
+                            },
+                            {
+                                label: 'Radio #1',
+                                type: 'radio'
+                            },
+                            {
+                                label: 'Radio #2',
+                                type: 'radio'
+                            },
+                            {
+                                type:'separator'
+                            },
+                            {
+                                label: 'Radio #1',
+                                type: 'radio'
+                            },
+                            {
+                                label: 'Radio #2',
+                                type: 'radio'
+                            },
+                            {
+                                type:'separator'
+                            },
+                            {
+                                label: 'More',
+                                submenu: [
+                                    {
+                                        label: 'Radio #1',
+                                        type: 'radio',
+                                        checked: true
+                                    },
+                                    {
+                                        label: 'Radio #2',
+                                        type: 'radio'
+                                    },
+                                    {
+                                        label: 'Checked radio',
+                                        click: () => {
+                                            alert(`${menu[1].submenu.items[9].submenu.items.find(item => item.checked).label} checked`);
+                                        }
+                                    },
+                                ]
+                            }
+                        ]
+                    },
+                    {
+                        label: 'Window',
+                    }
+                ]
+
+            let titlebar;
+            
+            if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
+                createTitlebar()
+            }
+
+            window.matchMedia('(display-mode: standalone)').onchange = (e) => {
+                e.matches ? createTitlebar() : titlebar.dispose();
+            }
+
+            function createTitlebar() {
+                titlebar = new Titlebar({
+                    backgroundUnfocusEffect: false,
+                    windowControlsOverlay: true,
+                    backgroundColor:"#2975ff",
+                    icon: "./img/fire-32.png",
+                    menu
+                });
+            }
+        </script>
+        <script>
+            let deferredPrompt;
+            const addBtn = document.querySelector('.add-button');
+            addBtn.style.display = 'none';
+            
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                addBtn.style.display = 'block';
+              
+                addBtn.addEventListener('click', (e) => {
+                    addBtn.style.display = 'none';
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('User accepted the A2HS prompt');
+                        } else {
+                            console.log('User dismissed the A2HS prompt');
+                        }
+                        deferredPrompt = null;
+                    });
+                });
+            });
+
+            // Register a Service Worker to enable PWA
+            if ("serviceWorker" in navigator) {
+                window.addEventListener("load", async () => {
+                    await navigator.serviceWorker.register("sw.js");
+                });
+            }
+        </script>
+    </body>
+</html>
