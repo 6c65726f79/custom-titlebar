@@ -1,4 +1,4 @@
-@media not (display-mode: standalone) {
+@media all and (display-mode: browser) {
   body {
     background:#2975ff;
     color:#fff;
@@ -16,7 +16,17 @@ body {
 }
 
 #align {
+  font-size: 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.add-button {
+  margin: 10px auto;
+  padding: 10px;
+  background: #fff;
+  border: none;
+  font-size: 20px;
+  cursor:pointer;
 }
