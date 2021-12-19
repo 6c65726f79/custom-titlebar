@@ -94,7 +94,6 @@ export default class MenuItem {
 
           // Update checked state before calling the click method
           this.checkedState();
-          console.log(this.item.checked);
 
           if (Options.values.menuItemClickHandler && menuItem.commandId) {
             // Use user-defined handler
