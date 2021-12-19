@@ -260,6 +260,7 @@ const applyTheme = () => {
 
 const updateHeight = (height: number) => {
   titlebar.style.height = height + 'px';
+  container.style.height = `calc(100vh - ${height}px)`;
 };
 
 const updateControlsWidth = (width: number) => {
