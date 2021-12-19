@@ -3,7 +3,10 @@ const CACHE_NAME = "pwa-custom-titlebar-cache";
 const ASSETS = [
   "./",
   "./index.html",
-  "./manifest.webmanifest"
+  "./manifest.webmanifest",
+  "./img/npm.png",
+  "./img/github.png",
+  "./img/jsdelivr.png"
 ];
 
 self.addEventListener("install", e => {
