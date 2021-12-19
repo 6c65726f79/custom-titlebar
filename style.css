@@ -1,8 +1,5 @@
-@media all and (display-mode: browser) {
-  body {
-    background:#2975ff;
-    color:#fff;
-  }
+a {
+  color:#2975ff;
 }
 
 body {
@@ -29,4 +26,15 @@ body {
   border: none;
   font-size: 20px;
   cursor:pointer;
+}
+
+@media all and (display-mode: browser) {
+  body {
+    background:#2975ff;
+    color:#fff;
+  }
+
+  a {
+    color:#fff;
+  }
 }
