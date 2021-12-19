@@ -16,6 +16,10 @@
         </div>
         <script>
             let titlebar;
+            let deferredPrompt;
+            const addBtn = document.querySelector('.add-button');
+            addBtn.style.display = 'none';
+
             const menu = [
                 {
                     label: 'Demo',
@@ -51,6 +55,13 @@
                         {
                             label: 'Radio #2',
                             type: 'radio'
+                        },
+                        {
+                            type:'separator'
+                        },
+                        {
+                            label: 'Icon',
+                            icon: './img/fire-32.png'
                         },
                         {
                             type:'separator'
@@ -101,7 +112,7 @@
                             checked: true,
                             click: () => {
                                 console.log(this);
-                                titlebar.updateOptions({icon:menu[1].submenu.items[2].checked? "./img/fire-32.png" : null});
+                                titlebar.updateOptions({icon:menu[1].submenu.items[2].checked? './img/fire-32.png' : null});
                             }
                         },
                         {
@@ -137,20 +148,6 @@
                 {
                     label: 'Window',
                     submenu: [
-                        {
-                            label: 'Back',
-                            accelerator: 'Alt+Left',
-                            click: () => {
-                                history.back();
-                            }
-                        },
-                        {
-                            label: 'Forward',
-                            accelerator: 'Alt+Right',
-                            click: () => {
-                                history.forward();
-                            }
-                        },
                         {
                             label: 'Reload',
                             accelerator: 'Ctrl+R',
@@ -189,10 +186,28 @@
                     ]
                 }
             ];
+            
+            function createTitlebar() {
+                titlebar = new Titlebar({
+                    backgroundUnfocusEffect: false,
+                    windowControlsOverlay: true,
+                    backgroundColor: '#2975ff',
+                    icon: './img/fire-32.png',
+                    menu
+                });
+            }
 
-            window.addEventListener("load", () => {
+            window.addEventListener('load', () => {
+                // Use the titlebar only in standalone mode
                 if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
                     createTitlebar()
+                }
+
+                // Register a Service Worker to enable PWA
+                if ('serviceWorker' in navigator) {
+                    window.addEventListener('load', async () => {
+                        await navigator.serviceWorker.register('sw.js');
+                    });
                 }
             });
 
@@ -200,21 +215,6 @@
                 e.matches ? createTitlebar() : titlebar.dispose();
             }
 
-            function createTitlebar() {
-                titlebar = new Titlebar({
-                    backgroundUnfocusEffect: false,
-                    windowControlsOverlay: true,
-                    backgroundColor:"#2975ff",
-                    icon: "./img/fire-32.png",
-                    menu
-                });
-            }
-        </script>
-        <script>
-            let deferredPrompt;
-            const addBtn = document.querySelector('.add-button');
-            addBtn.style.display = 'none';
-            
             window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 deferredPrompt = e;
@@ -223,23 +223,9 @@
                 addBtn.addEventListener('click', (e) => {
                     addBtn.style.display = 'none';
                     deferredPrompt.prompt();
-                    deferredPrompt.userChoice.then((choiceResult) => {
-                        if (choiceResult.outcome === 'accepted') {
-                            console.log('User accepted the A2HS prompt');
-                        } else {
-                            console.log('User dismissed the A2HS prompt');
-                        }
-                        deferredPrompt = null;
-                    });
                 });
             });
 
-            // Register a Service Worker to enable PWA
-            if ("serviceWorker" in navigator) {
-                window.addEventListener("load", async () => {
-                    await navigator.serviceWorker.register("sw.js");
-                });
-            }
         </script>
     </body>
 </html>
