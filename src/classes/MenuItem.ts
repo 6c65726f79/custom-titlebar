@@ -79,6 +79,7 @@ export default class MenuItem {
       // Add icon
       const icon = document.createElement('img');
       icon.src = menuItem.icon;
+      icon.setAttribute('draggable', 'false');
       icon.classList.add(style.locals.icon);
       this.element.append(icon);
     }
