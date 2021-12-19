@@ -1,3 +1,9 @@
+@media print {
+  #titlebar {
+    display: none;
+  }
+}
+
 #container {
   position: relative;
   height: calc(100vh - 30px);
