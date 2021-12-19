@@ -301,7 +301,7 @@ All parameters are optional.
 
 | Parameter                | Type       | Description                                                                        | Default          |
 | ------------------------ | ---------- | ---------------------------------------------------------------------------------- | ---------------- |
-| backgroundColor          | `string`   | The background color of the titlebar. The value must be a valid CSS color.         | `#FFFFFF`        |
+| backgroundColor          | `string`   | The background color of the titlebar. The value must be a valid CSS color.         | `"#FFFFFF"`      |
 | backgroundUnfocusEffect  | `boolean`  | Enables or disables the unfocus effect on the background of the titlebar.          | `true`           |
 | browserWindow            | `object`   | The current `BrowserWindow`. **(Electron only)**                                   | undefined        |
 | condensed                | `boolean`  | Force the menu bar to be condensed.                                                | `false`          |
@@ -315,10 +315,10 @@ All parameters are optional.
 | onClose                  | `function` | The function to call when the close button is clicked.                             | undefined        |
 | onMaximize               | `function` | The function to call when the maximize/restore button is clicked.                  | undefined        |
 | onMinimize               | `function` | The function to call when the minimize button is clicked.                          | undefined        |
-| overflow                 | `string`   | The overflow of the container. (`auto`, `visible`, `hidden`)                       | `auto`           |
-| platform                 | `string`   | Style of the control buttons. (`win`, `darwin`)                                    | `win`            |
+| overflow                 | `string`   | The overflow of the container. (`auto`, `visible`, `hidden`)                       | `"auto"`         |
+| platform                 | `string`   | Style of the control buttons. (`win`, `darwin`)                                    | `"win"`          |
 | title                    | `string`   | Window title.                                                                      | `document.title` |
-| titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (`left`, `center`, `right`)          | `center`         |
+| titleHorizontalAlignment | `string`   | Set horizontal alignment of the window title. (`left`, `center`, `right`)          | `"center"`       |
 | unfocusEffect            | `boolean`  | Enables or disables the unfocus effect on the text and background of the titlebar. | `true`           |
 | windowControlsOverlay    | `boolean`  | Set this option to true if you're using [Window Controls Overlay](https://github.com/WICG/window-controls-overlay/blob/main/explainer.md). | `false`          |
 
