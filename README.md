@@ -372,6 +372,8 @@ titlebar.updateTitle('New Title');
 
 ## updateMenu
 
+> Deprecated: This method will be removed in v1.0.0, use `updateOptions` instead.
+
 This method updates or creates the menu. You can use an array of MenuItem from [Electron](https://www.electronjs.org/docs/api/menu-item)/[NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/), or directly `Menu.getApplicationMenu()` in Electron.
 
 ```javascript
