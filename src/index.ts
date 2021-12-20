@@ -127,7 +127,7 @@ export default class Titlebar {
   updateMenu(template?: Record<string, any> | null): void {
     // Deprecated warning
     // eslint-disable-next-line no-console
-    console.log('Warning: updateMenu is deprecated and will be removed in v1.0.0, use updateOptions instead.');
+    console.warn('Warning: updateMenu is deprecated and will be removed in v1.0.0, use updateOptions instead.');
     updateMenu(template);
   }
 
