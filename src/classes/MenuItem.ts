@@ -2,8 +2,7 @@ import style from '../style/style.scss';
 import svg from '../style/svg.json';
 import Menu from './Menu';
 import { Accelerator } from './Accelerator';
-import { RoleHandler } from './RoleHandler';
-import { Options } from './Options';
+import { ClickHandler } from './ClickHandler';
 
 export default class MenuItem {
   element: HTMLDivElement;
@@ -95,13 +94,8 @@ export default class MenuItem {
           // Update checked state before calling the click method
           this.checkedState();
 
-          if (Options.values.menuItemClickHandler && menuItem.commandId) {
-            // Use user-defined handler
-            Options.values.menuItemClickHandler(menuItem.commandId);
-          } else if (menuItem.click) {
-            // Use default handler
-            menuItem.role ? RoleHandler.invoke(menuItem.click) : menuItem.click();
-          }
+          // Call click method
+          ClickHandler.click(this.item);
         };
 
         this.element.onmouseenter = () => {
