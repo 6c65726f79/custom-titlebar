@@ -127,11 +127,11 @@ export default class Titlebar {
   updateMenu(template?: Record<string, any> | null): void {
     // Deprecated warning
     // eslint-disable-next-line no-console
-    console.log("Warning: updateMenu is deprecated and will be removed in v1.0.0, use updateOptions instead.");
+    console.log('Warning: updateMenu is deprecated and will be removed in v1.0.0, use updateOptions instead.');
     updateMenu(template);
   }
 
-  getMenuItemById(id: number): Record<string,any> | null {
+  getMenuItemById(id: number): Record<string, any> | null {
     return getMenuItemById(id);
   }
 
@@ -203,18 +203,18 @@ const updateIcon = (icon: string | null): void => {
 const updateMenu = (template?: Record<string, any> | null): void => {
   menuTemplate = template ? parseMenuTemplate(template) : null;
   buildMenu(menuCondensed);
-}
+};
 
-const getMenuItemById = (id: number, menu = menuTemplate): Record<string,any> | null  => {
-  if(!menu) return null;
-  let found = menu.items.find((item: Record<string,any>) => item.id === id) || null;
+const getMenuItemById = (id: number, menu = menuTemplate): Record<string, any> | null => {
+  if (!menu) return null;
+  let found = menu.items.find((item: Record<string, any>) => item.id === id) || null;
   for (let i = 0; !found && i < menu.items.length; i++) {
     if (menu.items[i].submenu) {
       found = getMenuItemById(id, menu.items[i].submenu);
     }
   }
   return found;
-}
+};
 
 const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (o.backgroundColor) {
