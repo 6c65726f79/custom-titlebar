@@ -136,7 +136,7 @@ export default class MenuItem {
   }
 
   // Checked state management for custom menu templates
-  checkedState() {
+  checkedState(): void {
     // Check if the click method is not from Electron
     if (!this.item.click || this.item.click.toString().indexOf('ipcRenderer') < 0) {
       if (this.item.type == 'radio') {
@@ -150,7 +150,7 @@ export default class MenuItem {
   }
 
   // Uncheck this item if it's a radio
-  unckeckRadio() {
+  unckeckRadio(): void {
     if (this.item.type == 'radio') {
       this.item.checked = false;
     }

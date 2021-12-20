@@ -67,7 +67,7 @@ export default class Menu {
   }
 
   // Uncheck all radio items from the same group in this menu
-  uncheckRadioGroup(itemIndex: number) {
+  uncheckRadioGroup(itemIndex: number): void {
     const group = this.getItemGroup(itemIndex);
     this.getGroupItems(group).forEach((menuItem) => {
       menuItem.unckeckRadio();
