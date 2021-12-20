@@ -267,12 +267,13 @@ currentWindow.webContents.once('dom-ready', () => {
               submenu: [
                 {
                     label: 'Checkbox',
-                    type: 'checkbox'
+                    type: 'checkbox',
+                    id: 'checkbox'
                 },
                 {
                     label: 'Checked state',
                     click: () => {
-                        alert(menu[0].submenu.items[0].checked ? 'Checked' : 'Unchecked');
+                        alert(titlebar.getMenuItemById('checkbox')?.checked ? 'Checked' : 'Unchecked');
                     }
                 }
               ]
@@ -332,7 +333,21 @@ All parameters are optional.
 
 # Methods
 
-## Update options
+## getMenuItemById
+
+Returns the MenuItem with the specified `id`.
+
+```javascript
+const titlebar = new Titlebar({
+  menu: [{label: 'Item 1', id: 'item1'}]
+});
+
+const menuItem = titlebar.getMenuItemById('item1');
+
+console.log(menuItem.label); // Item 1
+```
+
+## updateOptions
 
 This method updates all parameters that are specified.
 
@@ -343,7 +358,7 @@ titlebar.updateOptions({
 });
 ```
 
-## Update title
+## updateTitle
 
 This method update the title of the titlebar. If you change the content of the title tag, you should call this method to update the title.
 
@@ -355,7 +370,7 @@ titlebar.updateTitle();
 titlebar.updateTitle('New Title');
 ```
 
-## Update menu
+## updateMenu
 
 This method updates or creates the menu. You can use an array of MenuItem from [Electron](https://www.electronjs.org/docs/api/menu-item)/[NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/), or directly `Menu.getApplicationMenu()` in Electron.
 
@@ -410,7 +425,7 @@ titlebar.updateMenu(Menu.getApplicationMenu());
 titlebar.updateMenu();
 ```
 
-## Dispose
+## dispose
 
 This method removes the titlebar completely and all recorded events.
 

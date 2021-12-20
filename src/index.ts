@@ -129,6 +129,10 @@ export default class Titlebar {
     buildMenu(menuCondensed);
   }
 
+  getMenuItemById(id: number): Record<string,any> | null {
+    return getMenuItemById(id);
+  }
+
   dispose(): void {
     while (container.firstChild) {
       document.body.append(container.firstChild);
@@ -193,6 +197,17 @@ const updateIcon = (icon: string | null): void => {
   appicon.style.backgroundImage = icon ? `url('${icon}')` : 'unset';
   appicon.style.display = icon ? 'block' : 'none';
 };
+
+const getMenuItemById = (id: number, menu = menuTemplate): Record<string,any> | null  => {
+  if(!menu) return null;
+  let found = menu.items.find((item: Record<string,any>) => item.id === id) || null;
+  for (let i = 0; !found && i < menu.items.length; i++) {
+    if (menu.items[i].submenu) {
+      found = getMenuItemById(id, menu.items[i].submenu);
+    }
+  }
+  return found;
+}
 
 const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (o.backgroundColor) {
