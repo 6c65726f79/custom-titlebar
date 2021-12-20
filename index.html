@@ -26,12 +26,13 @@
                     submenu: [
                         {
                             label: 'Checkbox',
-                            type: 'checkbox'
+                            type: 'checkbox',
+                            id: 'checkbox'
                         },
                         {
                             label: 'Checked state',
                             click: () => {
-                                alert(menu[0].submenu.items[0].checked ? 'Checked' : 'Unchecked');
+                                alert(titlebar.getMenuItemById('checkbox')?.checked ? 'Checked' : 'Unchecked');
                             }
                         },
                         {
@@ -68,6 +69,7 @@
                         },
                         {
                             label: 'More',
+                            id: 'radio',
                             submenu: [
                                 {
                                     label: 'Radio #1',
@@ -81,7 +83,7 @@
                                 {
                                     label: 'Checked radio',
                                     click: () => {
-                                        alert(`${menu[0].submenu.items[11].submenu.items.find(item => item.checked).label} checked`);
+                                        alert(`${titlebar.getMenuItemById('radio').submenu.items.find(item => item.checked).label} checked`);
                                     }
                                 },
                             ]
