@@ -96,25 +96,24 @@
                         {
                             label: 'Condensed',
                             type: 'checkbox',
-                            click: () => {
-                                titlebar.updateOptions({condensed:menu[1].submenu.items[0].checked});
+                            click: (menuItem) => {
+                                titlebar.updateOptions({condensed: menuItem.checked});
                             }
                         },
                         {
                             label: 'Drag',
                             type: 'checkbox',
                             checked: true,
-                            click: () => {
-                                titlebar.updateOptions({drag:menu[1].submenu.items[1].checked});
+                            click: (menuItem) => {
+                                titlebar.updateOptions({drag: menuItem.checked});
                             }
                         },
                         {
                             label: 'Icon',
                             type: 'checkbox',
                             checked: true,
-                            click: () => {
-                                console.log(this);
-                                titlebar.updateOptions({icon:menu[1].submenu.items[2].checked? './img/fire-32.png' : null});
+                            click: (menuItem) => {
+                                titlebar.updateOptions({icon: menuItem.checked ? './img/fire-32.png' : null});
                             }
                         },
                         {
@@ -125,7 +124,7 @@
                             tooltip: 'Title horizontal alignment',
                             type: 'radio',
                             click: () => {
-                                titlebar.updateOptions({titleHorizontalAlignment:'left'});
+                                titlebar.updateOptions({titleHorizontalAlignment: 'left'});
                             }
                         },
                         {
@@ -134,7 +133,7 @@
                             type: 'radio',
                             checked: true,
                             click: () => {
-                                titlebar.updateOptions({titleHorizontalAlignment:'center'});
+                                titlebar.updateOptions({titleHorizontalAlignment: 'center'});
                             }
                         },
                         {
@@ -142,7 +141,7 @@
                             tooltip: 'Title horizontal alignment',
                             type: 'radio',
                             click: () => {
-                                titlebar.updateOptions({titleHorizontalAlignment:'right'});
+                                titlebar.updateOptions({titleHorizontalAlignment: 'right'});
                             }
                         },
                     ]
