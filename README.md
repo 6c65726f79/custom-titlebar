@@ -43,7 +43,10 @@ Poorly coded titlebar for [Electron](https://www.electronjs.org/), [NW.js](https
 
 You can see a demo of this library in a PWA here: https://6c65726f79.github.io/custom-titlebar/
 
-If the install button doesn't appear, try reloading and reopening the tab several times.
+Notes:
+* Check the list of [compatible browsers](https://developer.mozilla.org/en-US/docs/Web/Manifest/display_override#browser_compatibility).
+* If the install button doesn't appear, try reloading and reopening the tab several times.
+* You may need to manually enable [Window Controls Overlay](chrome://flags/#enable-desktop-pwas-window-controls-overlay) until Chrome 98 is released.
 
 ## Inpiration
 

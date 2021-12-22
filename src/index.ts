@@ -285,11 +285,6 @@ const updateHeight = (height: number) => {
   container.style.height = `calc(100vh - ${height}px)`;
 };
 
-const updateControlsWidth = (width: number) => {
-  controls.style.width = width + 'px';
-  updateMenuSize();
-};
-
 // Check if the menu need to be condensed
 const updateMenuSize = () => {
   if (titlebar.clientWidth > 0) {
@@ -297,7 +292,7 @@ const updateMenuSize = () => {
       menuSize = menubar.clientWidth;
     }
     if (
-      menuSize + appicon.clientWidth + title.clientWidth + controls.clientWidth + 1 > titlebar.clientWidth ||
+      menuSize + appicon.clientWidth + title.clientWidth + controls.clientWidth + 1 > titlebarWidth() ||
       Options.values.condensed
     ) {
       if (!menuCondensed) {
@@ -366,12 +361,6 @@ const windowControlsOverlayListener = () => {
   const nav: Record<string, any> = window.navigator;
 
   if ('windowControlsOverlay' in nav) {
-    // Hide controls if Window Controls Overlay is enabled
-    controls.classList.toggle(
-      style.locals.hidden,
-      nav.windowControlsOverlay.visible || Options.values.windowControlsOverlay,
-    );
-
     windowControlsOverlayHandler(nav.windowControlsOverlay.visible, nav.windowControlsOverlay.getBoundingClientRect());
 
     nav.windowControlsOverlay.addEventListener(
@@ -384,12 +373,17 @@ const windowControlsOverlayListener = () => {
 };
 
 const windowControlsOverlayHandler = (visible: boolean, size: DOMRect) => {
-  // Update titlebar size
+  // Update titlebar height
   updateHeight(visible ? size.height : titlebarHeight);
-  if (Options.values.windowControlsOverlay) {
-    updateControlsWidth(visible ? document.body.clientWidth - size.width : 0);
-  }
+
+  // Update controls visibility
+  controls.style.display = visible || Options.values.windowControlsOverlay ? "none" : "flex";
 };
+
+const titlebarWidth = (): number => {
+  var computedStyle = getComputedStyle(titlebar);
+  return titlebar.clientWidth - (parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight));
+}
 
 const parseColor = (input: string): Array<number> => {
   const div = document.createElement('div');

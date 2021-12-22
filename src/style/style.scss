@@ -13,9 +13,12 @@
 #titlebar {
   font-family: Segoe WPC, Segoe UI, sans-serif;
   font-size: 13px;
+  box-sizing: border-box;
   background-color: #fff;
   color: rgb(0, 0, 0);
   width: 100%;
+  padding-left: env(titlebar-area-x, 0);
+  padding-right: calc(100vw - env(titlebar-area-width, 100vw));
   height: 30px;
   position: relative;
   user-select: none;
@@ -376,10 +379,6 @@
     z-index: 3000;
     -webkit-app-region: no-drag;
     height: 100%;
-
-    &.hidden {
-      visibility: hidden;
-    }
 
     .button {
       display: flex;
