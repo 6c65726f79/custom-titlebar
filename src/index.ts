@@ -276,7 +276,7 @@ const applyTheme = () => {
   titlebar.classList.toggle(style.locals.darwin, platform == 'darwin');
   minimizeWindow.innerHTML = svgs.minimize;
   maximizeWindow.innerHTML = svgs.maximize;
-  restoreWindow.innerHTML = platform == 'darwin' ? svgs.maximize : svgs.restore;
+  restoreWindow.innerHTML = svgs.restore;
   closeWindow.innerHTML = svgs.close;
 };
 
