@@ -224,7 +224,7 @@
                 });
             }
 
-            window.addEventListener('load', () => {
+            window.addEventListener('load', async () => {
                 // Use the titlebar only in standalone mode
                 if (navigator.standalone || window.matchMedia('(display-mode: standalone)').matches) {
                     createTitlebar()
@@ -232,9 +232,7 @@
 
                 // Register a Service Worker to enable PWA
                 if ('serviceWorker' in navigator) {
-                    window.addEventListener('load', async () => {
-                        await navigator.serviceWorker.register('sw.js');
-                    });
+                    await navigator.serviceWorker.register('sw.js');
                 }
             });
 
