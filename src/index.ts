@@ -377,13 +377,13 @@ const windowControlsOverlayHandler = (visible: boolean, size: DOMRect) => {
   updateHeight(visible ? size.height : titlebarHeight);
 
   // Update controls visibility
-  controls.style.display = visible || Options.values.windowControlsOverlay ? "none" : "flex";
+  controls.style.display = visible || Options.values.windowControlsOverlay ? 'none' : 'flex';
 };
 
 const titlebarWidth = (): number => {
-  var computedStyle = getComputedStyle(titlebar);
+  const computedStyle = getComputedStyle(titlebar);
   return titlebar.clientWidth - (parseFloat(computedStyle.paddingLeft) + parseFloat(computedStyle.paddingRight));
-}
+};
 
 const parseColor = (input: string): Array<number> => {
   const div = document.createElement('div');

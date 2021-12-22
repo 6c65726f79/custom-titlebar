@@ -1,15 +1,15 @@
 import { Options } from './Options';
 
 export const ClickHandler = {
-  click(menuItem: Record<string, any>, accelerator=false): void {
+  click(menuItem: Record<string, any>, accelerator = false): void {
     if (Options.values.menuItemClickHandler && menuItem.commandId) {
       // Use user-defined handler
       Options.values.menuItemClickHandler(menuItem.commandId);
     } else if (menuItem.click) {
       // Use default handler
       const keyboardEvent = {
-        triggeredByAccelerator: accelerator
-      }
+        triggeredByAccelerator: accelerator,
+      };
 
       if (menuItem.click.toString().indexOf('ipcRenderer') > 0) {
         // Invoke electron click method
