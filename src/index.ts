@@ -360,6 +360,9 @@ const buildMenu = (condensed = false): void => {
 const windowControlsOverlayListener = () => {
   const nav: Record<string, any> = window.navigator;
 
+  // Hide the controls if windowControlsOverlay option is enabled
+  controls.style.display = Options.values.windowControlsOverlay ? 'none' : 'flex';
+
   if ('windowControlsOverlay' in nav) {
     windowControlsOverlayHandler(nav.windowControlsOverlay.visible, nav.windowControlsOverlay.getBoundingClientRect());
 
