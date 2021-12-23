@@ -1,6 +1,9 @@
 @media print {
   #titlebar {
-    display: none;
+    display: none !important;
+  }
+  #container {
+    height: auto !important;
   }
 }
 
