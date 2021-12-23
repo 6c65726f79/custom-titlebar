@@ -20,7 +20,7 @@ Poorly coded titlebar for [Electron](https://www.electronjs.org/), [NW.js](https
 
 > Condensed menu
 
-![Preview 4](screenshots/capture-4.png)
+![Preview 4](screenshots/capture-4.gif)
 
 > Progressive web app
 
