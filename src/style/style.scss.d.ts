@@ -7,6 +7,7 @@ declare namespace StyleScssNamespace {
     button: string;
     check: string;
     close: string;
+    'close-only': string;
     container: string;
     controls: string;
     dark: string;

@@ -317,13 +317,16 @@ All parameters are optional.
 | backgroundUnfocusEffect  | `boolean`  | Enables or disables the unfocus effect on the background of the titlebar.          | `true`           |
 | browserWindow            | `object`   | The current `BrowserWindow`. **(Electron only)**                                   | undefined        |
 | condensed                | `boolean`  | Force the menu bar to be condensed.                                                | `false`          |
+| closeable                | `boolean`  | Enables or disables the close button.                                              | `true`           |
 | drag                     | `boolean`  | Define whether or not you can drag the window.                                     | `true`           |
 | hideMenuOnDarwin         | `boolean`  | Hide the menu bar when the `platform` is `darwin`.                                 | `true`           |
 | height                   | `number`   | The height of the titlebar.                                                        | `30`             |
 | icon                     | `string`   | The icon of the titlebar.                                                          | undefined        |
 | isMaximized              | `function` | A function that return `true` or `false` if the window is maximized or not.        | undefined        |
+| maximizable              | `boolean`  | Enables or disables the maximize button.                                           | `true`           |
 | menu                     | `object`   | List of MenuItem to show in the menu bar. ([Electron](https://www.electronjs.org/docs/api/menu-item) or [NW.js](https://docs.nwjs.io/en/latest/References/MenuItem/)) | undefined        | 
 | menuItemClickHandler     | `function` | A function that takes a `commandId` as parameter to handle menu item clicks.       | undefined        |
+| minimizable              | `boolean`  | Enables or disables the minimize button.                                           | `true`           |
 | onClose                  | `function` | The function to call when the close button is clicked.                             | undefined        |
 | onMaximize               | `function` | The function to call when the maximize/restore button is clicked.                  | undefined        |
 | onMinimize               | `function` | The function to call when the minimize button is clicked.                          | undefined        |

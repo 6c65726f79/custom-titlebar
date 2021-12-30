@@ -98,7 +98,7 @@
   /* Windows style */
   &.win {
     &.inactive {
-      .button:not(:hover) svg {
+      .button:not(:hover):not(.disabled) svg {
         opacity: 0.5;
       }
     }
@@ -119,24 +119,40 @@
       }
     }
 
-    #controls .button {
-      width: 46px;
+    #controls {
+      &.close-only {
+        #minimize, #maximize {
+          display: none;
+        }
 
-      &:hover {
-        background-color: hsla(0, 0%, 0%, 0.1);
+        #close {
+          width: 30px;
+        }
       }
 
-      &#close:hover {
-        background-color: rgba(232, 17, 35, 0.9);
-      }
+      .button {
+        width: 46px;
 
-      &:active {
-        background-color: hsla(0, 0%, 0%, 0.2);
-      }
+        &:hover {
+          background-color: hsla(0, 0%, 0%, 0.1);
+        }
 
-      svg {
-        width: 10px;
-        height: 10px;
+        &#close:hover {
+          background-color: rgba(232, 17, 35, 0.9);
+        }
+
+        &:active {
+          background-color: hsla(0, 0%, 0%, 0.2);
+        }
+
+        &.disabled {
+          opacity: .2;
+        }
+
+        svg {
+          width: 10px;
+          height: 10px;
+        }
       }
     }
   }
@@ -194,8 +210,14 @@
           background: #fc5753;
         }
 
-        &.disabled::before {
-          background: #dfdedf;
+        &.disabled {
+          &::before {
+            background: #cfcfcf !important;
+          }
+
+          svg {
+            display: none;
+          }
         }
 
         svg {
@@ -382,6 +404,10 @@
       position: relative;
       line-height: 30px;
       height: 100%;
+
+      &.disabled {
+        pointer-events: none;
+      }
     }
   }
 

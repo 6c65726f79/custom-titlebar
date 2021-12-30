@@ -14,6 +14,9 @@ export interface TitleBarOptions {
   browserWindow?: any;
   height?: number;
   windowControlsOverlay?: boolean;
+  minimizable?: boolean;
+  maximizable?: boolean;
+  closeable?: boolean;
   onMinimize?: () => void;
   onMaximize?: () => void;
   onClose?: () => void;
@@ -43,6 +46,9 @@ export const Options = {
     menuItemClickHandler: undefined,
     height: undefined,
     windowControlsOverlay: false,
+    minimizable: true,
+    maximizable: true,
+    closeable: true,
   } as TitleBarOptions,
 
   update(_options: TitleBarOptions): void {
