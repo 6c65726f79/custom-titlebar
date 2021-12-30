@@ -236,7 +236,7 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
     closeWindow.classList.toggle(style.locals.disabled, !o.closeable);
   }
   if (typeof o.minimizable != 'undefined' || typeof o.maximizable != 'undefined') {
-    controls.classList.toggle(style.locals["close-only"], (!Options.values.minimizable && !Options.values.maximizable));
+    controls.classList.toggle(style.locals['close-only'], !Options.values.minimizable && !Options.values.maximizable);
   }
   if (o.onMinimize) {
     minimizeWindow.onclick = o.onMinimize;

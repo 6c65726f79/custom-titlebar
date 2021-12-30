@@ -121,7 +121,8 @@
 
     #controls {
       &.close-only {
-        #minimize, #maximize {
+        #minimize,
+        #maximize {
           display: none;
         }
 
@@ -146,7 +147,7 @@
         }
 
         &.disabled {
-          opacity: .2;
+          opacity: 0.2;
         }
 
         svg {
