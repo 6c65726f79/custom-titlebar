@@ -238,15 +238,15 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (typeof o.minimizable != 'undefined' || typeof o.maximizable != 'undefined') {
     controls.classList.toggle(style.locals['close-only'], !Options.values.minimizable && !Options.values.maximizable);
   }
-  if (o.onMinimize) {
-    minimizeWindow.onclick = Options.values.minimizable ? o.onMinimize : null;
+  if (o.onMinimize && Options.values.minimizable) {
+    minimizeWindow.onclick = o.onMinimize;
   }
-  if (o.onMaximize) {
-    maximizeWindow.onclick = Options.values.maximizable ? o.onMaximize : null;
-    restoreWindow.onclick =  Options.values.maximizable ? o.onMaximize : null;
+  if (o.onMaximize && Options.values.maximizable) {
+    maximizeWindow.onclick = o.onMaximize;
+    restoreWindow.onclick = o.onMaximize;
   }
-  if (o.onClose) {
-    closeWindow.onclick = Options.values.closeable ? o.onClose : null;
+  if (o.onClose && Options.values.closeable) {
+    closeWindow.onclick = o.onClose;
   }
   if (o.isMaximized) {
     titlebar.classList.toggle(style.locals.maximized, o.isMaximized());
