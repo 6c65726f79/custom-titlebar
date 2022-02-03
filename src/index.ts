@@ -301,17 +301,16 @@ const updateHeight = (height: number) => {
 };
 
 const updateControlsVisibility = () => {
-  let visible=true;
-  if(Options.values.hideControlsOnDarwin && Options.getPlatform() == 'darwin') {
+  let visible = true;
+  if (Options.values.hideControlsOnDarwin && Options.getPlatform() == 'darwin') {
     // Hide the controls if hideControlsOnDarwin option is enabled
-    visible=false;
-  }
-  else if(Options.values.windowControlsOverlay) {
+    visible = false;
+  } else if (Options.values.windowControlsOverlay) {
     // Hide the controls if windowControlsOverlay option is enabled
-    visible=false;
+    visible = false;
   }
   controls.style.display = visible ? 'flex' : 'none';
-}
+};
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {
@@ -389,7 +388,12 @@ const windowControlsOverlayListener = () => {
   const nav: Record<string, any> = window.navigator;
 
   if ('windowControlsOverlay' in nav) {
-    windowControlsOverlayHandler(nav.windowControlsOverlay.visible, nav.windowControlsOverlay.getBoundingClientRect ? nav.windowControlsOverlay.getBoundingClientRect() : nav.windowControlsOverlay.getTitlebarAreaRect());
+    windowControlsOverlayHandler(
+      nav.windowControlsOverlay.visible,
+      nav.windowControlsOverlay.getBoundingClientRect
+        ? nav.windowControlsOverlay.getBoundingClientRect()
+        : nav.windowControlsOverlay.getTitlebarAreaRect(),
+    );
 
     nav.windowControlsOverlay.addEventListener(
       'geometrychange',
