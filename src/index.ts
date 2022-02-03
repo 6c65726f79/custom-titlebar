@@ -376,12 +376,12 @@ const windowControlsOverlayListener = () => {
   controls.style.display = Options.values.windowControlsOverlay ? 'none' : 'flex';
 
   if ('windowControlsOverlay' in nav) {
-    windowControlsOverlayHandler(nav.windowControlsOverlay.visible, nav.windowControlsOverlay.getBoundingClientRect());
+    windowControlsOverlayHandler(nav.windowControlsOverlay.visible, nav.windowControlsOverlay.getBoundingClientRect ? nav.windowControlsOverlay.getBoundingClientRect() : nav.windowControlsOverlay.getTitlebarAreaRect());
 
     nav.windowControlsOverlay.addEventListener(
       'geometrychange',
       debounce((e: Record<string, any>) => {
-        windowControlsOverlayHandler(e.visible, e.boundingRect);
+        windowControlsOverlayHandler(e.visible, e.boundingRect ? e.boundingRect : e.titlebarAreaRect);
       }, 10),
     );
   }
