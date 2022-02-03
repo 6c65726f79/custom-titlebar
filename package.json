@@ -39,7 +39,9 @@
     "macos",
     "electron",
     "nw",
-    "nwjs"
+    "nwjs",
+    "nw.js",
+    "pwa"
   ],
   "author": {
     "name": "Samuel Leroy",
