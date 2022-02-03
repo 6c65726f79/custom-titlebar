@@ -279,6 +279,9 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
   if (typeof o.backgroundUnfocusEffect != 'undefined') {
     dragregion.style.opacity = o.backgroundUnfocusEffect ? '1' : '0';
   }
+  if (typeof o.windowControlsOverlay != 'undefined' || typeof o.hideControlsOnDarwin != 'undefined') {
+    updateControlsVisibility();
+  }
 };
 
 const applyTheme = () => {
@@ -296,6 +299,19 @@ const updateHeight = (height: number) => {
   titlebar.style.height = height + 'px';
   container.style.height = `calc(100vh - ${height}px)`;
 };
+
+const updateControlsVisibility = () => {
+  let visible=true;
+  if(Options.values.hideControlsOnDarwin && Options.getPlatform() == 'darwin') {
+    // Hide the controls if hideControlsOnDarwin option is enabled
+    visible=false;
+  }
+  else if(Options.values.windowControlsOverlay) {
+    // Hide the controls if windowControlsOverlay option is enabled
+    visible=false;
+  }
+  controls.style.display = visible ? 'flex' : 'none';
+}
 
 // Check if the menu need to be condensed
 const updateMenuSize = () => {
@@ -371,9 +387,6 @@ const buildMenu = (condensed = false): void => {
 
 const windowControlsOverlayListener = () => {
   const nav: Record<string, any> = window.navigator;
-
-  // Hide the controls if windowControlsOverlay option is enabled
-  controls.style.display = Options.values.windowControlsOverlay ? 'none' : 'flex';
 
   if ('windowControlsOverlay' in nav) {
     windowControlsOverlayHandler(nav.windowControlsOverlay.visible, nav.windowControlsOverlay.getBoundingClientRect ? nav.windowControlsOverlay.getBoundingClientRect() : nav.windowControlsOverlay.getTitlebarAreaRect());

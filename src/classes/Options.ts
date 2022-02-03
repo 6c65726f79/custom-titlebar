@@ -11,6 +11,7 @@ export interface TitleBarOptions {
   backgroundUnfocusEffect?: boolean;
   platform?: string;
   hideMenuOnDarwin?: boolean;
+  hideControlsOnDarwin?: boolean;
   browserWindow?: any;
   height?: number;
   windowControlsOverlay?: boolean;
@@ -38,6 +39,7 @@ export const Options = {
     backgroundUnfocusEffect: true,
     platform: 'win',
     hideMenuOnDarwin: true,
+    hideControlsOnDarwin: false,
     browserWindow: undefined,
     onMinimize: undefined,
     onMaximize: undefined,

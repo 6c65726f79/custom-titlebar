@@ -139,7 +139,6 @@ function createWindow () {
     width: 800,
     height: 600,
     frame: false,
-    titleBarStyle: 'hidden',
     webPreferences: {
       contextIsolation: true,
       preload: path.join(__dirname, 'preload.js')
@@ -319,6 +318,7 @@ All parameters are optional.
 | condensed                | `boolean`  | Force the menu bar to be condensed.                                                | `false`          |
 | closeable                | `boolean`  | Enables or disables the close button.                                              | `true`           |
 | drag                     | `boolean`  | Define whether or not you can drag the window.                                     | `true`           |
+| hideControlsOnDarwin     | `boolean`  | Set this option to true if you're using `titleBarStyle: 'hidden'` on macOS. **(Electron only)** | `false`          |
 | hideMenuOnDarwin         | `boolean`  | Hide the menu bar when the `platform` is `darwin`.                                 | `true`           |
 | height                   | `number`   | The height of the titlebar.                                                        | `30`             |
 | icon                     | `string`   | The icon of the titlebar.                                                          | undefined        |
