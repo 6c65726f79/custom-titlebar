@@ -9,6 +9,7 @@ let dragregion: HTMLDivElement;
 let appicon: HTMLDivElement;
 let menubar: HTMLDivElement;
 let title: HTMLDivElement;
+let titlecontainer: HTMLSpanElement;
 let controls: HTMLDivElement;
 let minimizeWindow: HTMLDivElement;
 let maximizeWindow: HTMLDivElement;
@@ -51,6 +52,8 @@ export default class Titlebar {
     // Create title
     title = document.createElement('div');
     title.id = style.locals.title;
+    titlecontainer = document.createElement('span');
+    title.append(titlecontainer);
     this.updateTitle();
     titlebar.append(title);
 
@@ -121,7 +124,7 @@ export default class Titlebar {
   }
 
   updateTitle(newTitle?: string): void {
-    title.innerText = newTitle || window.document.title;
+    titlecontainer.innerText = newTitle || window.document.title;
   }
 
   updateMenu(template?: Record<string, any> | null): void {
@@ -197,7 +200,7 @@ const updateHorizontalAlignment = (position: string): void => {
 
 const updateIcon = (icon: string | null): void => {
   appicon.style.backgroundImage = icon ? `url('${icon}')` : 'unset';
-  appicon.style.display = icon ? 'block' : 'none';
+  appicon.style.display = icon ? 'inline-block' : 'none';
 };
 
 const updateMenu = (template?: Record<string, any> | null): void => {
@@ -296,6 +299,12 @@ const applyTheme = () => {
   maximizeWindow.innerHTML = svgs.maximize;
   restoreWindow.innerHTML = svgs.restore;
   closeWindow.innerHTML = svgs.close;
+  if(platform=='darwin') {
+    title.insertBefore(appicon, title.firstChild);
+  }
+  else {
+    titlebar.insertBefore(appicon, menubar);
+  }
 };
 
 const updateHeight = (height: number) => {
