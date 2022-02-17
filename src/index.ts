@@ -286,7 +286,7 @@ const applyOptions = (o: TitleBarOptions, context: Titlebar) => {
     controls.style.display = o.windowControlsOverlay ? 'none' : 'flex';
   }
   if (typeof o.hideControlsOnDarwin != 'undefined') {
-    controls.style.visibility = (o.hideControlsOnDarwin && Options.getPlatform() == 'darwin') ? 'hidden' : 'visible';
+    controls.style.visibility = o.hideControlsOnDarwin && Options.getPlatform() == 'darwin' ? 'hidden' : 'visible';
   }
 };
 
@@ -299,10 +299,9 @@ const applyTheme = () => {
   maximizeWindow.innerHTML = svgs.maximize;
   restoreWindow.innerHTML = svgs.restore;
   closeWindow.innerHTML = svgs.close;
-  if(platform=='darwin') {
+  if (platform == 'darwin') {
     title.insertBefore(appicon, title.firstChild);
-  }
-  else {
+  } else {
     titlebar.insertBefore(appicon, menubar);
   }
 };
